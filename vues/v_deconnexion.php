@@ -1,4 +1,9 @@
-
+<?php
+/**
+ * Affichage du Visiteur en cours
+ * @author chrysinus@gmail.com
+ */
+?>
 <ul>
 <?php
 	  $id = $_SESSION['idVisiteur'];
