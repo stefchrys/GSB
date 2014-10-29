@@ -5,7 +5,7 @@ include("vues/v_entete.php") ;
 session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
-//si pas de variable d'environnements initialisés,testgit
+//si pas de variable d'environnements initialisés,testgitstef
 //cela signifie qu'on  est sur la page d'accuel en attente de connexion
 if(!isset($_REQUEST['uc']) || $estConnecte==0){
      $_REQUEST['uc'] = 'connexion';
