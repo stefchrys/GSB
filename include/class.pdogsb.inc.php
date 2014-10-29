@@ -8,13 +8,24 @@
  * les 4 premiers pour la connexion
  * $monPdo de type PDO 
  * $monPdoGsb qui contiendra l'unique instance de la classe
- 
+ *
  * @package default
  * @author Chrysinus@gmail.com
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
 
-class PdoGsb{   		
+class PdoGsb{  
+/**
+ * Attributs de connexion
+ * 
+ * @var type 
+ * @var String $serveur Adresse du serveur
+ * @var String $bdd Nom de la base de donnée
+ * @var String $user Identifiant utilisateur
+ * @var String$mdp Mot de passe
+ * @var PDO $monPdo objet PDO
+ * @var $monPdoGsb objet 
+ */
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbV2';   		
       	private static $user='root' ;    		
@@ -25,6 +36,7 @@ class PdoGsb{
 /**
  * Constructeur privé, crée l'instance de PDO qui sera sollicitée
  * pour toutes les méthodes de la classe
+ * 
  */				
 	private function __construct(){
     	PdoGsb::$monPdo = new PDO(PdoGsb::$serveur.';'.PdoGsb::$bdd, PdoGsb::$user, PdoGsb::$mdp); 
@@ -154,6 +166,7 @@ class PdoGsb{
  
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
+ * @param $nbJustificatifs Nombre de justificatifs
 */
 	public function majNbJustificatifs($idVisiteur, $mois, $nbJustificatifs){
 		$req = "update fichefrais set nbjustificatifs = $nbJustificatifs 
@@ -290,6 +303,7 @@ class PdoGsb{
  * Modifie le champ idEtat et met la date de modif à aujourd'hui
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
+ * @param $etat Etat en cours
  */
  
 	public function majEtatFicheFrais($idVisiteur,$mois,$etat){
