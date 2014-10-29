@@ -2,13 +2,14 @@
 /** 
  * Fonctions pour l'application GSB
  
+ * Fonctions Metier (MODELE)
  * @package default 
- * @author Cheri Bibi
- * @version    1.0
+ * @author chrysinus@gmail.com
+ * 
  */
  /**
  * Teste si un quelconque visiteur est connecté
- * @return vrai ou faux 
+ * @return bool true false
  */
 function estConnecte(){
   return isset($_SESSION['idVisiteur']);
@@ -32,20 +33,24 @@ function deconnecter(){
 	session_destroy();
 }
 /**
- * Transforme une date au format français jj/mm/aaaa vers le format anglais aaaa-mm-jj
+ * Convertisseur de date FR->UK
  
- * @param $madate au format  jj/mm/aaaa
- * @return la date au format anglais aaaa-mm-jj
+ * Transforme une date au format français jj/mm/aaaa vers le format
+ * anglais aaaa-mm-jj
+ * @param date $madate  Date au format  jj/mm/aaaa
+ * @return date Date au format anglais aaaa-mm-jj
 */
 function dateFrancaisVersAnglais($maDate){
 	@list($jour,$mois,$annee) = explode('/',$maDate);
 	return date('Y-m-d',mktime(0,0,0,$mois,$jour,$annee));
 }
 /**
- * Transforme une date au format format anglais aaaa-mm-jj vers le format français jj/mm/aaaa 
+ * Convertisseur de date UK->FR
  
- * @param $madate au format  aaaa-mm-jj
- * @return la date au format format français jj/mm/aaaa
+ * Transforme une date au format format anglais aaaa-mm-jj vers 
+ * le format français jj/mm/aaaa 
+ * @param date $madate Date au format  aaaa-mm-jj
+ * @return date Date au format format français jj/mm/aaaa
 */
 function dateAnglaisVersFrancais($maDate){
    @list($annee,$mois,$jour)=explode('-',$maDate);
@@ -53,10 +58,11 @@ function dateAnglaisVersFrancais($maDate){
    return $date;
 }
 /**
+ * Simplifie le format d'une date
+  
  * retourne le mois au format aaaamm selon le jour dans le mois
- 
- * @param $date au format  jj/mm/aaaa
- * @return le mois au format aaaamm
+ * @param date $date  Format  jj/mm/aaaa
+ * @return date Mois au format aaaamm
 */
 function getMois($date){
 		@list($jour,$mois,$annee) = explode('/',$date);
@@ -70,8 +76,8 @@ function getMois($date){
 /**
  * Indique si une valeur est un entier positif ou nul
  
- * @param $valeur
- * @return vrai ou faux
+ * @param numeric $valeur
+ * @return bool true false
 */
 function estEntierPositif($valeur) {
 	return preg_match("/[^0-9]/", $valeur) == 0;
@@ -81,8 +87,8 @@ function estEntierPositif($valeur) {
 /**
  * Indique si un tableau de valeurs est constitué d'entiers positifs ou nuls
  
- * @param $tabEntiers : le tableau
- * @return vrai ou faux
+ * @param array $tabEntiers : le tableau
+ * @return bool true false
 */
 function estTableauEntiers($tabEntiers) {
 	$ok = true;
@@ -96,8 +102,8 @@ function estTableauEntiers($tabEntiers) {
 /**
  * Vérifie si une date est inférieure d'un an à la date actuelle
  
- * @param $dateTestee 
- * @return vrai ou faux
+ * @param date $dateTestee  Date à tester
+ * @return bool true false
 */
 function estDateDepassee($dateTestee){
 	$dateActuelle=date("d/m/Y");
@@ -110,8 +116,8 @@ function estDateDepassee($dateTestee){
 /**
  * Vérifie la validité du format d'une date française jj/mm/aaaa 
  
- * @param $date 
- * @return vrai ou faux
+ * @param date $date Date à Vérifier
+ * @return bool true false
 */
 function estDateValide($date){
 	$tabDate = explode('/',$date);
@@ -135,20 +141,21 @@ function estDateValide($date){
 /**
  * Vérifie que le tableau de frais ne contient que des valeurs numériques 
  
- * @param $lesFrais 
- * @return vrai ou faux
+ * @param array $lesFrais 
+ * @return bool true false
 */
 function lesQteFraisValides($lesFrais){
 	return estTableauEntiers($lesFrais);
 }
 /**
- * Vérifie la validité des trois arguments : la date, le libellé du frais et le montant 
+ * Vérifie la validité des trois arguments : la date, le libellé
+ *  du frais et le montant 
  
- * des message d'erreurs sont ajoutés au tableau des erreurs
+ * Des message d'erreurs sont ajoutés au tableau des erreurs
  
- * @param $dateFrais 
- * @param $libelle 
- * @param $montant
+ * @param date $dateFrais Date à vérifier
+ * @param String $libelle Libellé à vérifier
+ * @param Numeric $montant Montant a vérifier
  */
 function valideInfosFrais($dateFrais,$libelle,$montant){
 	if($dateFrais==""){
@@ -178,7 +185,7 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
 /**
  * Ajoute le libellé d'une erreur au tableau des erreurs 
  
- * @param $msg : le libellé de l'erreur 
+ * @param String $msg : le libellé de l'erreur 
  */
 function ajouterErreur($msg){
    if (! isset($_REQUEST['erreurs'])){
@@ -189,7 +196,7 @@ function ajouterErreur($msg){
 /**
  * Retoune le nombre de lignes du tableau des erreurs 
  
- * @return le nombre d'erreurs
+ * @return int Le nombre d'erreurs
  */
 function nbErreurs(){
    if (!isset($_REQUEST['erreurs'])){
