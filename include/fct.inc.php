@@ -3,7 +3,7 @@
  * Fonctions pour l'application GSB
  
  * Fonctions Metier (MODELE)
- * @package default 
+ *  
  * @author chrysinus@gmail.com
  * 
  */
@@ -37,7 +37,7 @@ function deconnecter(){
  
  * Transforme une date au format français jj/mm/aaaa vers le format
  * anglais aaaa-mm-jj
- * @param date $madate  Date au format  jj/mm/aaaa
+ * @param date $maDate  Date au format  jj/mm/aaaa
  * @return date Date au format anglais aaaa-mm-jj
 */
 function dateFrancaisVersAnglais($maDate){
@@ -49,7 +49,7 @@ function dateFrancaisVersAnglais($maDate){
  
  * Transforme une date au format format anglais aaaa-mm-jj vers 
  * le format français jj/mm/aaaa 
- * @param date $madate Date au format  aaaa-mm-jj
+ * @param date $maDate Date au format  aaaa-mm-jj
  * @return date Date au format format français jj/mm/aaaa
 */
 function dateAnglaisVersFrancais($maDate){
