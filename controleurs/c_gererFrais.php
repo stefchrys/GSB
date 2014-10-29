@@ -1,4 +1,7 @@
 <?php
+/**
+ * Fichier qui s'occupe de toute la gestion des frais 
+ */
 include("vues/v_sommaire.php");
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
