@@ -1,6 +1,9 @@
 ﻿<?php
 /**
  * Fichier qui gère l'affichage des frais
+ * 
+ * @author chrysinus@gmail.com
+ * @package default
  */
 include("vues/v_sommaire.php");
 $action = $_REQUEST['action'];
