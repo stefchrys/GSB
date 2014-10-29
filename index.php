@@ -1,17 +1,29 @@
 <?php
+/**
+ * Controleur principal
+ 
+ * Ce controleur sert de point d'entrée à l'application et sera appelé à chaque
+ * soumission d'un formulaire.
+ * @author chrysinus@gmail.com
+ * @package default
+ * @date 29/10/2014
+ */
+
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 include("vues/v_entete.php") ;
 session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
-//si pas de variable d'environnements initialisés,testgitstef
-//cela signifie qu'on  est sur la page d'accuel en attente de connexion
-if(!isset($_REQUEST['uc']) || $estConnecte==0){
+
+/* Verifier le cas d'utilisation en cours (uc) et par défaut l'initialise
+à l'état "connexion" */
+
+if(!isset($_REQUEST['uc']) || $estConnecte == 0){
      $_REQUEST['uc'] = 'connexion';
 }	 
 $uc = $_REQUEST['uc'];
-//on check à quel cas d'utilisation correspond $uc et on include le bon CTRLR
+
 switch($uc){
 	case 'connexion':{
 		include("controleurs/c_connexion.php");break;
