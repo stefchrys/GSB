@@ -20,8 +20,8 @@ switch($action){
 	}
         //on controle l'identité 
 	case 'valideConnexion':{
-		$login = $_REQUEST['login'];
-		$mdp = $_REQUEST['mdp'];
+		$login = $_REQUEST['txt_login'];
+		$mdp = $_REQUEST['txt_mdp'];
 		$visiteur = $pdo->getInfosVisiteur($login,$mdp);                
                 //si $visiteur n'est pas un tableau on renvoie vers connexion
 		if(!is_array( $visiteur)){
