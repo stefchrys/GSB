@@ -38,15 +38,18 @@
             </legend>
             <p>
               <label >Date (jj/mm/aaaa): </label>
-              <input type="text"  name="dateFrais" size="10" maxlength="10" value=""  />
+              <input type="text"  name="dateFrais" size="10" maxlength="10"
+                     value="" required/>
             </p>
             <p>
               <label >Libellé</label>
-              <input type="text"  name="libelle" size="70" maxlength="256" value="" />
+              <input type="text"  name="libelle" size="70" maxlength="256" 
+                     value="" required/>
             </p>
             <p>
               <label >Montant : </label>
-              <input type="text"  name="montant" size="10" maxlength="10" value="" />
+              <input type="text"  name="montant" size="10" maxlength="10" 
+                     value="" required/>
             </p>
           </fieldset>
       </div>

@@ -30,7 +30,7 @@
                             name="txt_lesFrais[<?php echo $idFrais ?>]" 
                             size="10" 
                             maxlength="5" 
-                            value="<?php echo $quantite ?>" >
+                            value="<?php echo $quantite ?>"  >
                     </p>
 
                     <?php
