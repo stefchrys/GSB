@@ -167,7 +167,7 @@ input:hover, textarea:hover, select:hover{
   background-color : #FAFAE6;
   cursor : pointer;
 }
-input #ok{
+input #ok #annuler #ajouter #effacer{
     width:20px;
 }
 

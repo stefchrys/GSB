@@ -38,7 +38,7 @@
                 ?>
             </fieldset>
         </div>
-        <div class="piedForm">
+        <div >
             <p>
                 <input id="ok" type="submit" value="Valider" name="cmd_valider" />
                 <input id="annuler" type="reset" value="Effacer" name="br_annuler"/>

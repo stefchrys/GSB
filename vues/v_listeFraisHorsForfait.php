@@ -6,7 +6,7 @@
                 <th class="date">Date</th>
 				<th class="libelle">Libellé</th>  
                 <th class="montant">Montant</th>  
-                <th class="action">&nbsp;</th>              
+                <th>&nbsp;</th>              
              </tr>
           
     <?php    
@@ -37,23 +37,23 @@
             <legend>Nouvel élément hors forfait
             </legend>
             <p>
-              <label for="txtDateHF">Date (jj/mm/aaaa): </label>
-              <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
+              <label >Date (jj/mm/aaaa): </label>
+              <input type="text"  name="dateFrais" size="10" maxlength="10" value=""  />
             </p>
             <p>
-              <label for="txtLibelleHF">Libellé</label>
-              <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
+              <label >Libellé</label>
+              <input type="text"  name="libelle" size="70" maxlength="256" value="" />
             </p>
             <p>
-              <label for="txtMontantHF">Montant : </label>
-              <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
+              <label >Montant : </label>
+              <input type="text"  name="montant" size="10" maxlength="10" value="" />
             </p>
           </fieldset>
       </div>
-      <div class="piedForm">
+      <div >
       <p>
-        <input id="ajouter" type="submit" value="Ajouter" size="20" />
-        <input id="effacer" type="reset" value="Effacer" size="20" />
+        <input id="ajouter" type="submit" value="Ajouter"  />
+        <input id="effacer" type="reset" value="Effacer"  />
       </p> 
       </div>
         
