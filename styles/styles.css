@@ -167,6 +167,9 @@ input:hover, textarea:hover, select:hover{
   background-color : #FAFAE6;
   cursor : pointer;
 }
+input #ok{
+    width:20px;
+}
 
 /*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de 
 taille de caract�res l�g�rement sup�rieure � la normale */
