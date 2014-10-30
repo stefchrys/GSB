@@ -15,7 +15,7 @@
         </p>
         <input type="submit" value="Valider" name="cmd_valider">
         <input type="reset" value="Annuler" name="br_annuler"> 
-        </p>
+        
     </form>
 
 </div>
