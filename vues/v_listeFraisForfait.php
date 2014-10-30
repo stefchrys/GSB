@@ -27,7 +27,7 @@
                         <input 
                             type="text" 
                             id="idFrais" 
-                            name="lesFrais[<?php echo $idFrais ?>]" 
+                            name="txt_lesFrais[<?php echo $idFrais ?>]" 
                             size="10" 
                             maxlength="5" 
                             value="<?php echo $quantite ?>" >
@@ -40,8 +40,8 @@
         </div>
         <div class="piedForm">
             <p>
-                <input id="ok" type="submit" value="Valider" size="20" />
-                <input id="annuler" type="reset" value="Effacer" size="20" />
+                <input id="ok" type="submit" value="Valider" name="cmd_valider" />
+                <input id="annuler" type="reset" value="Effacer" name="br_annuler"/>
             </p> 
         </div>
 
