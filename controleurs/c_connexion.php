@@ -1,7 +1,7 @@
 ﻿<?php
 /**
  * Verification et redirection d'un utilisateur
- * 
+ * test de branche
  * Redirige l'utilisateur qui essaye de se connecter vers le sommaire si 
  * la connexion est validée sinon vers la page connexion .
  */
