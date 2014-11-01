@@ -8,5 +8,6 @@
 
 
 if ($_REQUEST['action']=='suivrePaiement'){
+    include("vues/v_sommaireC.php");
     include ('vues/v_suivrePaiement.php');
 }

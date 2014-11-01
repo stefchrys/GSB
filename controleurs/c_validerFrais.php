@@ -5,6 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 if ($_REQUEST['action']=='validerFrais'){
+    include("vues/v_sommaireC.php");
     include('vues/v_validerFrais.php');
 }
