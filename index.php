@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Controleur principal
@@ -34,5 +35,11 @@ switch($uc){
 	case 'etatFrais' :{
 		include("controleurs/c_etatFrais.php");break; 
 	}
+         case 'validerFrais':{
+            include("controleurs/c_validerFrais.php");
+        }
+        case 'suivrePaiement':{
+             include("controleurs/c_suivrePaiement.php");
+        }
 }
 include("vues/v_pied.php") ;

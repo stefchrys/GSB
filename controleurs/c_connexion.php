@@ -23,24 +23,29 @@ switch($action){
 		$login = $_REQUEST['txt_login'];
 		$mdp = $_REQUEST['txt_mdp'];
 		$visiteur = $pdo->getInfosVisiteur($login,$mdp);                
-                //si $visiteur n'est pas un tableau on renvoie vers connexion
+                //si conexion est pas valide retour depart
 		if(!is_array( $visiteur)){
 			ajouterErreur("Login ou mot de passe incorrect");
 			include("vues/v_erreurs.php");
 			include("vues/v_connexion.php");
 		}
-                /*si $visiteur est un tableau associatif alors on se connecte
-                au sommaire en récuperant les valeurs du tableau
-                et en les assignant aux variables de SESSION*/
+                // connexion ok on verifie le type de personne connectée
 		else{
 			$id = $visiteur['id'];
 			$nom =  $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
 			connecter($id,$nom,$prenom);
-			include("vues/v_sommaire.php");
+                       	
+                        // si c'est un comptable on affiche son sommaire comptable
+                        if($pdo->verifierComptable($id)){
+                            include ("vues/v_sommaireC.php");
+                        //sinon le sommaire visiteur
+                        }else{
+                            include("vues/v_sommaire.php");
+                        }
 		}
 		break;
-	}
+	}       
         //retour sur la page de connexion dans tout les autres cas
 	default :{
 		include("vues/v_connexion.php");

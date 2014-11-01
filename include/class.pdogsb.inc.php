@@ -77,10 +77,12 @@ class PdoGsb {
                     from visiteur 
                     where visiteur.login='$login' and visiteur.mdp='$mdp'";
         $idJeuVisiteurs = PdoGsb::$monPdo->query($req);
-        $lgFraisHorsForfVisiteur = $idJeuVisiteurs->fetch();
-        return $lgFraisHorsForfVisiteur;
+        $lgJeuVisiteur= $idJeuVisiteurs->fetch();
+        return $lgJeuVisiteur;
     }
-
+    
+    
+     
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais 
      * hors forfait concernées par les deux arguments
@@ -158,7 +160,20 @@ class PdoGsb {
         $lgId = $idJeuId->fetchAll();
         return $lgId;
     }
-
+     /**
+     * Verification type de personnel connecté
+     
+     * Verifie si la personne connectée est un visiteur ou un comptable
+     * @param $id String id du de la personne conectée
+     * @return un tableau associatif
+     */
+    function verifierComptable($id) {
+        $req="select comptable.id "
+                ."from comptable where comptable.id='$id'";
+        $idJeu = PdoGsb::$monPdo->query($req);
+        $lg = $idJeu->fetchAll();
+        return $lg;
+    }
     /**
      * Met à jour la table ligneFraisForfait
 
