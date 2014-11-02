@@ -1,4 +1,4 @@
-
+<!-- v_ajoutFrais -->
 <h3>Ajouter un nouveau frais hors forfait</h3>
 <form method='POST' action='index.php?uc=gererFrais&action=validerCreationFrais'>
     <table >
@@ -38,3 +38,4 @@
     <input type='reset' value='Annuler' name='br_annuler'>
 
 </form>
+<!-- fin v_ajoutFrais -->

@@ -4,6 +4,7 @@
  * @author chrysinus@gmail.com
  */
 ?>
+<!-- v_listeFraisForfait -->
 <div id="contenu">
     <h2>Renseigner ma fiche de frais du mois 
         <?php echo $numMois . "-" . $numAnnee ?></h2>
@@ -46,3 +47,4 @@
         </div>
 
     </form>
+<!-- fin v_listeForfait -->

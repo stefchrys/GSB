@@ -1,5 +1,7 @@
+<!-- debut entete -->
 <!DOCTYPE html >
-<html  lang="fr">
+
+<html lang="fr">
 
     <head>
         <title>Intranet du Laboratoire Galaxy-Swiss Bourdin</title>
@@ -14,3 +16,4 @@
                      Bourdin" title="Laboratoire Galaxy-Swiss Bourdin" />
                 <h1>Suivi du remboursement des frais</h1>
             </div>
+<!-- fin entete -->

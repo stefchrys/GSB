@@ -1,4 +1,4 @@
-﻿
+﻿<!-- v_listeFraisHorsForfait -->
 <table class="listeLegere">
   	   <caption>Descriptif des éléments hors forfait
        </caption>
@@ -62,5 +62,6 @@
         
       </form>
   </div>
+  <!-- fin v_listeFraisHorsForfait -->
   
 

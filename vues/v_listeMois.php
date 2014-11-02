@@ -3,7 +3,7 @@
      * Affichage des Mois
      * @author chrysinus@gmai.com
      */
-?>
+?><!-- debut v_listeMois -->
     <div id="contenu">
       <h2>Mes fiches de frais</h2>
       <h3>Mois à sélectionner : </h3>
@@ -45,3 +45,4 @@
       </div>
         
       </form>
+      <!-- fin v_listeMois -->

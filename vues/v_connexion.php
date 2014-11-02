@@ -1,4 +1,5 @@
-﻿<div id="contenu">
+﻿<!-- debut v_connexion -->
+<div id="contenu">
     <h2>Identification utilisateur</h2>
 
 
@@ -21,3 +22,4 @@
     </form>
 
 </div>
+<!-- fin v_connexion -->
