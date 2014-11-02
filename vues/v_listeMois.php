@@ -1,12 +1,9 @@
-<?php
-    /**
-     * Affichage des Mois
-     * @author chrysinus@gmai.com
-     */
-?><!-- debut v_listeMois -->
-    <div id="contenu">
-      <h2>Mes fiches de frais</h2>
-      <h3>Mois à sélectionner : </h3>
+ <!--  debut v_listeMois -->
+
+		<div class="col-md-4 column">
+    <div class="contenu">
+      <h3>Mes fiches de frais</h3>
+      <h4>Mois à sélectionner : </h4>
       <form action="index.php?uc=etatFrais&action=voirEtatFrais" method="post">
       <div class="corpsForm">
          
@@ -45,4 +42,9 @@
       </div>
         
       </form>
-      <!-- fin v_listeMois -->
+      
+		</div>
+		<div class="col-md-4 column">
+		</div>
+	</div>
+	<!-- fin v_listeMois -->
