@@ -1,67 +1,81 @@
-﻿<?php
-    /**
-     * Affichage de l'Etat des Frais
-     * @author chrysinus@gmail.com
-     */
-?>
-<!-- debut v_etatFrais -->
-<h3>Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
-</h3>
-<div class="encadre">
-    <p>
-        Etat : <?php echo $libEtat ?> depuis le <?php echo $dateModif ?> <br> Montant validé : <?php echo $montantValide ?>
+<!--debut v_etatFrais -->
+<div class="row clearfix"  >
+    <div class="col-md-4 column">		
+    </div>
+    <div class="col-md-8 column">
+        <h3>Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
+        </h3>
+        <p>
+            Etat : <?php echo $libEtat ?> depuis le <?php echo $dateModif ?> <br> Montant validé : <?php echo $montantValide ?>
 
 
-    </p>
-    <table class="listeLegere">
-        <caption>Eléments forfaitisés </caption>
-        <tr>
-            <?php
-            foreach ($lesFraisForfait as $unFraisForfait) {
-                $libelle = $unFraisForfait['libelle'];
-                ?>	
-                <th> <?php echo $libelle ?></th>
+        </p>
+
+        <h3 class='text-center'>
+            Eléments forfaitisés .
+        </h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+
+                    <?php
+                    foreach ($lesFraisForfait as $unFraisForfait) {
+                        $libelle = $unFraisForfait['libelle'];
+                        ?>	
+                        <th> <?php echo $libelle ?></th>
+                        <?php
+                    }
+                    ?>						
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="active">
+                    <?php
+                    foreach ($lesFraisForfait as $unFraisForfait) {
+                        $quantite = $unFraisForfait['quantite'];
+                        ?>
+                        <td ><?php echo $quantite ?> </td>
+                        <?php
+                    }
+                    ?>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-hover">
+            <caption>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -
+            </caption>
+            <thead>
+            <th><span class="label label-info">Date</span></th>
+            <th><span class="label label-info">Libellé</span></th>
+
+            <th><span class="label label-info">Montant</span></th>
+
+            </thead>
+            <tbody>
                 <?php
-            }
-            ?>
-        </tr>
-        <tr>
-            <?php
-            foreach ($lesFraisForfait as $unFraisForfait) {
-                $quantite = $unFraisForfait['quantite'];
-                ?>
-                <td ><?php echo $quantite ?> </td>
-                <?php
-            }
-            ?>
-        </tr>
-    </table>
-    <table class="listeLegere">
-        <caption>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -
-        </caption>
-        <tr>
-            <th class="date">Date</th>
-            <th class="libelle">Libellé</th>
-            <th class='montant'>Montant</th>                
-        </tr>
-        <?php
-        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-            $date = $unFraisHorsForfait['date'];
-            $libelle = $unFraisHorsForfait['libelle'];
-            $montant = $unFraisHorsForfait['montant'];
-            ?>
+                foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+                    $date = $unFraisHorsForfait['date'];
+                    $libelle = $unFraisHorsForfait['libelle'];
+                    $montant = $unFraisHorsForfait['montant'];
+                    ?>
                     <tr>
                         <td><?php echo $date ?></td>
                         <td><?php echo $libelle ?></td>
                         <td><?php echo $montant ?></td>
                     </tr>
-            <?php
-        }
-        ?>
-    </table>
+                    <?php
+                }
+                ?>
+                
+        </table>
+
+
+    </div>		
 </div>
-</div>
-<!-- fin v_etatFrais -->
+<!--fin v_etatFrais -->
 
 
 

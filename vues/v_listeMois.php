@@ -1,6 +1,6 @@
  <!--  debut v_listeMois -->
 
-		<div class="col-md-4 column">
+		<div class="col-md-6 column">
     <div class="contenu">
       <h3>Mes fiches de frais</h3>
       <h4>Mois à sélectionner : </h4>
@@ -44,7 +44,7 @@
       </form>
       
 		</div>
-		<div class="col-md-4 column">
+		<div class="col-md-2 column">
 		</div>
 	</div>
 	<!-- fin v_listeMois -->
