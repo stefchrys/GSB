@@ -1,7 +1,7 @@
 
-  <!-- Division pour le pied de page -->
-    
-  </body>
+<!--debut pieds -->
+        </div>
+       </body>
 </html>
-
+<!-- fin pieds -->
 

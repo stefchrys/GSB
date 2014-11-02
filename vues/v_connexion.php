@@ -1,25 +1,25 @@
-﻿<!-- debut v_connexion -->
-<div id="contenu">
-    <h2>Identification utilisateur</h2>
-
-
-    <form method="POST" action="index.php?uc=connexion&action=valideConnexion">
-
-
-        <p>
-            <label for="login">Login*</label>
-            <input id="login" type="text" name="txt_login"  size="30"
-                   maxlength="45" required>
-        </p>
-        <p>
-            <label for="mdp">Mot de passe*</label>
-            <input id="mdp"  type="password"  name="txt_mdp" size="30" 
-                   maxlength="45" required>
-        </p>
-        <input type="submit" value="Valider" name="cmd_valider">
-        <input type="reset" value="Annuler" name="br_annuler"> 
-        
-    </form>
-
-</div>
-<!-- fin v_connexion -->
+	<!--debut connexion -->
+	<div class="row clearfix"  >
+		<div class="col-md-4 column">
+		</div>
+		<div class="col-md-4 column" id="contenu" >
+			<form role="form" method="POST" action="index.php?uc=connexion&action=valideConnexion">
+				<h3 class='text-center'>
+					Identification utilisateur .
+				</h3>
+				<div class="form-group" >
+					 <label for="login">Login*</label>
+					 <input class="form-control" id="login" type="text" name="txt_login" required>
+				</div>
+				<div class="form-group">
+					 <label for="mdp">Password*</label>
+					 <input class="form-control" id="mdp" type="password" name="txt_mdp" required>
+				</div>
+				
+				 <button type="submit" class="btn btn-default">Valider</button>
+			</form>
+		</div>
+		<div class="col-md-4 column">
+		</div>
+	</div>
+	<!-- fin connexion -->

@@ -1,50 +1,36 @@
-<?php
-/**
- * Affichage Liste frais
- * @author chrysinus@gmail.com
- */
-?>
-<!-- v_listeFraisForfait -->
-<div id="contenu">
-    <h2>Renseigner ma fiche de frais du mois 
-        <?php echo $numMois . "-" . $numAnnee ?></h2>
-
-    <form method="POST"  
+<!--debut v_listeFrais -->
+<div class="col-md-8 column">
+    <form class="form-horizontal contenu" role="form" method="POST"  
           action="index.php?uc=gererFrais&action=validerMajFraisForfait">
-        <div class="corpsForm">
-
-            <fieldset>
-                <legend>Eléments forfaitisés
-                </legend>
-                <?php
-                foreach ($lesFraisForfait as $unFrais) {
-                    $idFrais = $unFrais['idfrais'];
-                    $libelle = $unFrais['libelle'];
-                    $quantite = $unFrais['quantite'];
-                    ?>
-                    <p>
-                        <label for="idFrais">
-                            <?php echo $libelle ?></label>
-                        <input 
-                            type="text" 
-                            id="idFrais" 
-                            name="txt_lesFrais[<?php echo $idFrais ?>]" 
-                            size="10" 
-                            maxlength="5" 
-                            value="<?php echo $quantite ?>"  >
-                    </p>
-
-                    <?php
-                }
+        <h3 class='text-center'>
+            Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
+        </h3>
+        <fieldset>
+            <legend>Eléments forfaitisés</legend>
+            <?php
+            foreach ($lesFraisForfait as $unFrais) {
+                $idFrais = $unFrais['idfrais'];
+                $libelle = $unFrais['libelle'];
+                $quantite = $unFrais['quantite'];
                 ?>
-            </fieldset>
-        </div>
-        <div >
-            <p>
-                <input id="ok" type="submit" value="Valider" name="cmd_valider" />
-                <input id="annuler" type="reset" value="Effacer" name="br_annuler"/>
-            </p> 
-        </div>
 
+                <div class="form-group">
+                    <label for="idFrais" class="col-sm-2 control-label">
+                        <?php echo $libelle ?></label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="idFrais" type="text"
+                               name="txt_lesFrais[<?php echo $idFrais ?>]" 
+                               value="<?php echo $quantite ?>"/>
+                    </div>
+                </div><?php } ?>					
+        </fieldset>	
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" 
+                        name="cmd_valider">Valider</button>
+            </div>
+        </div>				
     </form>
-<!-- fin v_listeForfait -->
+</div>		
+</div>
+<!--fin v_listeFrais -->
