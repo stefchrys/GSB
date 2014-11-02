@@ -2,7 +2,7 @@
 <div class="row clearfix"  >
     <div class="col-md-4 column">		
     </div>
-    <div class="col-md-8 column">
+    <div class="col-md-8 column contenu" >
         <h3>Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
         </h3>
         <p>
@@ -11,7 +11,7 @@
 
         </p>
 
-        <h3 class='text-center'>
+        <h3 class='contenu'>
             Eléments forfaitisés .
         </h3>
         <table class="table table-hover">

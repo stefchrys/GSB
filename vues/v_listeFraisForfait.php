@@ -1,12 +1,16 @@
 <!--debut v_listeFrais -->
-<div class="col-md-8 column">
-    <form class="form-horizontal contenu" role="form" method="POST"  
+<div class="col-md-8 column ">
+
+    <h3 >
+        Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
+    </h3>
+
+
+
+    <form class="form-horizontal " role="form" method="POST"  
           action="index.php?uc=gererFrais&action=validerMajFraisForfait">
-        <h3 class='text-center'>
-            Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
-        </h3>
         <fieldset>
-            <legend>Eléments forfaitisés</legend>
+            <legend> Eléments forfaitisés</legend>
             <?php
             foreach ($lesFraisForfait as $unFrais) {
                 $idFrais = $unFrais['idfrais'];
@@ -23,13 +27,14 @@
                                value="<?php echo $quantite ?>"/>
                     </div>
                 </div><?php } ?>					
-        </fieldset>	
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" 
-                        name="cmd_valider">Valider</button>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" 
+                            name="cmd_valider">Valider</button>
+                </div>
             </div>
-        </div>				
+        </fieldset>
     </form>
 </div>		
 </div>
