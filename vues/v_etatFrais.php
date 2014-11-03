@@ -1,8 +1,7 @@
 <!--debut v_etatFrais -->
 <div class="row clearfix"  >
-    <div class="col-md-4 column">		
-    </div>
-    <div class="col-md-8 column contenu" >
+    
+    <div class="col-md-12 column contenu" >
         <h3>Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
         </h3>
         <p>
@@ -30,7 +29,7 @@
             </thead>
             <tbody>
 
-                <tr class="active">
+                <tr class="success">
                     <?php
                     foreach ($lesFraisForfait as $unFraisForfait) {
                         $quantite = $unFraisForfait['quantite'];
