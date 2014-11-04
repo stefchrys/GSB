@@ -11,19 +11,19 @@ $action = $_REQUEST['action'];
 $visiteurs = $pdo->getListeVisiteurs();
 $tableauDate= $pdo->getDouzeMois();
 
-
-
-if ($action == 'choixVisiteurMois'){
+switch ($action){
+    case 'choixVisiteurMois':{
+        include('vues/v_listeVisiteurMoisC.php');
+        break;
+    }
     
-    include('vues/v_listeVisiteurMoisC.php');
-}
-else{
-    if (action == validerChoixVisiteurMois){
-        //controler qu'une fiche de frias existe
+    case 'validerChoixVisiteurMois':{
+         //controler qu'une fiche de frias existe
         
         //si existe pas retour choixMoisVisiteur
         
         //si fiche existe on affiche la fiche frais correspondante
+        break;
     }
+        
 }
-
