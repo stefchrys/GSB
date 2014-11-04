@@ -6,7 +6,24 @@
  * and open the template in the editor.
  */
 
-if ($_REQUEST['action']=='validerFrais'){
-    include("vues/v_sommaireC.php");
-    include('vues/v_validerFrais.php');
+include("vues/v_sommaireC.php");
+$action = $_REQUEST['action'];
+$visiteurs = $pdo->getListeVisiteurs();
+$tableauDate= $pdo->getDouzeMois();
+
+
+
+if ($action == 'choixVisiteurMois'){
+    
+    include('vues/v_listeVisiteurMoisC.php');
 }
+else{
+    if (action == validerChoixVisiteurMois){
+        //controler qu'une fiche de frias existe
+        
+        //si existe pas retour choixMoisVisiteur
+        
+        //si fiche existe on affiche la fiche frais correspondante
+    }
+}
+

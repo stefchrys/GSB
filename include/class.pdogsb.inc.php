@@ -77,12 +77,28 @@ class PdoGsb {
                     from visiteur 
                     where visiteur.login='$login' and visiteur.mdp='$mdp'";
         $idJeuVisiteurs = PdoGsb::$monPdo->query($req);
-        $lgJeuVisiteur= $idJeuVisiteurs->fetch();
+        $lgJeuVisiteur = $idJeuVisiteurs->fetch();
         return $lgJeuVisiteur;
     }
     
+   
+    /**
+     * Retourne un tableau rempli des visiteurs(nom,prenom)
+     * 
+     * @return Array
+     */
+    public function getListeVisiteurs(){
+        $req="select visiteur.nom as nom,
+            visiteur.prenom as prenom
+            from visiteur
+            where visiteur.id 
+             not in
+            (select * from comptable)";
+        $idJeuVisiteurs = PdoGsb::$monPdo->query($req);
+        $lgJeuVisiteur = $idJeuVisiteurs->fetchAll();
+        return $lgJeuVisiteur;
+    }
     
-     
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais 
      * hors forfait concernées par les deux arguments
@@ -377,6 +393,38 @@ class PdoGsb {
 		where fichefrais.idvisiteur ='$idVisiteur' "
                 . "and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
+    }
+    
+    /**
+     * renvoie un tableau composé des 12 derniers mois 
+     * 
+     * Le tableau est un tableau multi dimmensionnel
+     * composé de la clé mois et de la clé année
+     * @return Array(12,2)
+     */
+    public function getDouzeMois() {
+
+        $req = "select current_date";
+        $idJeuMois = PdoGsb::$monPdo->query($req);
+        $lgMois = $idJeuMois->fetch();
+        $dateNow = $lgMois['current_date'];
+        $numAnnee = substr($dateNow, 0, 4);
+        $numMois = substr($dateNow, 5, 2);
+        for ($i = 0; $i <= 12; $i++) {
+            //si le mois  arrive à zero on reinitalise a 12
+            if ($numMois - $i == 0) {
+                $numMois += $i + 1;
+                $numAnnee -= 1;
+            }
+            //remplissage du tableau 
+            $tableauDate[$i] = (array('mois' =>
+                (string) ($numMois - $i), 'annee' => (string) $numAnnee));
+            //si le mois ne possede qu 'un carractere on lui ajoute un zero devant
+            if(strlen($tableauDate[$i]['mois'])==1){
+                $tableauDate[$i]['mois']="0".$tableauDate[$i]['mois'];
+            }
+        }
+        return $tableauDate;
     }
 
 }
