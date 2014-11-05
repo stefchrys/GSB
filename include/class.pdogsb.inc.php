@@ -429,18 +429,20 @@ class PdoGsb {
 
     /**
      * Teste si une fiche de frais cloturee existe concernant 
-     * le visiteur et le mois passé en paramètre renvoie un tab
+     * le visiteur l'etat et le mois passé en paramètre renvoie un tab
      * @param string $id 
      * @param string $date
+     * @param string $etat
      * @return Array or NULL
      */
-    public function ficheExiste($id,$date){
+    public function ficheExiste($id,$date,$etat){
         $req = "select * from ficheFrais "
                 . "where ficheFrais.idVisiteur = '$id'"
-                . "and ficheFrais.mois = '$date'";
+                . "and ficheFrais.mois = '$date'"
+                . "and idEtat='$etat'";
         $idjeuFiche = PdoGsb::$monPdo->query($req);
         $lgFiche = $idjeuFiche->fetch();
-          return $lgFiche;
+        return $lgFiche;
     } 
 }
 ?>

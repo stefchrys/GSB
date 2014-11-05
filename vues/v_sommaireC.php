@@ -1,7 +1,7 @@
 ﻿ 
 	<!--debut sommaireC -->
 	<div class="row clearfix"  >
-		<div class="col-md-4 column">
+		<div class="col-md-2 column">
 			<div id="menuGauche">   			
     			<ul id="menuList">
         			<li >

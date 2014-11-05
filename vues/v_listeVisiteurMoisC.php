@@ -1,15 +1,15 @@
 <!--  debut v_listeVisiteursMoisC -->
 
-<div class="col-md-8 column">
+<div class="col-md-10 column">
     <div class="contenu">
         <h3>Choix fiche (Visiteur/Mois)</h3>
-        <h4>Visiteur à sélectionner : </h4>
+        <h4>Selectionner une fiche de frais : </h4>
         <form action="index.php?uc=validerFrais&action=validerChoixVisiteurMois" method="post">
-            <table>
-                <div>
-                    <th>
-                    <p>
-                        <label for="nom" accesskey="n">Visiteurs : </label>
+            <table >
+                
+                    <tr>
+                        <td>
+                        Visiteurs : 
                         <select id="visiteur" name="visiteur">
                             <?php
                             foreach ($visiteurs as $unVisiteur) {
@@ -30,34 +30,32 @@
                             }
                             ?>
                         </select>
-                    </p>
-                    </th>
-                    <th>
-                    <p>
-                        <label for="nom" accesskey="n">Mois : </label>
-                        <select id="mois" name="mois">
-                            <?php
-                            foreach ($tableauDate as $uneDate) {
-                                $date = $uneDate['date'];
-                                $numAnnee = $uneDate['numAnnee'];
-                                $numMois = $uneDate['numMois'];
-                                if ($date == $dateASelectionner) {
-                                    ?>
-                                    <option selected value="<?php echo $date ?>">
-                                        <?php echo $numMois . "/" . $numAnnee ?></option> 
-                                    <?php
-                                } else {
-                                    ?>
-                                    <option value="<?php echo $date ?>">
-                                        <?php echo $numMois . "/" . $numAnnee ?></option>
-                                    <?php
+                        </td>                   
+                        <td>
+                            Mois :
+                            <select id="mois" name="mois">
+                                <?php
+                                foreach ($tableauDate as $uneDate) {
+                                    $date = $uneDate['date'];
+                                    $numAnnee = $uneDate['numAnnee'];
+                                    $numMois = $uneDate['numMois'];
+                                    if ($date == $dateASelectionner) {
+                                        ?>
+                                        <option selected value="<?php echo $date ?>">
+                                            <?php echo $numMois . "/" . $numAnnee ?></option> 
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <option value="<?php echo $date ?>">
+                                            <?php echo $numMois . "/" . $numAnnee ?></option>
+                                        <?php
+                                    }
                                 }
-                            }
-                            ?>    
-                        </select>
-                    </p>
-                    </th>
-                </div>
+                                ?>    
+                            </select>
+                        </td>
+                    </tr>
+                
             </table>
             <div class="piedForm">
                 <p>
@@ -67,4 +65,7 @@
             </div>
         </form>
     </div>
+</div>
+</div>
     <!--  fin v_listeVisiteursMoisC -->
+    
