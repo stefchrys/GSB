@@ -83,12 +83,13 @@ class PdoGsb {
     
    
     /**
-     * Retourne un tableau rempli des visiteurs(nom,prenom)
+     * Retourne un tableau rempli des visiteurs(id,nom,prenom)
      * 
      * @return Array
      */
     public function getListeVisiteurs(){
-        $req="select visiteur.nom as nom,
+        $req="select visiteur.id as id,
+            visiteur.nom as nom,
             visiteur.prenom as prenom
             from visiteur
             where visiteur.id 
@@ -231,7 +232,7 @@ class PdoGsb {
     }
 
     /**
-     * Teste si un visiteur possède une fiche de frais pour le mois passé en argument
+     * Teste si le frais est le prmeir du mois
 
      * @param $idVisiteur 
      * @param $mois sous la forme aaaamm
@@ -399,33 +400,47 @@ class PdoGsb {
      * renvoie un tableau composé des 12 derniers mois 
      * 
      * Le tableau est un tableau multi dimmensionnel
-     * composé de la clé mois et de la clé année
-     * @return Array(12,2)
+     * composé de la clé mois et de la clé année et de la date au format aaaamm
+     * @return Array
      */
     public function getDouzeMois() {
-
-        $req = "select current_date";
+        //choisir les 12 derniers mois de la fiche de frais
+        $req = "select distinct(mois) as date "
+                . "from fichefrais "
+                . "where mois >= (select max(mois)-100 from fichefrais)"
+                . "order by mois desc";
         $idJeuMois = PdoGsb::$monPdo->query($req);
         $lgMois = $idJeuMois->fetch();
-        $dateNow = $lgMois['current_date'];
-        $numAnnee = substr($dateNow, 0, 4);
-        $numMois = substr($dateNow, 5, 2);
-        for ($i = 0; $i <= 12; $i++) {
-            //si le mois  arrive à zero on reinitalise a 12
-            if ($numMois - $i == 0) {
-                $numMois += $i + 1;
-                $numAnnee -= 1;
-            }
-            //remplissage du tableau 
-            $tableauDate[$i] = (array('mois' =>
-                (string) ($numMois - $i), 'annee' => (string) $numAnnee));
-            //si le mois ne possede qu 'un carractere on lui ajoute un zero devant
-            if(strlen($tableauDate[$i]['mois'])==1){
-                $tableauDate[$i]['mois']="0".$tableauDate[$i]['mois'];
-            }
+        $tableauDate = array();
+        //on rempli le tableau assciatif
+        while ($lgMois != null) {
+            $mois = $lgMois['date'];
+            $numAnnee = substr($mois, 0, 4);
+            $numMois = substr($mois, 4, 2);
+            $tableauDate["$mois"] = array(
+                "date" => "$mois",
+                "numAnnee" => "$numAnnee",
+                "numMois" => "$numMois"
+            );
+            $lgMois = $idJeuMois->fetch();
         }
         return $tableauDate;
     }
 
+    /**
+     * Teste si une fiche de frais cloturee existe concernant 
+     * le visiteur et le mois passé en paramètre renvoie un tab
+     * @param string $id 
+     * @param string $date
+     * @return Array or NULL
+     */
+    public function ficheExiste($id,$date){
+        $req = "select * from ficheFrais "
+                . "where ficheFrais.idVisiteur = '$id'"
+                . "and ficheFrais.mois = '$date'";
+        $idjeuFiche = PdoGsb::$monPdo->query($req);
+        $lgFiche = $idjeuFiche->fetch();
+          return $lgFiche;
+    } 
 }
 ?>
