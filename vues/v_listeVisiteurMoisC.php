@@ -60,7 +60,7 @@
             <div class="piedForm">
                 <p>
                     <input id="ok" type="submit" value="Valider"  />
-                    <input id="annuler" type="reset" value="Effacer"  />
+                    
                 </p> 
             </div>
         </form>

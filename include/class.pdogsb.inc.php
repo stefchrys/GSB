@@ -444,5 +444,8 @@ class PdoGsb {
         $lgFiche = $idjeuFiche->fetch();
         return $lgFiche;
     } 
+    
+  
+   
 }
 ?>
