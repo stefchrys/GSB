@@ -26,7 +26,6 @@
                             <?php
                         }
                         ?> 
-                            <td>Etat:</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,11 +42,7 @@
                             <?php
                             $numero++;
                         }
-                        ?>
-                        <td>  <select name="etatFraisForfait">
-                                <option selected value="CL">Enregistré</option>
-                                <option value="VA">Validé</option>
-                            </select></td>  
+                        ?> 
                     </tr>
                 </tbody>
             </table>
@@ -63,34 +58,38 @@
                 </tr>
                 <tbody>
                     <?php
+                    $i = 0;
                     foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
                         $date = $unFraisHorsForfait['date'];
                         $libelle = $unFraisHorsForfait['libelle'];
                         $montant = $unFraisHorsForfait['montant'];
-                        ?>
-                        <tr>
+                        $id = $unFraisHorsForfait['id'];
+                        ?>                      
+                        <tr>                         
                             <td><?php echo $date ?></td>
                             <td><?php echo $libelle ?></td>
                             <td><?php echo $montant ?></td>
                             <td>
-                                <select name="etatFraisHorsForfait">
-                                    <option selected value="CL">Enregistré</option>
-                                    <option value="VA">Validé</option>
-                                    <option value="VA">Reporté</option>
-                                    <option value="RF">Refusé</option>
+                                <input type="hidden" 
+                                       name="idFraisHorsForfait<?php echo (string)$i ?>" 
+                                       value=<?php echo $id ?>/>
+                                <select name='etatFraisHorsForfait<?php echo (string)$i ?>'>
+                                    <option selected value="valide">Validé</option>
+                                    <option value="reporte">Reporté</option>
+                                    <option value="supprime">Supprimé</option>
                                 </select>
                             </td>
                         </tr>
                         <?php
+                        $i++;
                     }
                     ?> 
                 </tbody>
             </table>           
-                <label> Nb de justificatifs requis:</label><?php echo count($lesFraisForfait)/2; ?>                       
-                <label> Nb justificatifs reçus:</label><input type="text"/>                      
-            <div class="piedForm">
-               
-                 <p>
+            <label> Nb de justificatifs requis:</label><?php echo count($lesFraisForfait) / 2; ?>                       
+            <label> Nb justificatifs reçus:</label><input type="text"/>                      
+            <div class="piedForm">              
+                <p>
                     <input  type="submit" value="Valider le traitement"  />                   
                 </p> 
             </div>
@@ -98,17 +97,3 @@
     </div>		
 </div>
 <!--fin v_traiterFrais -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-

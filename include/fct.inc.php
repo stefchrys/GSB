@@ -221,5 +221,20 @@ function remplirTableauFrais($idFrais) {
     }
     return $lesFrais;
 }
+/**
+ * Securise l'utilisation des variables globales
+ * 
+ * @param string $value
+ * @return string
+ */
+function implementer($value,$option="") {
+    $action = "";
+    if (isset($_REQUEST[$value.$option]) && is_string($_REQUEST[$value.$option])) {
+        $action = $_REQUEST[$value.$option];
+        return $action;
+    }else{
+        echo "probleme de variable globale";
+    }
+}
 
 ?>

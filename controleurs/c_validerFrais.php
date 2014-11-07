@@ -1,15 +1,9 @@
 <?php
 
 include("vues/v_sommaireC.php");
-if (isset($_REQUEST['action']) && is_string($_REQUEST['action'])) {
-    $action = $_REQUEST['action'];
-}
-if (isset($_REQUEST['mois']) && is_string($_REQUEST['mois'])) {
-    $mois = $_REQUEST['mois'];
-}
-if (isset($_REQUEST['visiteur']) && is_string($_REQUEST['visiteur'])) {
-    $idVisiteur = $_REQUEST['visiteur'];
-}
+$action = implementer('action');
+$mois= implementer('mois');
+$idVisiteur=implementer('visiteur');
 $visiteurs = $pdo->getListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
@@ -27,7 +21,6 @@ switch ($action) {
         }
     case 'validerChoixVisiteurMois': {
             //controler qu'une fiche de frais existe
-
             $visiteurASelectionner = $idVisiteur;
             $dateASelectionner = $mois;
             $ficheAnnee = substr($mois, 0, 4);
@@ -39,7 +32,6 @@ switch ($action) {
             if ($laFiche) {
                 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
                 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-                $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $mois);
                 include('vues/v_listeVisiteurMoisC.php');
                 include('vues/v_traiterFrais.php');
             } else {
@@ -51,9 +43,26 @@ switch ($action) {
             break;
         }
     case 'validerTraitement': {
-            //mettre a jour table fraisforfait
+            //mettre a jour table lignefraisforfait
             $idFrais = $pdo->getLesIdFrais();
             $lesFrais = remplirTableauFrais($idFrais);
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
+            //mettre a jour table lignefraishorsforfait
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+            $i = 0;
+            foreach ($lesFraisHorsForfait as $value) {
+                $idFrais=implementer('idFraisHorsForfait',(string)$i);
+                $etatFrais = implementer ('etatFraisHorsForfait',(string)$i);
+                
+                if ($etatFrais == 'supprime') {
+                    //supprime ligne de etat frais ou id=idFrais
+                    echo "sup";
+                } else
+                if ($etatFrais == 'reporte') {
+                    //reporter la ligne de frais sur mois suivant
+                    echo "ref";
+                }
+            }
+            //Faire les comptes et valider ficheFrais
         }
 }

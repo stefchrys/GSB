@@ -10,7 +10,7 @@ $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
 $numAnnee = substr($mois, 0, 4);
 $numMois = substr($mois, 4, 2);
-$action = $_REQUEST['action'];
+$action = implementer('action');
 switch ($action) {
     case 'saisirFrais': {
             if ($pdo->estPremierFraisMois($idVisiteur, $mois)) {
@@ -20,6 +20,7 @@ switch ($action) {
         }
     case 'validerMajFraisForfait': {
             $lesFrais = $_REQUEST['txt_lesFrais'];
+            var_dump($lesFrais);
             if (lesQteFraisValides($lesFrais)) {
                 $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
             } else {
@@ -29,9 +30,9 @@ switch ($action) {
             break;
         }
     case 'validerCreationFrais': {
-            $dateFrais = $_REQUEST['dateFrais'];
-            $libelle = $_REQUEST['libelle'];
-            $montant = $_REQUEST['montant'];
+            $dateFrais = implementer('dateFrais');
+            $libelle = implementer('libelle');
+            $montant = implementer('montant');
             valideInfosFrais($dateFrais, $libelle, $montant);
             if (nbErreurs() != 0) {
                 include("vues/v_erreurs.php");
