@@ -15,15 +15,15 @@
                             foreach ($visiteurs as $unVisiteur) {
                                 $nom = $unVisiteur['nom'];
                                 $prenom = $unVisiteur['prenom'];
-                                $idVisiteur = $unVisiteur['id'];
-                                if ($idVisiteur == $visiteurASelectionner) {
+                                $idDuVisiteur = $unVisiteur['id'];
+                                if ($idDuVisiteur == $visiteurASelectionner) {
                                     ?>
-                                    <option selected value="<?php echo $idVisiteur ?>">
+                                    <option selected value="<?php echo $idDuVisiteur ?>">
                                         <?php echo $nom . " " . $prenom ?> </option>
                                     <?php
                                 } else {
                                     ?> 
-                                    <option  value="<?php echo $idVisiteur ?>">  
+                                    <option  value="<?php echo $idDuVisiteur ?>">  
                                         <?php echo $nom . " " . $prenom ?> </option>
                                     <?php
                                 }

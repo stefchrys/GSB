@@ -2,8 +2,6 @@
 
 include("vues/v_sommaireC.php");
 $action = implementer('action');
-$mois= implementer('mois');
-$idVisiteur=implementer('visiteur');
 $visiteurs = $pdo->getListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
@@ -20,6 +18,8 @@ switch ($action) {
             break;
         }
     case 'validerChoixVisiteurMois': {
+            $mois = implementer('mois');
+            $idVisiteur = implementer('visiteur');
             //controler qu'une fiche de frais existe
             $visiteurASelectionner = $idVisiteur;
             $dateASelectionner = $mois;
@@ -43,6 +43,8 @@ switch ($action) {
             break;
         }
     case 'validerTraitement': {
+            $mois = implementer('mois');
+            $idVisiteur = implementer('visiteur');
             //mettre a jour table lignefraisforfait
             $idFrais = $pdo->getLesIdFrais();
             $lesFrais = remplirTableauFrais($idFrais);
@@ -51,9 +53,9 @@ switch ($action) {
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
             $i = 0;
             foreach ($lesFraisHorsForfait as $value) {
-                $idFrais=implementer('idFraisHorsForfait',(string)$i);
-                $etatFrais = implementer ('etatFraisHorsForfait',(string)$i);
-                
+                $idFrais = implementer('idFraisHorsForfait', (string) $i);
+                $etatFrais = implementer('etatFraisHorsForfait', (string) $i);
+
                 if ($etatFrais == 'supprime') {
                     //supprime ligne de etat frais ou id=idFrais
                     echo "sup";

@@ -33,7 +33,7 @@
                         <?php
                         $numero = 0;
                         foreach ($lesFraisForfait as $unFraisForfait) {
-                            $quantite = $unFraisForfait['quantite'];
+                            $quantite = $unFraisForfait['quantite']; 
                             ?>                          
                             <td ><input type="text" class="form-control" 
                                         value="<?php echo $quantite ?>" 
