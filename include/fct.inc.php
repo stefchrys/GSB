@@ -212,6 +212,14 @@ function nbErreurs() {
     }
 }
 
-
+function remplirTableauFrais($idFrais) {
+    $lesFrais = array();
+    for ($i = 0; $i < count($idFrais); $i++) {
+        if (isset($_REQUEST['fraisForfait' . $i]) && is_string($_REQUEST['fraisForfait' . $i])) {
+            $lesFrais[$idFrais[$i][0]] = (int) (($_REQUEST['fraisForfait' . $i]));
+        }
+    }
+    return $lesFrais;
+}
 
 ?>

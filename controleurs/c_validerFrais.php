@@ -1,8 +1,15 @@
 <?php
 
-
 include("vues/v_sommaireC.php");
-$action = $_REQUEST['action'];
+if (isset($_REQUEST['action']) && is_string($_REQUEST['action'])) {
+    $action = $_REQUEST['action'];
+}
+if (isset($_REQUEST['mois']) && is_string($_REQUEST['mois'])) {
+    $mois = $_REQUEST['mois'];
+}
+if (isset($_REQUEST['visiteur']) && is_string($_REQUEST['visiteur'])) {
+    $idVisiteur = $_REQUEST['visiteur'];
+}
 $visiteurs = $pdo->getListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
@@ -17,27 +24,22 @@ switch ($action) {
             $dateASelectionner = $lesClesDate[0];
             include('vues/v_listeVisiteurMoisC.php');
             break;
-    }
-
+        }
     case 'validerChoixVisiteurMois': {
             //controler qu'une fiche de frais existe
-            $moisChoisi = $_REQUEST['mois'];
-            $idVisiteur = $_REQUEST['visiteur'];
+
             $visiteurASelectionner = $idVisiteur;
-            $dateASelectionner = $moisChoisi;
-            $ficheAnnee = substr($moisChoisi, 0, 4);
-            $ficheMois = substr($moisChoisi, 4, 2);
+            $dateASelectionner = $mois;
+            $ficheAnnee = substr($mois, 0, 4);
+            $ficheMois = substr($mois, 4, 2);
             $etat = "CL";
             //chercher la fiche
-            $laFiche = $pdo->ficheExiste($idVisiteur, $moisChoisi,$etat);
-             //si fiche existe on affiche la fiche frais correspondante
+            $laFiche = $pdo->ficheExiste($idVisiteur, $mois, $etat);
+            //si fiche existe on affiche la fiche frais correspondante
             if ($laFiche) {
-                $lesFraisHorsForfait = 
-                        $pdo->getLesFraisHorsForfait($idVisiteur, $moisChoisi);
-                $lesFraisForfait = 
-                        $pdo->getLesFraisForfait($idVisiteur, $moisChoisi);
-                $lesInfosFicheFrais = 
-                        $pdo->getLesInfosFicheFrais($idVisiteur, $moisChoisi);
+                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+                $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+                $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $mois);
                 include('vues/v_listeVisiteurMoisC.php');
                 include('vues/v_traiterFrais.php');
             } else {
@@ -47,19 +49,11 @@ switch ($action) {
                 include('vues/v_listeVisiteurMoisC.php');
             }
             break;
-    }
+        }
     case 'validerTraitement': {
-            //Frais forfait:
             //mettre a jour table fraisforfait
             $idFrais = $pdo->getLesIdFrais();
-            $montantFrais = array();
-            $lesFrais = array();
-            for ($i = 0; $i < 4; $i++) {
-                $montantFrais[] = (int) ($_REQUEST['fraisForfait' . $i]);
-                $lesFrais[$idFrais[$i][0]] = $montantFrais[$i];
-            }
-            $mois = $_REQUEST['mois'];
-            $idVisiteur = $_REQUEST['visiteur'];
+            $lesFrais = remplirTableauFrais($idFrais);
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
         }
 }
