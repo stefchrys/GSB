@@ -227,14 +227,15 @@ function remplirTableauFrais($idFrais) {
  * @param string $value
  * @return string
  */
-function implementer($value,$option="") {
+function implementer($value) {
     $action = "";
-    if (isset($_REQUEST[$value.$option]) && is_string($_REQUEST[$value.$option])) {
-        $action = $_REQUEST[$value.$option];
+    if (isset($_REQUEST[$value])) {
+        $action = $_REQUEST[$value];
         return $action;
     }else{
-        echo "probleme de variable globale";
+        echo "probleme de variable globale".$value;
     }
+    
 }
 
 ?>

@@ -2,8 +2,6 @@
 
 include("vues/v_sommaireC.php");
 $action = implementer('action');
-$mois= implementer('mois');
-$idVisiteur=implementer('visiteur');
 $visiteurs = $pdo->getListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
@@ -20,6 +18,8 @@ switch ($action) {
             break;
         }
     case 'validerChoixVisiteurMois': {
+            $mois = implementer('mois');
+            $idVisiteur = implementer('visiteur');
             //controler qu'une fiche de frais existe
             $visiteurASelectionner = $idVisiteur;
             $dateASelectionner = $mois;
@@ -43,26 +43,26 @@ switch ($action) {
             break;
         }
     case 'validerTraitement': {
-            //mettre a jour table lignefraisforfait
-            $idFrais = $pdo->getLesIdFrais();
-            $lesFrais = remplirTableauFrais($idFrais);
+            $lesFrais = implementer('fraisForfait');
+            $etat = implementer('etatFraisHorsForfait');
+            var_dump($etat);
+            $mois = implementer('mois');
+            $idVisiteur = implementer('visiteur');
+            //mise a jour de ligneFraisForfait
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
-            //mettre a jour table lignefraishorsforfait
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
-            $i = 0;
-            foreach ($lesFraisHorsForfait as $value) {
-                $idFrais=implementer('idFraisHorsForfait',(string)$i);
-                $etatFrais = implementer ('etatFraisHorsForfait',(string)$i);
-                
-                if ($etatFrais == 'supprime') {
-                    //supprime ligne de etat frais ou id=idFrais
-                    echo "sup";
-                } else
-                if ($etatFrais == 'reporte') {
-                    //reporter la ligne de frais sur mois suivant
-                    echo "ref";
+            //traitement frais hors forfaits
+            
+            foreach($etat as $id){
+                switch($id){
+                    case 'supprime':{
+                        //supprimer la ligne de frais hors forfait
+                        break;
+                    }  
+                    case 'reporte':{
+                        //reporter la ligne de frais hors forfait le mois suivant
+                        break;
+                    } 
                 }
             }
-            //Faire les comptes et valider ficheFrais
         }
-}
+} 

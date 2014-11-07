@@ -31,16 +31,17 @@
                 <tbody>
                     <tr class="success">
                         <?php
-                        $numero = 0;
+                        
                         foreach ($lesFraisForfait as $unFraisForfait) {
                             $quantite = $unFraisForfait['quantite'];
+                            $idFrais= $unFraisForfait['idfrais'];
                             ?>                          
                             <td ><input type="text" class="form-control" 
                                         value="<?php echo $quantite ?>" 
-                                        name="fraisForfait<?php echo $numero ?>"/>
+                                        name="fraisForfait[<?php echo $idFrais ?>]"/>
                             </td>
                             <?php
-                            $numero++;
+                            
                         }
                         ?> 
                     </tr>
@@ -70,10 +71,8 @@
                             <td><?php echo $libelle ?></td>
                             <td><?php echo $montant ?></td>
                             <td>
-                                <input type="hidden" 
-                                       name="idFraisHorsForfait<?php echo (string)$i ?>" 
-                                       value=<?php echo $id ?>/>
-                                <select name='etatFraisHorsForfait<?php echo (string)$i ?>'>
+                               
+                                <select name='etatFraisHorsForfait[<?php echo $id ?>]'>
                                     <option selected value="valide">Validé</option>
                                     <option value="reporte">Reporté</option>
                                     <option value="supprime">Supprimé</option>
@@ -81,7 +80,7 @@
                             </td>
                         </tr>
                         <?php
-                        $i++;
+                        
                     }
                     ?> 
                 </tbody>
