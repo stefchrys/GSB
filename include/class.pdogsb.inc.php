@@ -394,6 +394,20 @@ class PdoGsb {
 		where fichefrais.idvisiteur ='$idVisiteur' "
                 . "and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
+    }   
+    /**
+     * modifie le champs nb justificatif et montant valide d'une fiche de frais
+     * @param type $idVisiteur
+     * @param type $mois
+     * @param type $montant
+     * @param type $nbJustificatifs
+     */
+    public function majMontantFicheFrais($idVisiteur, $mois, $montant,$nbJustificatifs){
+        $req="update fichefrais set montantValide ='$montant',"
+                . "nbJustificatifs='$nbJustificatifs' "
+                . "where fichefrais.idvisiteur ='$idVisiteur' "
+                . "and fichefrais.mois = '$mois'";
+        PdoGsb::$monPdo->exec($req);
     }
     
     /**
@@ -445,7 +459,23 @@ class PdoGsb {
         return $lgFiche;
     } 
     
+    /**
+     * Modifie le libelle d'un frais hors forfait refusé
+     * 
+     * @param int $id id de la fiche fraishorsforfait
+     */
+    public function refuserLigneFraisHorsForfait($id){
+        $req="update ligneFraisHorsForfait "
+                . "set libelle = concat('REFUS',libelle) "
+                . "where id='$id'";              
+         PdoGsb::$monPdo->exec($req);
+    }
   
-   
+    public function valeurMontant($id){
+        $req="select montant from fraisForfait where id='$id'";
+        $idJeuMontant=PdoGsb::$monPdo->query($req);
+        $lgMontant=$idJeuMontant->fetch();
+        return (float)$lgMontant[0];
+    }
 }
 ?>

@@ -234,8 +234,31 @@ function implementer($value) {
         return $action;
     }else{
         echo "probleme de variable globale".$value;
-    }
-    
+    }    
 }
+/**
+ * Definit le mois suivant la date donnée en parametre au format
+ * aaaa/mm
+ * @param type $date
+ * @return string date au format aaaamm
+ */
+function definirMoisSuivant($date) {
+    $moisSuivant = "";
+    $annee = substr($date, 0, 4);
+    $mois = substr($date, 4, 2);
+    if ((int) $mois == 12) {
+        $mois = 1;
+        (int)$annee++;
+    } else {
+        $mois++;
+    }
+    if($mois<10){
+        (string)$mois='0'.(string)$mois;
+    }   
+    $moisSuivant = (string)$annee . (string)$mois;
+    return $moisSuivant;
+}
+
+
 
 ?>

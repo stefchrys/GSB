@@ -66,7 +66,8 @@
                         $montant = $unFraisHorsForfait['montant'];
                         $id = $unFraisHorsForfait['id'];
                         ?>                      
-                        <tr>                         
+                        <tr> 
+                           
                             <td><?php echo $date ?></td>
                             <td><?php echo $libelle ?></td>
                             <td><?php echo $montant ?></td>
@@ -85,8 +86,8 @@
                     ?> 
                 </tbody>
             </table>           
-            <label> Nb de justificatifs requis:</label><?php echo count($lesFraisForfait) / 2; ?>                       
-            <label> Nb justificatifs reçus:</label><input type="text"/>                      
+                                  
+            <label> Nb justificatifs reçus:</label><input type="text" name='justificatifs'/>                      
             <div class="piedForm">              
                 <p>
                     <input  type="submit" value="Valider le traitement"  />                   

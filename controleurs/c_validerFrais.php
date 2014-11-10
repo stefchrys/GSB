@@ -43,26 +43,58 @@ switch ($action) {
             break;
         }
     case 'validerTraitement': {
+           
             $lesFrais = implementer('fraisForfait');
             $etat = implementer('etatFraisHorsForfait');
-            var_dump($etat);
+            $lesClesEtat = array_keys($etat);
             $mois = implementer('mois');
             $idVisiteur = implementer('visiteur');
+            $tableauFrais = [];
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+            foreach ($lesFraisHorsForfait as $frais) {
+                $tableauFrais[$frais['id']]['libelle'] = $frais['libelle'];
+                $tableauFrais[$frais['id']]['date'] = $frais['date'];
+                $tableauFrais[$frais['id']]['montant'] = $frais['montant'];
+            }
             //mise a jour de ligneFraisForfait
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
-            //traitement frais hors forfaits
-            
-            foreach($etat as $id){
-                switch($id){
-                    case 'supprime':{
-                        //supprimer la ligne de frais hors forfait
-                        break;
-                    }  
-                    case 'reporte':{
-                        //reporter la ligne de frais hors forfait le mois suivant
-                        break;
-                    } 
+            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+            $montantValide=0;
+            foreach($lesFraisForfait as $frais){
+                $montantValide +=($frais['quantite'])*( $pdo->valeurMontant($frais['idfrais']));               
+            }       
+            //traitement des frais hors forfaits           
+            foreach ($lesClesEtat as $cle) {
+                $libelle = $tableauFrais[$cle]['libelle'];
+                $date = $tableauFrais[$cle]['date'];
+                $montant = (float) $tableauFrais[$cle]['montant'];
+                //si on supprime le frais
+                if ($etat[$cle] == 'supprime') {
+                    //on refuse le paiement
+                    $pdo->refuserLigneFraisHorsForfait($cle);
+                } else {
+                    //si on reporte le frais
+                    if ($etat[$cle] == 'reporte') {
+                        //verifier si ficheFrais du mois suivant existe
+                        $moisSuivant = definirMoisSuivant($mois);
+                        $fiche = $pdo->ficheExiste($idVisiteur, $moisSuivant, 'CR');
+                        //si la fichefrais du mois suivant n'existe pas
+                        if (!$fiche) {
+                            //creer la nouvelle fiche de frais du mois suivant
+                            $pdo->creeNouvellesLignesFrais($idVisiteur, $moisSuivant);
+                        }
+                        //deplacer la ligne fraishorsforfait du mois traité vers mois suivant
+                        $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, $libelle, $date, $montant);
+                        //et supprimer l'ancienne
+                        $pdo->supprimerFraisHorsForfait($cle);
+                    }else{
+                        $montantValide += $montant;
+                    }
                 }
             }
+            //enfin on cloture fiche de frais
+            $nbJustificatifs=implementer('justificatifs');
+            $pdo->majMontantFicheFrais($idVisiteur, $mois,$montantValide,$nbJustificatifs);
+            $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
         }
 } 
