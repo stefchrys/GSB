@@ -229,6 +229,7 @@ function remplirTableauFrais($idFrais) {
  */
 function implementer($value) {
     $action = "";
+    
     if (isset($_REQUEST[$value])) {
         $action = $_REQUEST[$value];
         return $action;
@@ -237,6 +238,7 @@ function implementer($value) {
     }    
 }
 /**
+ * 
  * Definit le mois suivant la date donnée en parametre au format
  * aaaa/mm
  * @param type $date

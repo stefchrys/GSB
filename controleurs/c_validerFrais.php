@@ -61,7 +61,8 @@ switch ($action) {
             $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
             $montantValide=0;
             foreach($lesFraisForfait as $frais){
-                $montantValide +=($frais['quantite'])*( $pdo->valeurMontant($frais['idfrais']));               
+                $montantValide +=
+                        ($frais['quantite'])*( $pdo->valeurMontant($frais['idfrais']));               
             }       
             //traitement des frais hors forfaits           
             foreach ($lesClesEtat as $cle) {
@@ -84,7 +85,8 @@ switch ($action) {
                             $pdo->creeNouvellesLignesFrais($idVisiteur, $moisSuivant);
                         }
                         //deplacer la ligne fraishorsforfait du mois traité vers mois suivant
-                        $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, $libelle, $date, $montant);
+                        $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, 
+                                $libelle, $date, $montant);
                         //et supprimer l'ancienne
                         $pdo->supprimerFraisHorsForfait($cle);
                     }else{
