@@ -262,7 +262,30 @@ function definirMoisSuivant($date) {
     $moisSuivant = (string)$annee . (string)$mois;
     return $moisSuivant;
 }
-
-
+/**
+ * Fusionne 2 tableauxassociatifs afin de renvoyer un tableau associatif de type
+ * id |libelle
+ *    |date
+ *    |montant
+ *    |etat
+ * ---+--------- 
+ *  
+ * @param array $lesFraisHorsForfait tableau de frais hors forfait
+ * @param array $etat tableau des etat type id=>etat
+ * @return array
+ */
+function fusionner($lesFraisHorsForfait, $etat) {
+    $lesCles = array_keys($etat);
+    $tableauFraisHF = [];
+    //remplir tableauFrais  
+    foreach ($lesFraisHorsForfait as $frais) {
+        $tableauFraisHF[$frais['id']]['id'] = $frais['id'];
+        $tableauFraisHF[$frais['id']]['libelle'] = $frais['libelle'];
+        $tableauFraisHF[$frais['id']]['date'] = $frais['date'];
+        $tableauFraisHF[$frais['id']]['montant'] = $frais['montant'];
+        $tableauFraisHF[$frais['id']]['etat'] = $etat[$frais['id']];
+    }
+    return $tableauFraisHF;
+}
 
 ?>
