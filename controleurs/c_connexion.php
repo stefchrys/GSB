@@ -37,7 +37,7 @@ switch($action){
 			connecter($id,$nom,$prenom);
                        	
                         // si c'est un comptable on affiche son sommaire comptable
-                        if($pdo->verifierComptable($id)){
+                        if($pdo->verifierComptable($id)!=null){
                             include ("vues/v_sommaireC.php");
                         //sinon le sommaire visiteur
                         }else{

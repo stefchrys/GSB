@@ -1,12 +1,12 @@
 <?php
-
-include("vues/v_sommaireC.php");
+ include ("vues/v_sommaireC.php");
 $action = implementer('action');
 $visiteurs = $pdo->getListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
 switch ($action) {
     case 'choixVisiteurMois': {
+      
             /* Afin de sélectionner par défaut le dernier visiteur
               dans la zone de liste et le dernier mois,
               on demande toutes les clés, et on prend la première */
@@ -18,6 +18,7 @@ switch ($action) {
             break;
         }
     case 'validerChoixVisiteurMois': {
+      
             $mois = implementer('mois');
             $idVisiteur = implementer('visiteur');
             //controler qu'une fiche de frais existe
@@ -43,32 +44,40 @@ switch ($action) {
             break;
         }
     case 'validerTraitement': {
-           
-            $lesFrais = implementer('fraisForfait');
-            $etat = implementer('etatFraisHorsForfait');
-            $lesClesEtat = array_keys($etat);
+       
+            //////////////////////traitement frais forfait//////////////////////////
+            //tableau de frais forfait idFrais=>quantité
+            $lesFrais = implementer('fraisForfait');          
             $mois = implementer('mois');
-            $idVisiteur = implementer('visiteur');
-            $tableauFrais = [];
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
-            foreach ($lesFraisHorsForfait as $frais) {
-                $tableauFrais[$frais['id']]['libelle'] = $frais['libelle'];
-                $tableauFrais[$frais['id']]['date'] = $frais['date'];
-                $tableauFrais[$frais['id']]['montant'] = $frais['montant'];
-            }
+            $idVisiteur = implementer('visiteur');          
             //mise a jour de ligneFraisForfait
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
             $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-            $montantValide=0;
-            foreach($lesFraisForfait as $frais){
-                $montantValide +=
-                        ($frais['quantite'])*( $pdo->valeurMontant($frais['idfrais']));               
-            }       
-            //traitement des frais hors forfaits           
+            //calcul du montant valide composé des frais forfait
+            $montantValide=$pdo->sommeFrais($lesFraisForfait);  
+            
+            //////////////////traitement des frais hors forfaits /////////////////
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+                       
+             //tableau associatif de frais hors forfait numeroté par id de frais
+            //      [id][libelle]=>value
+            //          [date]   =>value
+            //          [montant]=>value
+            $tableauFraisHF = [];           
+            //remplir tableauFrais  
+            foreach ($lesFraisHorsForfait as $frais) {
+                $tableauFraisHF[$frais['id']]['libelle'] = $frais['libelle'];
+                $tableauFraisHF[$frais['id']]['date'] = $frais['date'];
+                $tableauFraisHF[$frais['id']]['montant'] = $frais['montant'];
+            }
+            //tableau des etats des frais hors forfait idFrais=>etat(validé/reporté/supprimé)
+            $etat = implementer('etatFraisHorsForfait');
+            //chaque clé correspond à un id de frais hors forfait
+            $lesClesEtat = array_keys($etat);
             foreach ($lesClesEtat as $cle) {
-                $libelle = $tableauFrais[$cle]['libelle'];
-                $date = $tableauFrais[$cle]['date'];
-                $montant = (float) $tableauFrais[$cle]['montant'];
+                $libelle = $tableauFraisHF[$cle]['libelle'];
+                $date = $tableauFraisHF[$cle]['date'];
+                $montant = (float) $tableauFraisHF[$cle]['montant'];
                 //si on supprime le frais
                 if ($etat[$cle] == 'supprime') {
                     //on refuse le paiement
@@ -89,6 +98,7 @@ switch ($action) {
                                 $libelle, $date, $montant);
                         //et supprimer l'ancienne
                         $pdo->supprimerFraisHorsForfait($cle);
+                    //si le frais est validé on y ajoute le montant 
                     }else{
                         $montantValide += $montant;
                     }
@@ -97,6 +107,6 @@ switch ($action) {
             //enfin on cloture fiche de frais
             $nbJustificatifs=implementer('justificatifs');
             $pdo->majMontantFicheFrais($idVisiteur, $mois,$montantValide,$nbJustificatifs);
-            $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
+            $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');           
         }
 } 

@@ -238,22 +238,24 @@ function implementer($value) {
     }    
 }
 /**
- * 
  * Definit le mois suivant la date donnée en parametre au format
  * aaaa/mm
- * @param type $date
- * @return string date au format aaaamm
+ * 
+ * @param string $date Date au format aaaann
+ * @return string Renvoie une date au format aaaamm
  */
 function definirMoisSuivant($date) {
     $moisSuivant = "";
     $annee = substr($date, 0, 4);
     $mois = substr($date, 4, 2);
+    //si le mois est 12 alors le prochain est 01, et l'année avance d'un cran
     if ((int) $mois == 12) {
         $mois = 1;
         (int)$annee++;
     } else {
         $mois++;
     }
+    //on formate le mois en 'mm' 
     if($mois<10){
         (string)$mois='0'.(string)$mois;
     }   

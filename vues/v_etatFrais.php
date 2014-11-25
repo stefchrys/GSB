@@ -59,8 +59,13 @@
                     $date = $unFraisHorsForfait['date'];
                     $libelle = $unFraisHorsForfait['libelle'];
                     $montant = $unFraisHorsForfait['montant'];
+                    $couleur='success';
+                    if(substr($libelle,0,5)=='refus' || substr($libelle,0,5)=='REFUS'){
+                        $couleur="danger";
+                    }
                     ?>
-                    <tr>
+                    
+                    <tr  class="<?php echo $couleur ?>">
                         <td><?php echo $date ?></td>
                         <td><?php echo $libelle ?></td>
                         <td><?php echo $montant ?></td>

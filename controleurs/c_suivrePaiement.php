@@ -7,7 +7,20 @@
  */
 
 
-if ($_REQUEST['action']=='suivrePaiement'){
-    include("vues/v_sommaireC.php");
-    include ('vues/v_suivrePaiement.php');
+//include("vues/v_sommaireC.php");
+$action = implementer('action');
+
+switch ($action){
+    /*case 'choixFicheValide':{
+        //recupération des fiches frais  en etat VA
+        $fichesFraisVA=$pdo->getFichesFrais('VA');
+        //recupération des lignes frais forfait pour chaque fiche frais dans un tableau
+       $r=$pdo->getTotalFraisForfait('f4','201411');
+              
+        include 'vues/v_suivrePaiement.php';
+    }
+    case 'payerFicheFrais':{
+        
+    }*/
+        
 }

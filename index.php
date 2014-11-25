@@ -36,6 +36,7 @@ switch($uc){
 		include("controleurs/c_etatFrais.php");break; 
 	}
          case 'validerFrais':{
+           
             include("controleurs/c_validerFrais.php");
         }
         case 'suivrePaiement':{

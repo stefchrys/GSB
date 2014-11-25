@@ -477,5 +477,33 @@ class PdoGsb {
         $lgMontant=$idJeuMontant->fetch();
         return (float)$lgMontant[0];
     }
+    /**
+     * Recupere les fiche frais dont l'état est donné en paramètre
+     * 
+     * @param string $etat etat de la fiche 
+     * @return array Retourne un tableau de ficheFrais 
+     */
+    public function getFichesFrais($etat){
+        $req="select * from ficheFrais where idEtat='$etat'";
+        $idjeuFiche = PdoGsb::$monPdo->query($req);
+        $lgFiche=$idjeuFiche->fetchAll();
+        return $lgFiche;
+    }
+   /**
+     * calcul la somme totale d'une ligne de frais forfaitisée
+     * @param array $lesFraisForfait tableau de frais forfait
+     * @return float
+     */
+    public function sommeFrais($lesFraisForfait) {
+        $montantValide = 0;
+        foreach ($lesFraisForfait as $frais) {
+            (float)$montantValide +=
+                    ($frais['quantite']) * ( $this->valeurMontant($frais['idfrais']));
+        }
+        return (float)$montantValide;
+    }
+
+    
+
 }
 ?>
