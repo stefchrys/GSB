@@ -264,10 +264,13 @@ function definirMoisSuivant($date) {
 }
 /**
  * Fusionne 2 tableauxassociatifs afin de renvoyer un tableau associatif de type
+ * clé|Value
+ * ---+---------
  * id |libelle
  *    |date
  *    |montant
  *    |etat
+ *    |id
  * ---+--------- 
  *  
  * @param array $lesFraisHorsForfait tableau de frais hors forfait
