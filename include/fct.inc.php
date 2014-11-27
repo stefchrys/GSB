@@ -230,7 +230,7 @@ function remplirTableauFrais($idFrais) {
 function implementer($value) {
     $action = "";
     
-    if (isset($_REQUEST[$value])) {
+    if (isset($_REQUEST[$value] )) {
         $action = $_REQUEST[$value];
         return $action;
     }else{

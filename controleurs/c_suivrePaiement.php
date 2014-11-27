@@ -1,26 +1,45 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-//include("vues/v_sommaireC.php");
+include("vues/v_sommaireC.php");
 $action = implementer('action');
 
-switch ($action){
-    /*case 'choixFicheValide':{
-        //recupération des fiches frais  en etat VA
-        $fichesFraisVA=$pdo->getFichesFrais('VA');
-        //recupération des lignes frais forfait pour chaque fiche frais dans un tableau
-       $r=$pdo->getTotalFraisForfait('f4','201411');
-              
-        include 'vues/v_suivrePaiement.php';
-    }
-    case 'payerFicheFrais':{
-        
-    }*/
-        
-}
+switch ($action) {
+    case 'choixFicheValide': {
+            //recupération des fiches frais  en etat VA
+            $fichesFraisVA = $pdo->getFichesFrais('VA');
+            //recuperer infos utiles dans un tableau
+            $tabInfoUtiles = array();
+            $i = 0;
+            foreach ($fichesFraisVA as $fiche) {
+                $lesFraisForfait = $pdo->getLesFraisForfait($fiche['idVisiteur'], $fiche['mois']);
+                $montantFraisForfait = $pdo->sommeFrais($lesFraisForfait);
+                $tabInfoUtiles[$i]['fraisForfait'] = $montantFraisForfait;
+                $tabInfoUtiles[$i]['fraisHorsForfait'] = ($fiche['montantValide']) - ($montantFraisForfait);
+                $tabInfoUtiles[$i]['montantTotal'] = $fiche['montantValide'];
+                $tabInfoUtiles[$i]['id'] = $fiche['idVisiteur'];
+                $tabInfoUtiles[$i]['mois'] = $fiche['mois'];
+                $tabInfoUtiles[$i]['nom'] = $pdo->getNomVisiteur($fiche['idVisiteur']);
+                $i++;
+            }
+            include 'vues/v_suivrePaiement.php';
+            break;
+        }
+    case 'payerFicheFrais': {
+            if (!empty($_REQUEST['choix'])) {
+                $choix = implementer('choix');
+                $etat = 'RB';
+                foreach ($choix as $el) {
+                    //recuperation de l'id et du mois afin de lancer une procedure de remboursemnt sur base de donnee
+                    $tab = array();
+                    $tab = explode("-", $el);
+                    $id = $tab[0];
+                    $mois = $tab[1];
+                    $pdo->majEtatFicheFrais($id, $mois, $etat);
+                }
+                include('vues/v_remboursement.php');
+            } else {
+                echo "aucune fiche remboursée";
+            }
+            break;
+        }
+} 
