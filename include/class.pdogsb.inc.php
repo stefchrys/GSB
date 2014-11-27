@@ -502,7 +502,18 @@ class PdoGsb {
         }
         return (float)$montantValide;
     }
-
+    /**
+     * Recupere le nom et le prenom d'un visiteur en fonction de l'id
+     * @param string $id
+     * @return array
+     */
+    public function getNomVisiteur($id){
+        $req="select nom,prenom from visiteur where id='$id'";
+        $idJeuNom=PdoGsb::$monPdo->query($req);
+        $lgNom=$idJeuNom->fetch();
+        $nom=$lgNom['nom']." ".$lgNom['prenom'];
+        return $nom;
+    }
     
 
 }

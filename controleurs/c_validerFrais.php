@@ -54,12 +54,13 @@ switch ($action) {
             //mise a jour de ligneFraisForfait
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
             $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-            //calcul du montant valide composé des frais forfait
+            //calcul du montant  composé des frais forfait validés par le comptable
             $montantValide = $pdo->sommeFrais($lesFraisForfait);
 
             //////////////////traitement des frais hors forfaits /////////////////
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
             $etat = implementer('etatFraisHorsForfait');
+            //creation d'un tableau associatif specifique(voir fonction fusionner())
             $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);
             foreach ($tableauFraisHF as $frais) {
                 $libelle = $frais['libelle'];
@@ -67,12 +68,12 @@ switch ($action) {
                 $montant = (float) $frais['montant'];
                 $etat = $frais['etat'];
                 $id = $frais['id'];
-                //si on supprime le frais
+                //si le frais est supprimé par le comptable
                 if ($etat == 'supprime') {
                     //on refuse le paiement
                     $pdo->refuserLigneFraisHorsForfait((int) $id);
                 } else {
-                    //si on reporte le frais
+                    //si le frais est reporté
                     if ($etat == 'reporte') {
                         //verifier si ficheFrais du mois suivant existe
                         $moisSuivant = definirMoisSuivant($mois);
@@ -84,7 +85,7 @@ switch ($action) {
                         }
                         //deplacer la ligne fraishorsforfait du mois traité vers mois suivant
                         $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, $libelle, $date, $montant);
-                        //et supprimer l'ancienne
+                        //et supprimer l'ancienne ligne fraishorsforfait
                         $pdo->supprimerFraisHorsForfait((int) $id);
                         //si le frais est validé on y ajoute le montant 
                     } else {
