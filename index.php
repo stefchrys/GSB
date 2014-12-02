@@ -12,7 +12,7 @@
  */
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
-include("vues/v_entete.php");
+require("vues/v_entete.inc.php");
 session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
@@ -27,24 +27,24 @@ $uc = $_REQUEST['uc'];
 
 switch ($uc) {
     case 'connexion': {
-            include("controleurs/c_connexion.php");
+            require("controleurs/c_connexion.inc.php");
             break;
         }
     case 'gererFrais' : {
-            include("controleurs/c_gererFrais.php");
+            require("controleurs/c_gererFrais.inc.php");
             break;
         }
     case 'etatFrais' : {
-            include("controleurs/c_etatFrais.php");
+            require("controleurs/c_etatFrais.inc.php");
             break;
         }
     case 'validerFrais': {
-            include("controleurs/c_validerFrais.php");
+            require("controleurs/c_validerFrais.inc.php");
             break;
         }
     case 'suivrePaiement': {
-            include("controleurs/c_suivrePaiement.php");
+            require("controleurs/c_suivrePaiement.inc.php");
             break;
         }
 }
-include("vues/v_pied.php");
+require("vues/v_pied.inc.php");

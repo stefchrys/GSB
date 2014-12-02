@@ -4,8 +4,7 @@
 
  * Fonctions Metier (MODELE)
  *  
- * @author chrysinus@gmail.com
- * 
+ * @author chrysinus@gmail.com 
  */
 
 /**
@@ -215,7 +214,8 @@ function nbErreurs() {
 function remplirTableauFrais($idFrais) {
     $lesFrais = array();
     for ($i = 0; $i < count($idFrais); $i++) {
-        if (isset($_REQUEST['fraisForfait' . $i]) && is_string($_REQUEST['fraisForfait' . $i])) {
+        if (isset($_REQUEST['fraisForfait' . $i]) 
+                  && is_string($_REQUEST['fraisForfait' . $i])) {
             $lesFrais[$idFrais[$i][0]] = (int) (($_REQUEST['fraisForfait' . $i]));
         }
     }
@@ -228,9 +228,8 @@ function remplirTableauFrais($idFrais) {
  * @return string
  */
 function implementer($value) {
-    $action = "";
-    
-    if (isset($_REQUEST[$value] )) {
+    $action = "";   
+    if (isset($_REQUEST[$value])) {
         $action = $_REQUEST[$value];
         return $action;
     }else{
@@ -239,9 +238,9 @@ function implementer($value) {
 }
 /**
  * Definit le mois suivant la date donnée en parametre au format
- * aaaa/mm
+ * aaaamm
  * 
- * @param string $date Date au format aaaann
+ * @param string $date Date au format aaaamm
  * @return string Renvoie une date au format aaaamm
  */
 function definirMoisSuivant($date) {
@@ -263,30 +262,35 @@ function definirMoisSuivant($date) {
     return $moisSuivant;
 }
 /**
- * Fusionne 2 tableauxassociatifs afin de renvoyer un tableau associatif de type
- * clé|Value
- * ---+---------
- * id |libelle
- *    |date
- *    |montant
- *    |etat
- *    |id
- * ---+--------- 
- *  
+ * (ok)
+ * Fusionne 2 tableaux associatifs afin de renvoyer un tableau associatif avec juste 
+ * les infos necessaires.
+ * id devient la clé .
+ * 
+ *    1er tableau           2eme tableau        tableau fusionné
+ *    clé|Value             clé|Value           clé|Value
+ *  -----+---------         ---+-----           ---+-----
+ * index |id                id | etat           id | id
+ *       |idVisiteur                               |libelle
+ *       |mois                                     |date
+ *       |libelle                                  |montant
+ *       |date                                     |etat
+ *       |montant
+ * 
  * @param array $lesFraisHorsForfait tableau de frais hors forfait
  * @param array $etat tableau des etat type id=>etat
  * @return array
  */
 function fusionner($lesFraisHorsForfait, $etat) {
-    $lesCles = array_keys($etat);
     $tableauFraisHF = [];
     //remplir tableauFrais  
     foreach ($lesFraisHorsForfait as $frais) {
-        $tableauFraisHF[$frais['id']]['id'] = $frais['id'];
-        $tableauFraisHF[$frais['id']]['libelle'] = $frais['libelle'];
-        $tableauFraisHF[$frais['id']]['date'] = $frais['date'];
-        $tableauFraisHF[$frais['id']]['montant'] = $frais['montant'];
-        $tableauFraisHF[$frais['id']]['etat'] = $etat[$frais['id']];
+        $index=$frais['id'];
+        $tableauFraisHF[$index]['id'] = $frais['id'];
+        $tableauFraisHF[$index]['libelle'] = $frais['libelle'];
+        $tableauFraisHF[$index]['date'] = $frais['date'];
+        $tableauFraisHF[$index]['montant'] = $frais['montant'];
+        $tableauFraisHF[$index]['etat'] = $etat[$frais['id']];
     }
     return $tableauFraisHF;
 }

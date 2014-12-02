@@ -40,7 +40,7 @@ class PdoGsb {
      * 
      */
     private function __construct() {
-        PdoGsb::$monPdo = new PDO(PdoGsb::$serveur . 
+        PdoGsb::$monPdo = new PDO(PdoGsb::$serveur .
                 ';' . PdoGsb::$bdd, PdoGsb::$user, PdoGsb::$mdp);
         PdoGsb::$monPdo->query("SET CHARACTER SET utf8");
     }
@@ -80,15 +80,14 @@ class PdoGsb {
         $lgJeuVisiteur = $idJeuVisiteurs->fetch();
         return $lgJeuVisiteur;
     }
-    
-   
+
     /**
      * Retourne un tableau rempli des visiteurs(id,nom,prenom)
      * 
      * @return Array
      */
-    public function getListeVisiteurs(){
-        $req="select visiteur.id as id,
+    public function getListeVisiteurs() {
+        $req = "select visiteur.id as id,
             visiteur.nom as nom,
             visiteur.prenom as prenom
             from visiteur
@@ -99,7 +98,7 @@ class PdoGsb {
         $lgJeuVisiteur = $idJeuVisiteurs->fetchAll();
         return $lgJeuVisiteur;
     }
-    
+
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais 
      * hors forfait concernées par les deux arguments
@@ -177,20 +176,22 @@ class PdoGsb {
         $lgId = $idJeuId->fetchAll();
         return $lgId;
     }
-     /**
+
+    /**
      * Verification type de personnel connecté
-     
+
      * Verifie si la personne connectée est un visiteur ou un comptable
      * @param $id String id du de la personne conectée
      * @return un tableau associatif
      */
     function verifierComptable($id) {
-        $req="select comptable.id "
-                ."from comptable where comptable.id='$id'";
+        $req = "select comptable.id "
+                . "from comptable where comptable.id='$id'";
         $idJeu = PdoGsb::$monPdo->query($req);
         $lg = $idJeu->fetchAll();
         return $lg;
     }
+
     /**
      * Met à jour la table ligneFraisForfait
 
@@ -394,7 +395,8 @@ class PdoGsb {
 		where fichefrais.idvisiteur ='$idVisiteur' "
                 . "and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
-    }   
+    }
+
     /**
      * modifie le champs nb justificatif et montant valide d'une fiche de frais
      * @param type $idVisiteur
@@ -402,14 +404,15 @@ class PdoGsb {
      * @param type $montant
      * @param type $nbJustificatifs
      */
-    public function majMontantFicheFrais($idVisiteur, $mois, $montant,$nbJustificatifs){
-        $req="update fichefrais set montantValide ='$montant',"
+    public function majMontantFicheFrais($idVisiteur, $mois, $montant, 
+                                         $nbJustificatifs) {
+        $req = "update fichefrais set montantValide ='$montant',"
                 . "nbJustificatifs='$nbJustificatifs' "
                 . "where fichefrais.idvisiteur ='$idVisiteur' "
                 . "and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
     }
-    
+
     /**
      * renvoie un tableau composé des 12 derniers mois 
      * 
@@ -449,7 +452,7 @@ class PdoGsb {
      * @param string $etat
      * @return Array or NULL
      */
-    public function ficheExiste($id,$date,$etat){
+    public function ficheExiste($id, $date, $etat) {
         $req = "select * from ficheFrais "
                 . "where ficheFrais.idVisiteur = '$id'"
                 . "and ficheFrais.mois = '$date'"
@@ -457,39 +460,41 @@ class PdoGsb {
         $idjeuFiche = PdoGsb::$monPdo->query($req);
         $lgFiche = $idjeuFiche->fetch();
         return $lgFiche;
-    } 
-    
+    }
+
     /**
      * Modifie le libelle d'un frais hors forfait refusé
      * 
      * @param int $id id de la fiche fraishorsforfait
      */
-    public function refuserLigneFraisHorsForfait($id){
-        $req="update ligneFraisHorsForfait "
+    public function refuserLigneFraisHorsForfait($id) {
+        $req = "update ligneFraisHorsForfait "
                 . "set libelle = concat('REFUS',libelle) "
-                . "where id='$id'";              
-         PdoGsb::$monPdo->exec($req);
+                . "where id='$id'";
+        PdoGsb::$monPdo->exec($req);
     }
-  
-    public function valeurMontant($id){
-        $req="select montant from fraisForfait where id='$id'";
-        $idJeuMontant=PdoGsb::$monPdo->query($req);
-        $lgMontant=$idJeuMontant->fetch();
-        return (float)$lgMontant[0];
+
+    public function valeurMontant($id) {
+        $req = "select montant from fraisForfait where id='$id'";
+        $idJeuMontant = PdoGsb::$monPdo->query($req);
+        $lgMontant = $idJeuMontant->fetch();
+        return (float) $lgMontant[0];
     }
+
     /**
      * Recupere les fiche frais dont l'état est donné en paramètre
      * 
      * @param string $etat etat de la fiche 
      * @return array Retourne un tableau de ficheFrais 
      */
-    public function getFichesFrais($etat){
-        $req="select * from ficheFrais where idEtat='$etat'";
+    public function getFichesFrais($etat) {
+        $req = "select * from ficheFrais where idEtat='$etat'";
         $idjeuFiche = PdoGsb::$monPdo->query($req);
-        $lgFiche=$idjeuFiche->fetchAll();
+        $lgFiche = $idjeuFiche->fetchAll();
         return $lgFiche;
     }
-   /**
+
+    /**
      * calcul la somme totale d'une ligne de frais forfaitisée
      * @param array $lesFraisForfait tableau de frais forfait
      * @return float
@@ -497,24 +502,24 @@ class PdoGsb {
     public function sommeFrais($lesFraisForfait) {
         $montantValide = 0;
         foreach ($lesFraisForfait as $frais) {
-            (float)$montantValide +=
-                    ($frais['quantite']) * ( $this->valeurMontant($frais['idfrais']));
+            (float) $montantValide +=($frais['quantite']) 
+                                     * ( $this->valeurMontant($frais['idfrais']));
         }
-        return (float)$montantValide;
+        return (float) $montantValide;
     }
+
     /**
      * Recupere le nom et le prenom d'un visiteur en fonction de l'id
      * @param string $id
      * @return array
      */
-    public function getNomVisiteur($id){
-        $req="select nom,prenom from visiteur where id='$id'";
-        $idJeuNom=PdoGsb::$monPdo->query($req);
-        $lgNom=$idJeuNom->fetch();
-        $nom=$lgNom['nom']." ".$lgNom['prenom'];
+    public function getNomVisiteur($id) {
+        $req = "select nom,prenom from visiteur where id='$id'";
+        $idJeuNom = PdoGsb::$monPdo->query($req);
+        $lgNom = $idJeuNom->fetch();
+        $nom = $lgNom['nom'] . " " . $lgNom['prenom'];
         return $nom;
     }
-    
 
 }
 ?>

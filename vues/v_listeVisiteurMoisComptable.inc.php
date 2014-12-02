@@ -1,12 +1,11 @@
-<!--  debut v_listeVisiteursMoisC -->
-
+<!--  debut v_listeVisiteursMoisComptable -->
 <div class="col-md-10 column">
     <div class="contenu">
         <h3>Choix fiche (Visiteur/Mois)</h3>
         <h4>Selectionner une fiche de frais : </h4>
-        <form action="index.php?uc=validerFrais&action=validerChoixVisiteurMois" method="post">
-            <table >
-                
+        <form action="index.php?uc=validerFrais&action=validerChoixVisiteurMois" 
+              method="post">
+            <table >                
                     <tr>
                         <td>
                         Visiteurs : 
@@ -42,30 +41,29 @@
                                     if ($date == $dateASelectionner) {
                                         ?>
                                         <option selected value="<?php echo $date ?>">
-                                            <?php echo $numMois . "/" . $numAnnee ?></option> 
+                                            <?php echo $numMois . "/" . $numAnnee ?>
+                                        </option> 
                                         <?php
                                     } else {
                                         ?>
                                         <option value="<?php echo $date ?>">
-                                            <?php echo $numMois . "/" . $numAnnee ?></option>
+                                            <?php echo $numMois . "/" . $numAnnee ?>
+                                        </option>
                                         <?php
                                     }
                                 }
                                 ?>    
                             </select>
                         </td>
-                    </tr>
-                
+                    </tr>               
             </table>
             <div class="piedForm">
                 <p>
-                    <input id="ok" type="submit" value="Valider"  />
-                    
+                    <input id="ok" type="submit" value="Valider"  />                    
                 </p> 
             </div>
         </form>
     </div>
 </div>
 </div>
-    <!--  fin v_listeVisiteursMoisC -->
-    
+<!--  fin v_listeVisiteursMoisComptable -->   

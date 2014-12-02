@@ -1,10 +1,3 @@
-<?php
-/**
- * Affichage Erreur
- * @author chrysinus@gmail.com
- */
-?>
-
 <div class ="erreur">
     <ul>
         <?php
@@ -12,4 +5,5 @@
             echo "<li>$erreur</li>";
         }
         ?>
-    </ul></div>
+    </ul>
+</div>

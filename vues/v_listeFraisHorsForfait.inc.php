@@ -1,28 +1,22 @@
-<!--debut v_listehorsFrais -->
+<!--debut v_listeFraishorsForfait -->
 <div class="row clearfix"  >
     <div class="col-md-4 column">		
     </div>
     <div class="col-md-8 column contenu">
-
-
         <h3 class='text-center'>
             Descriptif des éléments hors forfaits .
         </h3>
         <table class="table table-hover">
             <thead>
                 <tr>
-
                     <th>
                         <span class="label label-info">Date</span>
-
                     </th>
                     <th>
-
                         <span class="label label-info">Libellé</span>
 
                     </th>
                     <th>
-
                         <span class="label label-info">Montant</span>
                     </th>
                     <th>
@@ -50,37 +44,44 @@
                         </td>
 
                         <td>
-                            <a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
-                               onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a>
+                        <a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
+                           onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">
+                               Supprimer ce frais
+                        </a>
                         </td>
                     </tr>
                     <?php
                 }
                 ?>
-
             </tbody>
         </table>
-
-        <form class="form-horizontal contenu" role="form" action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
+        <form class="form-horizontal contenu" role="form" 
+              action="index.php?uc=gererFrais&action=validerCreationFrais" 
+              method="post">
             <fieldset>
                 <legend>Nouvel élément hors-forfait.
                 </legend>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Date<br />(jj/mm/aaaa):</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">
+                        Date<br />(jj/mm/aaaa):</label>
                     <div class="col-sm-10">
                         <input class="form-control" name="dateFrais" type="text" 
                                value ="" required/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Libelle</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">
+                        Libelle
+                    </label>
                     <div class="col-sm-10">
                         <input class="form-control" name="libelle" type="text" 
                                value ="" required/>						
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Montant</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">
+                        Montant
+                    </label>
                     <div class="col-sm-10">
                         <input class="form-control" name="montant" type="text" 
                                value ="" required />
@@ -95,4 +96,4 @@
         </form>
     </div>		
 </div>
-<!--fin v_listehorsFrais -->
+<!--fin v_listeFraishorsForfait -->

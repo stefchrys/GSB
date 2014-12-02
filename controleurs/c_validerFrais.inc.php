@@ -1,6 +1,6 @@
 <?php
 
-include ("vues/v_sommaireC.php");
+require ("vues/v_sommaireComptable.inc.php");
 $action = implementer('action');
 $visiteurs = $pdo->getListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
@@ -15,7 +15,7 @@ switch ($action) {
             $visiteurASelectionner = $lesClesVisiteurs[0];
             $lesClesDate = array_keys($tableauDate);
             $dateASelectionner = $lesClesDate[0];
-            include('vues/v_listeVisiteurMoisC.php');
+            require('vues/v_listeVisiteurMoisComptable.inc.php');
             break;
         }
     case 'validerChoixVisiteurMois': {
@@ -34,13 +34,13 @@ switch ($action) {
             if ($laFiche) {
                 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
                 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-                include('vues/v_listeVisiteurMoisC.php');
-                include('vues/v_traiterFrais.php');
+                require('vues/v_listeVisiteurMoisComptable.inc.php');
+                require('vues/v_traiterFrais.inc.php');
             } else {
                 //si existe pas retour vers le choix d'une fiche
                 ajouterErreur("pas de fiches trouvées ce mois ci pour ce visiteur");
-                include('vues/v_erreurs.php');
-                include('vues/v_listeVisiteurMoisC.php');
+                require('vues/v_erreurs.inc.php');
+                require('vues/v_listeVisiteurMoisComptable.inc.php');
             }
             break;
         }
@@ -61,7 +61,8 @@ switch ($action) {
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
             $etat = implementer('etatFraisHorsForfait');
             //creation d'un tableau associatif specifique(voir fonction fusionner())
-            $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);
+            var_dump($lesFraisHorsForfait);var_dump($etat);
+            $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);var_dump($tableauFraisHF);
             foreach ($tableauFraisHF as $frais) {
                 $libelle = $frais['libelle'];
                 $date = $frais['date'];
@@ -83,8 +84,10 @@ switch ($action) {
                             //creer la nouvelle fiche de frais du mois suivant
                             $pdo->creeNouvellesLignesFrais($idVisiteur, $moisSuivant);
                         }
-                        //deplacer la ligne fraishorsforfait du mois traité vers mois suivant
-                        $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, $libelle, $date, $montant);
+                        //deplacer la ligne fraishorsforfait du mois traité 
+                        //vers mois suivant
+                        $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, 
+                                                          $libelle, $date, $montant);
                         //et supprimer l'ancienne ligne fraishorsforfait
                         $pdo->supprimerFraisHorsForfait((int) $id);
                         //si le frais est validé on y ajoute le montant 
@@ -95,7 +98,8 @@ switch ($action) {
             }
             //enfin on cloture fiche de frais
             $nbJustificatifs = implementer('justificatifs');
-            $pdo->majMontantFicheFrais($idVisiteur, $mois, $montantValide, $nbJustificatifs);
+            $pdo->majMontantFicheFrais($idVisiteur, $mois, $montantValide, 
+                                       $nbJustificatifs);
             $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
         }
 } 

@@ -1,12 +1,8 @@
 <!--debut v_listeFrais -->
 <div class="col-md-8 column ">
-
     <h3 >
         Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
     </h3>
-
-
-
     <form class="form-horizontal " role="form" method="POST"  
           action="index.php?uc=gererFrais&action=validerMajFraisForfait">
         <fieldset>
@@ -17,7 +13,6 @@
                 $libelle = $unFrais['libelle'];
                 $quantite = $unFrais['quantite'];
                 ?>
-
                 <div class="form-group">
                     <label for="idFrais" class="col-sm-2 control-label">
                         <?php echo $libelle ?></label>
@@ -27,7 +22,6 @@
                                value="<?php echo $quantite ?>"/>
                     </div>
                 </div><?php } ?>					
-
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default" 

@@ -1,7 +1,6 @@
-
 <!--debut pieds -->
-        </div>
-       </body>
+</div>
+</body>
 </html>
 <!-- fin pieds -->
 

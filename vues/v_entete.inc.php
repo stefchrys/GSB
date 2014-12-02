@@ -1,4 +1,3 @@
-
 <!-- debut entete -->
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,12 +10,12 @@
 	<link href="./styles/bootstrap.min.css" rel="stylesheet">
 	<link href="./styles/style.css" rel="stylesheet">
 </head>
-
 <body>
 <div class="container">
 	<div class="row clearfix entete" >
 		<div class="col-md-4 column">
-			<img src="./images/logo.jpg" id="logoGSB" alt="Laboratoire Galaxy-Swiss
+			<img src="./images/logo.jpg" id="logoGSB" 
+                             alt="Laboratoire Galaxy-Swiss
                      Bourdin" title="Laboratoire Galaxy-Swiss Bourdin" />
 		</div>
 		<div class="col-md-8 column entete" >
@@ -25,4 +24,4 @@
 			</h2>
 		</div>
 	</div>
-	<!-- fin entete -->﻿﻿
+<!-- fin entete -->

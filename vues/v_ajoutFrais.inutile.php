@@ -30,12 +30,9 @@
             <td>
                 <input type='radio' name='opt_justificatif' value='non'> non
             </td>
-
         </tr>
-
     </table>
     <input type='submit' value='Valider' name='cmd_valider'>
     <input type='reset' value='Annuler' name='br_annuler'>
-
 </form>
 <!-- fin v_ajoutFrais -->

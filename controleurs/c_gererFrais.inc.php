@@ -5,7 +5,7 @@
  * @author chrysinus@gmail.com
  * 
  */
-include("vues/v_sommaire.php");
+require("vues/v_sommaireVisiteur.inc.php");
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
 $numAnnee = substr($mois, 0, 4);
@@ -24,7 +24,7 @@ switch ($action) {
                 $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
             } else {
                 ajouterErreur("Les valeurs des frais doivent être numériques");
-                include("vues/v_erreurs.php");
+                require("vues/v_erreurs.inc.php");
             }
             break;
         }
@@ -34,9 +34,10 @@ switch ($action) {
             $montant = implementer('montant');
             valideInfosFrais($dateFrais, $libelle, $montant);
             if (nbErreurs() != 0) {
-                include("vues/v_erreurs.php");
+                require("vues/v_erreurs.inc.php");
             } else {
-                $pdo->creeNouveauFraisHorsForfait($idVisiteur, $mois, $libelle, $dateFrais, $montant);
+                $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,
+                                                  $dateFrais, $montant);
             }
             break;
         }
@@ -48,6 +49,6 @@ switch ($action) {
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-include("vues/v_listeFraisForfait.php");
-include("vues/v_listeFraisHorsForfait.php");
+require("vues/v_listeFraisForfait.inc.php");
+require("vues/v_listeFraisHorsForfait.inc.php");
 ?>

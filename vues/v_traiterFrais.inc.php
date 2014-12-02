@@ -30,8 +30,7 @@
                 </thead>
                 <tbody>
                     <tr class="success">
-                        <?php
-                        
+                        <?php                        
                         foreach ($lesFraisForfait as $unFraisForfait) {
                             $quantite = $unFraisForfait['quantite'];
                             $idFrais= $unFraisForfait['idfrais'];
@@ -40,8 +39,7 @@
                                         value="<?php echo $quantite ?>" 
                                         name="fraisForfait[<?php echo $idFrais ?>]"/>
                             </td>
-                            <?php
-                            
+                            <?php                           
                         }
                         ?> 
                     </tr>
@@ -66,13 +64,11 @@
                         $montant = $unFraisHorsForfait['montant'];
                         $id = $unFraisHorsForfait['id'];
                         ?>                      
-                        <tr> 
-                           
+                        <tr>                            
                             <td><?php echo $date ?></td>
                             <td><?php echo $libelle ?></td>
                             <td><?php echo $montant ?></td>
-                            <td>
-                               
+                            <td>                               
                                 <select name='etatFraisHorsForfait[<?php echo $id ?>]'>
                                     <option selected value="valide">Validé</option>
                                     <option value="reporte">Reporté</option>
@@ -80,13 +76,11 @@
                                 </select>
                             </td>
                         </tr>
-                        <?php
-                        
+                        <?php                        
                     }
                     ?> 
                 </tbody>
-            </table>           
-                                  
+            </table>                                             
             <label> Nb justificatifs reçus:</label><input type="text" name='justificatifs'/>                      
             <div class="piedForm">              
                 <p>

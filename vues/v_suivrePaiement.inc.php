@@ -1,5 +1,4 @@
 <!--  debut v_SuivrePaiements -->
-
 <div class="col-md-10 column">
     <div class="contenu">
         <h3>Choix fiche Frais </h3>
@@ -22,8 +21,7 @@
                    $mois=$fiche['mois'];
                    $numFiche=$id.$mois;
                    $montant=$fiche['montantTotal'];
-                   $nom=$fiche['nom'];
-                   
+                   $nom=$fiche['nom'];                  
                    $montantF=$fiche['fraisForfait'];
                    $montantHF=$fiche['fraisHorsForfait'];
                 ?>               
@@ -36,8 +34,7 @@
                     </td>
                     <td>
                          <?php echo $mois ?>
-                    </td>
-                    
+                    </td>                    
                     <td>
                          <?php echo $montant;?>
                     </td>
@@ -48,7 +45,10 @@
                          <?php echo $montantHF;?>
                     </td>
                     <td>
-                        <input type="checkbox" name="choix[]"  value="<?php echo $id.'-'.$mois.'-'.$nom ?>" checked> Valider
+                        <input type="checkbox" name="choix[]"  
+                               value="<?php echo $id.'-'.$mois.'-'.$nom ?>" 
+                               checked> 
+                        Valider
                     </td>
                 </tr>
                <?php } ?>
@@ -56,12 +56,11 @@
             </table>
             <div class="piedForm">
                 <p>
-                    <input id="ok" type="submit" value="Valider"  />
-                    
+                    <input id="ok" type="submit" value="Valider"  />                    
                 </p> 
             </div>
         </form>
     </div>
 </div>
 </div>
-    <!--  fin v_suivrePaiements -->
+<!--  fin v_suivrePaiements -->
