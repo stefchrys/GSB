@@ -13,14 +13,24 @@ switch ($action) {
             foreach ($fichesFraisVA as $fiche) {
                 $lesFraisForfait = $pdo->getLesFraisForfait($fiche['idVisiteur'], 
                                                             $fiche['mois']);
+                $fraisHorsForfait= $pdo->getLesFraisHorsForfait($fiche['idVisiteur'], 
+                                                            $fiche['mois']);
+                //calcul le montant réel des frais horsForfaits afin d'oter ceux refusés
+                $montantHF=calculReel($fraisHorsForfait);
+                //calcul montant des frais forfaits validés
                 $montantFraisForfait = $pdo->sommeFrais($lesFraisForfait);
+                
                 $tabInfoUtiles[$i]['fraisForfait'] = $montantFraisForfait;
-                $tabInfoUtiles[$i]['fraisHorsForfait'] = ($fiche['montantValide']) 
-                                                          - ($montantFraisForfait);
+                $tabInfoUtiles[$i]['fraisHorsForfait'] = $montantHF ;
                 $tabInfoUtiles[$i]['montantTotal'] = $fiche['montantValide'];
                 $tabInfoUtiles[$i]['id'] = $fiche['idVisiteur'];
                 $tabInfoUtiles[$i]['mois'] = $fiche['mois'];
                 $tabInfoUtiles[$i]['nom'] = $pdo->getNomVisiteur($fiche['idVisiteur']);
+                $tabInfoUtiles[$i]['alerte']='success';
+                //verification cohérences des montants
+                if($fiche['montantValide']!=$montantFraisForfait+$montantHF){
+                    $tabInfoUtiles[$i]['alerte']="danger";
+                }
                 $i++;
             }
             require 'vues/v_suivrePaiement.inc.php';

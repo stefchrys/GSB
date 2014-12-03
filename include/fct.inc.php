@@ -294,5 +294,21 @@ function fusionner($lesFraisHorsForfait, $etat) {
     }
     return $tableauFraisHF;
 }
-
+/**
+ * retourne le montant des frais hors forfait validé 
+ * @param array $tableau
+ * @return int le montant total des frais hors forfait
+ */
+function calculReel($tableau){ 
+    $montant=0;   
+    foreach($tableau as $tab){
+        //récupération des 5 premiers carractères du libellé
+        $debutLibel=substr($tab['libelle'],0,5);
+        //si le frais est valide on le comptabilise
+        if($debutLibel!='REFUS'){
+            $montant+=$tab['montant'];
+        }
+    }
+    return $montant;
+}
 ?>

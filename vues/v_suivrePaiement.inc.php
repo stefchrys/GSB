@@ -24,8 +24,9 @@
                    $nom=$fiche['nom'];                  
                    $montantF=$fiche['fraisForfait'];
                    $montantHF=$fiche['fraisHorsForfait'];
+                   $couleur=$fiche['alerte'];
                 ?>               
-                <tr >
+                <tr class="<?php echo $couleur ?>">
                     <td>
                          <?php echo $numFiche;?>
                     </td>
