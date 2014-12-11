@@ -104,7 +104,18 @@ function estTableauEntiers($tabEntiers) {
     }
     return $ok;
 }
-
+/**
+ * Calcul si la date envoyée en paramètre est posterieur à la date actuelle
+ * renvoi vrai si elle est posterieur
+ * 
+ * @param date $date
+ * @return bool 
+ */
+function estDatePosterieur($date){
+    $dateActuelle = date("Y-m-d");
+    $dateFormatee=dateFrancaisVersAnglais($date);
+    return($dateFormatee>$dateActuelle);   
+}
 /**
  * Vérifie si une date est inférieure d'un an à la date actuelle
 
@@ -129,6 +140,9 @@ function estDateDepassee($dateTestee) {
 function estDateValide($date) {
     $tabDate = explode('/', $date);
     $dateOK = true;
+    if (strlen($date)!=10){
+        $dateOK = false;
+    }
     if (count($tabDate) != 3) {
         $dateOK = false;
     } else {
@@ -167,11 +181,15 @@ function valideInfosFrais($dateFrais, $libelle, $montant) {
     if ($dateFrais == "") {
         ajouterErreur("Le champ date ne doit pas être vide");
     } else {
-        if (!estDatevalide($dateFrais)) {
-            ajouterErreur("Date invalide");
+        if (!estDateValide($dateFrais)) {
+            ajouterErreur("Format Date invalide la date doit être au format jj/mm/aaaa");
         } else {
             if (estDateDepassee($dateFrais)) {
                 ajouterErreur("date d'enregistrement du frais dépassé, plus de 1 an");
+            }else {
+                if(estDatePosterieur($dateFrais)){
+                   ajouterErreur("La date ne doit pas être posterieur à celle d'aujourd'hui");
+                }              
             }
         }
     }
@@ -294,21 +312,6 @@ function fusionner($lesFraisHorsForfait, $etat) {
     }
     return $tableauFraisHF;
 }
-/**
- * retourne le montant des frais hors forfait validé 
- * @param array $tableau
- * @return int le montant total des frais hors forfait
- */
-function calculReel($tableau){ 
-    $montant=0;   
-    foreach($tableau as $tab){
-        //récupération des 5 premiers carractères du libellé
-        $debutLibel=substr($tab['libelle'],0,5);
-        //si le frais est valide on le comptabilise
-        if($debutLibel!='REFUS'){
-            $montant+=$tab['montant'];
-        }
-    }
-    return $montant;
-}
+
+
 ?>

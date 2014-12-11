@@ -20,7 +20,7 @@ switch ($action) {
     case 'valideConnexion': {
             $login = $_REQUEST['txt_login'];
             $mdp = $_REQUEST['txt_mdp'];
-            $visiteur = $pdo->getInfosVisiteur($login, $mdp);
+            $visiteur = $pdo->obtenirInfoVisiteur($login, $mdp);
             //si conexion est pas valide retour depart
             if (!is_array($visiteur)) {
                 ajouterErreur("Login ou mot de passe incorrect");
