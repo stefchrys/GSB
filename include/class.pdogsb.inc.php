@@ -62,7 +62,38 @@ class PdoGsb {
         }
         return PdoGsb::$monPdoGsb;
     }
-
+    /**
+     * execute une requete en parametre et retourne un tableau associatif, un element ou 
+     * ne retourne rien en fonction du deuxieme parametre
+     * 
+     * @param string $req
+     * @param string $fetch
+     * @return NULL or array retourne rien ou un tableau
+     */
+    private function executerRequete($req,$fetch){
+        switch ($fetch){
+            case 'fetch()':{
+                $idJeu = PdoGsb::$monPdo->query($req);
+                $lgJeu = $idJeu->fetch();
+                return $lgJeu;
+                break;
+            }
+            case 'fetchAll()':{
+                $idJeu = PdoGsb::$monPdo->query($req);
+                $lgJeu = $idJeu->fetchAll();
+                return $lgJeu;
+                break;
+            }
+            case 'exec':{
+                PdoGsb::$monPdo->exec($req);
+                break;
+            }
+            default:{
+                echo "probleme execution de requete lié a une variable fetch";
+                break;
+            }
+        }       
+    }
     /**
      * Retourne les informations d'un visiteur(validé 10/12/2014)
 
@@ -76,10 +107,8 @@ class PdoGsb {
                     visiteur.nom as nom, 
                     visiteur.prenom as prenom 
                     from visiteur 
-                    where visiteur.login='$login' and visiteur.mdp='$mdp'";
-        $idJeuVisiteurs = PdoGsb::$monPdo->query($req);
-        $lgJeuVisiteur = $idJeuVisiteurs->fetch();
-        return $lgJeuVisiteur;
+                    where visiteur.login='$login' and visiteur.mdp='$mdp'";       
+        return $this->executerRequete($req,'fetch()');
     }
 
     /**
@@ -95,9 +124,7 @@ class PdoGsb {
             where visiteur.id 
              not in
             (select * from comptable)";
-        $idJeuVisiteurs = PdoGsb::$monPdo->query($req);
-        $lgJeuVisiteur = $idJeuVisiteurs->fetchAll();
-        return $lgJeuVisiteur;
+        return $this->executerRequete($req, 'fetchAll()');
     }
 
     /**
@@ -116,8 +143,7 @@ class PdoGsb {
         $req = "select * from lignefraishorsforfait "
                 . "where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
                 and lignefraishorsforfait.mois = '$mois' ";
-        $idJeuFraisHorsForf = PdoGsb::$monPdo->query($req);
-        $lgFraisHorsForf = $idJeuFraisHorsForf->fetchAll();
+        $lgFraisHorsForf= $this ->executerRequete($req, 'fetchAll()');
         $nbLignes = count($lgFraisHorsForf);
         for ($i = 0; $i < $nbLignes; $i++) {
             $date = $lgFraisHorsForf[$i]['date'];
@@ -160,9 +186,7 @@ class PdoGsb {
 		where lignefraisforfait.idvisiteur ='$idVisiteur' "
                 . "and lignefraisforfait.mois='$mois' 
 		order by lignefraisforfait.idfraisforfait";
-        $idJeuFrais = PdoGsb::$monPdo->query($req);
-        $lgFrais = $idJeuFrais->fetchAll();
-        return $lgFrais;
+        return $this ->executerRequete($req, 'fetchAll()');
     }
 
     /**
@@ -173,9 +197,7 @@ class PdoGsb {
     public function obtenirLesIdFrais() {
         $req = "select fraisforfait.id as idfrais "
                 . "from fraisforfait order by fraisforfait.id";
-        $idJeuId = PdoGsb::$monPdo->query($req);
-        $lgId = $idJeuId->fetchAll();
-        return $lgId;
+        return $this ->executerRequete($req, 'fetchAll()');
     }
 
     /**
@@ -188,9 +210,7 @@ class PdoGsb {
     function verifierComptable($id) {
         $req = "select comptable.id "
                 . "from comptable where comptable.id='$id'";
-        $idJeu = PdoGsb::$monPdo->query($req);
-        $lg = $idJeu->fetchAll();
-        return $lg;
+        return $this->executerRequete($req,'fetchAll()');
     }
 
     /**
@@ -214,7 +234,7 @@ class PdoGsb {
                     where lignefraisforfait.idvisiteur = '$idVisiteur' "
                     . "and lignefraisforfait.mois = '$mois'
                     and lignefraisforfait.idfraisforfait = '$unIdFrais'";
-            PdoGsb::$monPdo->exec($req);
+            $this->executerRequete($req, 'exec');
         }
     }
 
@@ -246,8 +266,7 @@ class PdoGsb {
                 from fichefrais 
                 where fichefrais.mois = '$mois' "
                 . "and fichefrais.idvisiteur = '$idVisiteur'";
-        $idJeuFrais = PdoGsb::$monPdo->query($req);
-        $lgFrais = $idJeuFrais->fetch();
+        $lgFrais= $this->executerRequete($req, 'fetch()');
         if ($lgFrais['nblignesfrais'] == 0) {
             $ok = true;
         }
@@ -264,8 +283,7 @@ class PdoGsb {
         $req = "select max(mois) as dernierMois "
                 . "from fichefrais "
                 . "where fichefrais.idvisiteur = '$idVisiteur'";
-        $idJeuMois = PdoGsb::$monPdo->query($req);
-        $lgMois = $idJeuMois->fetch();
+        $lgMois=$this->executerRequete($req, 'fetch()');
         $dernierMois = $lgMois['dernierMois'];
         return $dernierMois;
     }
@@ -290,14 +308,14 @@ class PdoGsb {
         $req = "insert into fichefrais
                 (idvisiteur,mois,nbJustificatifs,montantValide,dateModif,idEtat) 
 		values('$idVisiteur','$mois',0,0,now(),'CR')";
-        PdoGsb::$monPdo->exec($req);
+        $this->executerRequete($req,'exec');
         $lesIdFrais = $this->obtenirLesIdFrais();
         foreach ($lesIdFrais as $uneLigneIdFrais) {
             $unIdFrais = $uneLigneIdFrais['idfrais'];
             $req = "insert into lignefraisforfait
                     (idvisiteur,mois,idFraisForfait,quantite) 
                     values('$idVisiteur','$mois','$unIdFrais',0)";
-            PdoGsb::$monPdo->exec($req);
+            $this->executerRequete($req,'exec');
         }
     }
 
@@ -316,7 +334,7 @@ class PdoGsb {
         $dateFr = dateFrancaisVersAnglais($date);
         $req = "insert into lignefraishorsforfait 
 		values('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
-        PdoGsb::$monPdo->exec($req);
+        $this->executerRequete($req,'exec');
     }
 
     /**
@@ -327,7 +345,7 @@ class PdoGsb {
     public function supprimerFraisHorsForfait($idFrais) {
         $req = "delete from lignefraishorsforfait "
                 . "where lignefraishorsforfait.id =$idFrais ";
-        PdoGsb::$monPdo->exec($req);
+        $this->executerRequete($req,'exec');
     }
 
     /**
@@ -344,7 +362,7 @@ class PdoGsb {
 		order by fichefrais.mois desc ";
         $idJeuMoisFiche = PdoGsb::$monPdo->query($req);
         $lesMois = array();
-        $lgMoisFiche = $idJeuMoisFiche->fetch();
+        $lgMoisFiche = $idJeuMoisFiche->fetch();       
         while ($lgMoisFiche != null) {
             $mois = $lgMoisFiche['mois'];
             $numAnnee = substr($mois, 0, 4);
@@ -378,9 +396,7 @@ class PdoGsb {
                 on ficheFrais.idEtat = Etat.id 
 		where fichefrais.idvisiteur ='$idVisiteur' "
                 . "and fichefrais.mois = '$mois'";
-        $idJeuFraisEtat = PdoGsb::$monPdo->query($req);
-        $lgFraisEtat = $idJeuFraisEtat->fetch();
-        return $lgFraisEtat;
+        return $this->executerRequete($req, 'fetch()');
     }
 
     /**
@@ -395,7 +411,7 @@ class PdoGsb {
         $req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' "
                 . "and fichefrais.mois = '$mois'";
-        PdoGsb::$monPdo->exec($req);
+        $this->executerRequete($req,'exec');
     }
 
     /**
@@ -411,7 +427,7 @@ class PdoGsb {
                 . "nbJustificatifs='$nbJustificatifs' "
                 . "where fichefrais.idvisiteur ='$idVisiteur' "
                 . "and fichefrais.mois = '$mois'";
-        PdoGsb::$monPdo->exec($req);
+        $this->executerRequete($req,'exec');
     }
 
     /**
@@ -458,9 +474,7 @@ class PdoGsb {
                 . "where ficheFrais.idVisiteur = '$id'"
                 . "and ficheFrais.mois = '$date'"
                 . "and idEtat='$etat'";
-        $idjeuFiche = PdoGsb::$monPdo->query($req);
-        $lgFiche = $idjeuFiche->fetch();
-        return $lgFiche;
+        return $this->executerRequete($req, 'fetch()');
     }
     /**
      * remplace le libelle par celui entré en parametre
@@ -470,8 +484,8 @@ class PdoGsb {
      */
     public function changerLibelle($id,$libelle){
         $req="update ligneFraisHorsForfait set libelle='$libelle'"
-                . "where id='$id'";
-         PdoGsb::$monPdo->exec($req);        
+                . "where id='$id'"; 
+        $this->executerRequete($req,'exec');
     }
     /**
      * verifie la taille du libelle et reduit  si nécéssaire à 95 carractères
@@ -480,8 +494,7 @@ class PdoGsb {
      */
     public function verifierTailleLibelle($id){
         $req="select libelle from ligneFraisHorsForfait where id='$id'";
-        $idjeuLibelle = PdoGsb::$monPdo->query($req);
-        $lgLibelle = $idjeuLibelle->fetch();
+       $lgLibelle = $this->executerRequete($req, 'fetch()');
         $taille=(strlen($lgLibelle['libelle']));
         if($taille>95){
             $libelle=(substr($lgLibelle['libelle'],0,95));
@@ -498,7 +511,7 @@ class PdoGsb {
         $req = "update ligneFraisHorsForfait "
                 . "set libelle = concat('REFUS',libelle) "
                 . "where id='$id'";
-        PdoGsb::$monPdo->exec($req);
+        $this->executerRequete($req,'exec');
     }
     /**
      * alerte 10/12/2014 
@@ -507,8 +520,7 @@ class PdoGsb {
      */
     public function valeurMontant($id) {
         $req = "select montant from fraisForfait where id='$id'";
-        $idJeuMontant = PdoGsb::$monPdo->query($req);
-        $lgMontant = $idJeuMontant->fetch();
+        $lgMontant = $this->executerRequete($req, 'fetch()');
         return (float) $lgMontant[0];
     }
 
@@ -520,9 +532,7 @@ class PdoGsb {
      */
     public function obtenirFichesFrais($etat) {
         $req = "select * from ficheFrais where idEtat='$etat'";
-        $idjeuFiche = PdoGsb::$monPdo->query($req);
-        $lgFiche = $idjeuFiche->fetchAll();
-        return $lgFiche;
+        return $this->executerRequete($req, 'fetchAll()');
     }
 
     /**
@@ -546,8 +556,7 @@ class PdoGsb {
      */
     public function obtenirNomVisiteur($id) {
         $req = "select nom,prenom from visiteur where id='$id'";
-        $idJeuNom = PdoGsb::$monPdo->query($req);
-        $lgNom = $idJeuNom->fetch();
+        $lgNom = $this->executerRequete($req, 'fetch()');
         $nom = $lgNom['nom'] . " " . $lgNom['prenom'];
         return $nom;
     }
@@ -563,10 +572,8 @@ class PdoGsb {
                 . "where ligneFraisHorsForfait.idVisiteur = '$visiteur' "
                 . "and ligneFraisHorsForfait.mois = '$mois' "
                 . "and ligneFraisHorsForfait.libelle not like 'REFUS%' ";
-		$idJeuMontant = PdoGsb::$monPdo->query($req);
-		$lgMontant = $idJeuMontant->fetch();
-		$cumulMontantHorsForfait = $lgMontant['cumul'];
-                               
+                $lgMontant = $this->executerRequete($req, 'fetch()');
+		$cumulMontantHorsForfait = $lgMontant['cumul'];                               
                 return (float)$cumulMontantHorsForfait;
     }
     
@@ -582,8 +589,7 @@ class PdoGsb {
                 . "where ligneFraisForfait.idFraisForfait = fraisForfait.id "
                 . "and ligneFraisForfait.idVisiteur = '$visiteur' "
                 . "and ligneFraisForfait.mois = '$mois' ";
-		$idJeuMontant = PdoGsb::$monPdo->query($req);
-		$lgMontant = $idJeuMontant->fetch();
+                $lgMontant = $this->executerRequete($req, 'fetch()');
 		$cumulMontantForfait = $lgMontant['cumul'];
                 return (float)$cumulMontantForfait;
     }
