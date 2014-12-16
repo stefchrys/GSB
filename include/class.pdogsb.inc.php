@@ -33,7 +33,7 @@ class PdoGsb {
     private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
-
+    
     /**
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
      * pour toutes les méthodes de la classe
@@ -48,7 +48,7 @@ class PdoGsb {
     public function _destruct() {
         PdoGsb::$monPdo = null;
     }
-
+    
     /**
      * Fonction statique qui crée l'unique instance de la classe
 
@@ -70,7 +70,7 @@ class PdoGsb {
      * @param string $fetch
      * @return NULL or array retourne rien ou un tableau
      */
-    private function executerRequete($req,$fetch){
+    public function executerRequete($req,$fetch){
         switch ($fetch){
             case 'fetch()':{
                 $idJeu = PdoGsb::$monPdo->query($req);
@@ -89,7 +89,7 @@ class PdoGsb {
                 break;
             }
             default:{
-                echo "probleme execution de requete lié a une variable fetch";
+                echo "probleme execution de requete lié a une variable fetch choisir 'fetch()' ,'fetchAll()', ou 'exec' ";
                 break;
             }
         }       

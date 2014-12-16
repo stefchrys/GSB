@@ -313,5 +313,13 @@ function fusionner($lesFraisHorsForfait, $etat) {
     return $tableauFraisHF;
 }
 
+function retourChariot($libelle, $char) {
+    $newLibelle = '';
+    $lignes = (int) (strlen($libelle) / $char);
+    for ($i = 0; $i <= $lignes; $i++) {
+        $newLibelle = $newLibelle . substr($libelle, $i * $char, $char) . '<br />';
+    }
+    return $newLibelle; 
+}
 
 ?>

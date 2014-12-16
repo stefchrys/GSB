@@ -50,7 +50,12 @@
                 <?php
                 foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
                     $date = $unFraisHorsForfait['date'];
-                    $libelle = $unFraisHorsForfait['libelle'];
+                    $libelle = $unFraisHorsForfait['libelle']; 
+                    //formater les retour chariots eventuels sur le libelle
+                    $char=30;
+                    if(strlen($libelle)>$char){
+                       $libelle = retourChariot($libelle, $char);
+                    }
                     $montant = $unFraisHorsForfait['montant'];
                     $couleur = 'success';
                     if (substr($libelle, 0, 5) == 'refus' 

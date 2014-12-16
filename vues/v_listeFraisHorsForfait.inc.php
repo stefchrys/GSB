@@ -28,6 +28,11 @@
                 <?php
                 foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
                     $libelle = $unFraisHorsForfait['libelle'];
+                    //formater les retour chariots eventuels sur le libelle
+                    $char=30;
+                    if(strlen($libelle)>$char){
+                       $libelle = retourChariot($libelle, $char);
+                    }
                     $date = $unFraisHorsForfait['date'];
                     $montant = $unFraisHorsForfait['montant'];
                     $id = $unFraisHorsForfait['id'];
