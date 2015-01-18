@@ -1,7 +1,7 @@
 ﻿<?php
 
 /**
- * Classe d'accès aux données. 
+ * Classe d'accès aux données.. 
 
  * Utilise les services de la classe PDO
  * pour l'application GSB
