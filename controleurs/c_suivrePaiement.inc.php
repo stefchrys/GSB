@@ -6,21 +6,27 @@ $action = implementer('action');
 switch ($action) {
     case 'choixFicheValide': {
             //recupération des fiches frais  en etat VA
-            $fichesFraisVA = $pdo->getFichesFrais('VA');
+            $fichesFraisVA = $pdo->obtenirFichesFrais('VA');
             //recuperer infos utiles dans un tableau
             $tabInfoUtiles = array();
             $i = 0;
             foreach ($fichesFraisVA as $fiche) {
-                $lesFraisForfait = $pdo->getLesFraisForfait($fiche['idVisiteur'], 
-                                                            $fiche['mois']);
-                $montantFraisForfait = $pdo->sommeFrais($lesFraisForfait);
+                $mois=$fiche['mois'];
+                $visiteur=$fiche['idVisiteur'];
+                $montantHF=$pdo->getCumulFraisHorsForfait($mois,$visiteur);
+                $montantFraisForfait=$pdo->getCumulFraisForfait($mois,$visiteur);               
                 $tabInfoUtiles[$i]['fraisForfait'] = $montantFraisForfait;
-                $tabInfoUtiles[$i]['fraisHorsForfait'] = ($fiche['montantValide']) 
-                                                          - ($montantFraisForfait);
-                $tabInfoUtiles[$i]['montantTotal'] = $fiche['montantValide'];
-                $tabInfoUtiles[$i]['id'] = $fiche['idVisiteur'];
-                $tabInfoUtiles[$i]['mois'] = $fiche['mois'];
-                $tabInfoUtiles[$i]['nom'] = $pdo->getNomVisiteur($fiche['idVisiteur']);
+                $tabInfoUtiles[$i]['fraisHorsForfait'] = $montantHF ;
+                $tabInfoUtiles[$i]['montantTotal'] = (float)$fiche['montantValide'];           
+                $tabInfoUtiles[$i]['id'] = $visiteur;
+                $tabInfoUtiles[$i]['mois'] = $mois;
+                $tabInfoUtiles[$i]['nom'] = $pdo->obtenirNomVisiteur($visiteur);
+                $tabInfoUtiles[$i]['alerte']='success';
+                //verification cohérences des montants (multiplication par 1000
+                // pour eviter les bugs liés aux types float )
+                if(($tabInfoUtiles[$i]['montantTotal'])*1000 != $montantFraisForfait*1000+$montantHF*1000){
+                    $tabInfoUtiles[$i]['alerte']="danger";
+                }
                 $i++;
             }
             require 'vues/v_suivrePaiement.inc.php';

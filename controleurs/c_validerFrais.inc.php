@@ -2,7 +2,7 @@
 
 require ("vues/v_sommaireComptable.inc.php");
 $action = implementer('action');
-$visiteurs = $pdo->getListeVisiteurs();
+$visiteurs = $pdo->obtenirListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
 switch ($action) {
@@ -32,8 +32,8 @@ switch ($action) {
             $laFiche = $pdo->ficheExiste($idVisiteur, $mois, $etat);
             //si fiche existe on affiche la fiche frais correspondante
             if ($laFiche) {
-                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
-                $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+                $lesFraisHorsForfait = $pdo->obtenirLesFraisHorsForfait($idVisiteur, $mois);
+                $lesFraisForfait = $pdo->obtenirLesFraisForfait($idVisiteur, $mois);
                 require('vues/v_listeVisiteurMoisComptable.inc.php');
                 require('vues/v_traiterFrais.inc.php');
             } else {
@@ -53,16 +53,15 @@ switch ($action) {
             $idVisiteur = implementer('visiteur');
             //mise a jour de ligneFraisForfait
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
-            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+            $lesFraisForfait = $pdo->obtenirLesFraisForfait($idVisiteur, $mois);
             //calcul du montant  composé des frais forfait validés par le comptable
             $montantValide = $pdo->sommeFrais($lesFraisForfait);
 
             //////////////////traitement des frais hors forfaits /////////////////
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+            $lesFraisHorsForfait = $pdo->obtenirLesFraisHorsForfait($idVisiteur, $mois);
             $etat = implementer('etatFraisHorsForfait');
             //creation d'un tableau associatif specifique(voir fonction fusionner())
-            var_dump($lesFraisHorsForfait);var_dump($etat);
-            $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);var_dump($tableauFraisHF);
+            $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);
             foreach ($tableauFraisHF as $frais) {
                 $libelle = $frais['libelle'];
                 $date = $frais['date'];

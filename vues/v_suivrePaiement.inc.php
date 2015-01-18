@@ -1,7 +1,7 @@
 <!--  debut v_SuivrePaiements -->
 <div class="col-md-10 column">
     <div class="contenu">
-        <h3>Choix fiche Frais </h3>
+        <h3>Fiches Frais à l'état "validé et mise en paiement" </h3>
         <h4>Selectionner une fiche de frais : </h4> 
         <form action="index.php?uc=suivrePaiement&action=payerFicheFrais" method="post">
             <table class="table table-hover">
@@ -24,8 +24,9 @@
                    $nom=$fiche['nom'];                  
                    $montantF=$fiche['fraisForfait'];
                    $montantHF=$fiche['fraisHorsForfait'];
+                   $couleur=$fiche['alerte'];
                 ?>               
-                <tr >
+                <tr class="<?php echo $couleur ?>">
                     <td>
                          <?php echo $numFiche;?>
                     </td>
