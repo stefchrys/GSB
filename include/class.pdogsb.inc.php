@@ -28,7 +28,7 @@ class PdoGsb {
      * @var $monPdoGsb objet 
      */
     private static $serveur = 'mysql:host=localhost';
-    private static $bdd = 'dbname=gsbv3';
+    private static $bdd = 'dbname=gsbv5';
     private static $user = 'root';
     private static $mdp = '';
     private static $monPdo;
@@ -208,9 +208,12 @@ class PdoGsb {
      * @return array  Tableau associatif
      */
     function verifierComptable($id) {
-        $req = "select comptable.id "
-                . "from comptable where comptable.id='$id'";
-        return $this->executerRequete($req,'fetchAll()');
+        /*$req = "select comptable.id "
+                . "from comptable where comptable.id='$id'";*/
+        $req= "select type from visiteur where id='$id'";
+        //return $this->executerRequete($req,'fetchAll()');
+        return($this->executerRequete($req,'fetchAll()'));
+        
     }
 
     /**
