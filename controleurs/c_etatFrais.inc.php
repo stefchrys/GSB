@@ -30,9 +30,7 @@ switch ($action) {
             $numAnnee = substr($leMois, 0, 4);
             $numMois = substr($leMois, 4, 2);
             $libEtat = $lesInfosFicheFrais['libEtat'];
-                        var_dump($libEtat);
             $montantValide = $lesInfosFicheFrais['montantValide'];
-                        var_dump($montantValide);
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif = $lesInfosFicheFrais['dateModif'];
             $dateModif = dateAnglaisVersFrancais($dateModif);

@@ -122,7 +122,7 @@ class PdoGsb {
     }
 
     /**
-     * Retourne un tableau rempli des visiteurs(id,nom,prenom)(validé 10/12/2014)
+     * Retourne un tableau rempli des visiteurs(id,nom,prenom)(validé 20/01/2015)
      * 
      * @return Array Tableau de visiteurs
      */
@@ -132,7 +132,7 @@ class PdoGsb {
                 . "Visiteur.prenom AS prenom "
                 . "FROM Visiteur "
                 . "WHERE Visiteur.id "
-                . "NOTIN (SELECT * FROM Comptable)";
+                . "NOT IN (SELECT * FROM Comptable)";
         return $this->executerRequete($req, 'fetchAll()');
     }
 
@@ -405,8 +405,8 @@ class PdoGsb {
                 . "Etat.libelle AS libEtat "
                 . "FROM FicheFrais INNER JOIN Etat "
                 . "ON FicheFrais.idEtat = Etat.id "
-                . "WHERE FicheFrais.idVisiteur = '$mois' "
-                . "AND FicheFrais.mois = '$idVisiteur'";
+                . "WHERE FicheFrais.idVisiteur = '$idVisiteur' "
+                . "AND FicheFrais.mois = '$mois'";
 		$res = PdoGsb::$monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;
@@ -565,12 +565,12 @@ class PdoGsb {
     }
 
     /**
-     * Recupere le nom et le prenom d'un visiteur en fonction de l'id(verifié 10/12/2014)
+     * Recupere le nom et le prenom d'un visiteur en fonction de l'id(verifié 20/01/2015)
      * @param string $id
      * @return array
      */
     public function obtenirNomVisiteur($id) {
-        $req = "SELECT nom,prenom FROM visiteur WHERE id='$id'";
+        $req = "SELECT nom,prenom FROM Visiteur WHERE id='$id'";
         $lgNom = $this->executerRequete($req, 'fetch()');
         $nom = $lgNom['nom'] . " " . $lgNom['prenom'];
         return $nom;
@@ -583,7 +583,7 @@ class PdoGsb {
      * @return float cumul des frais hors forfait
      */
     public function getCumulFraisHorsForfait($mois,$visiteur){
-        $req = "SELECTt SUM(montant) AS cumul from LigneFraisHorsForfait "
+        $req = "SELECT SUM(montant) AS cumul from LigneFraisHorsForfait "
                 . "WHERE LigneFraisHorsForfait.idVisiteur = '$visiteur' "
                 . "AND LigneFraisHorsForfait.mois = '$mois' "
                 . "AND LigneFraisHorsForfait.libelle NOT LIKE 'REFUS%' ";

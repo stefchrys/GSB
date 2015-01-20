@@ -14,7 +14,7 @@ switch ($action) {
                 $mois=$fiche['mois'];
                 $visiteur=$fiche['idVisiteur'];
                 $montantHF=$pdo->getCumulFraisHorsForfait($mois,$visiteur);
-                $montantFraisForfait=$pdo->getCumulFraisForfait($mois,$visiteur);               
+                $montantFraisForfait=$pdo->getCumulFraisForfait($mois,$visiteur);              
                 $tabInfoUtiles[$i]['fraisForfait'] = $montantFraisForfait;
                 $tabInfoUtiles[$i]['fraisHorsForfait'] = $montantHF ;
                 $tabInfoUtiles[$i]['montantTotal'] = (float)$fiche['montantValide'];           
