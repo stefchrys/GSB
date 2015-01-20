@@ -9,7 +9,7 @@
             <legend> Eléments forfaitisés</legend>
             <?php
             foreach ($lesFraisForfait as $unFrais) {
-                $idFrais = $unFrais['idfrais'];
+                $idFrais = $unFrais['idFrais'];
                 $libelle = $unFrais['libelle'];
                 $quantite = $unFrais['quantite'];
                 ?>

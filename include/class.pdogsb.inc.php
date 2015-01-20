@@ -27,18 +27,18 @@ class PdoGsb {
      * @var PDO $monPdo objet PDO
      * @var $monPdoGsb objet 
      */
-    /*private static $serveur = 'mysql:host=localhost';
-    private static $bdd = 'dbname=gsbv5';
+    private static $serveur = 'mysql:host=localhost';
+    private static $bdd = 'dbname=gsbv2';
     private static $user = 'root';
     private static $mdp = '';
     private static $monPdo;
-    private static $monPdoGsb = null;*/
-    private static $serveur = 'mysql:host=10.0.231.222';
+    private static $monPdoGsb = null;
+    /*private static $serveur = 'mysql:host=10.0.231.222';
     private static $bdd = 'dbname=gsb2';
     private static $user = 'gsb_data';
     private static $mdp = 'Stephane1971';
     private static $monPdo;
-    private static $monPdoGsb = null;
+    private static $monPdoGsb = null;*/
     
     /**
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
@@ -278,7 +278,7 @@ class PdoGsb {
                 . "WHERE FicheFrais.mois = '$mois' "
                 . "AND FicheFrais.idVisiteur = '$idVisiteur'";
         $lgFrais= $this->executerRequete($req, 'fetch()');
-        if ($lgFrais['nblignesfrais'] == 0) {
+        if ($lgFrais['nbLignesFrais'] == 0) {
             $ok = true;
         }
         return $ok;
@@ -322,7 +322,7 @@ class PdoGsb {
         $this->executerRequete($req,'exec');
         $lesIdFrais = $this->obtenirLesIdFrais();
         foreach ($lesIdFrais as $uneLigneIdFrais) {
-            $unIdFrais = $uneLigneIdFrais['idfrais'];
+            $unIdFrais = $uneLigneIdFrais['idFrais'];
             $req = "INSERT INTO LigneFraisForfait "
                     . "(idVisiteur,mois,idFraisForfait,quantite) "
                     . "VALUES('$idVisiteur','$mois','$unIdFrais',0)";
@@ -559,7 +559,7 @@ class PdoGsb {
         $montantValide = 0;
         foreach ($lesFraisForfait as $frais) {
             (float) $montantValide +=($frais['quantite']) 
-                                     * ( $this->valeurMontant($frais['idfrais']));
+                                     * ( $this->valeurMontant($frais['idFrais']));
         }
         return (float) $montantValide;
     }
