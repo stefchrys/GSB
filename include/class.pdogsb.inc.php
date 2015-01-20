@@ -27,12 +27,20 @@ class PdoGsb {
      * @var PDO $monPdo objet PDO
      * @var $monPdoGsb objet 
      */
-    private static $serveur = 'mysql:host=localhost';
+   /* private static $serveur = 'mysql:host=localhost';
+    private static $bdd = 'dbname=gsbv2';
+    private static $user = 'root';
+    private static $mdp = '';
+    private static $monPdo;
+    private static $monPdoGsb = null;*/
+    
+     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsbv2';
     private static $user = 'root';
     private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
+    
    
     
     /**
@@ -603,5 +611,28 @@ class PdoGsb {
 		$cumulMontantForfait = $lgMontant['cumul'];
                 return (float)$cumulMontantForfait;
     }
+    
+    public function validationCampagne() {
+        $day = (new \DateTime())->format('d');
+        $month = (new \DateTime())->format('m');
+        $year = (new \DateTime())->format('Y');
+        //pour la soustraction :avant janvier c'est decembre soit 12
+        if($month==1){
+            $month='13';
+            $year = ((int)$year)-1;
+            $year= (string)$year;
+        }    
+        $moisPrecedent = ((int)($year.$month))-1;
+        $moisPrecedent=(string)$moisPrecedent;     
+        //verifier que nous sommens entre le 10 et 20 du mois suivant
+        if ((int) $day >= 10 && (int) $day <= 20) {
+            //si oui on cloture les fiches du mois precedent qui ne le sont pas
+            $req = "UPDATE ficheFrais SET idEtat = 'CL' "
+                    . "WHERE ficheFrais.mois = '$moisPrecedent' "
+                    . "AND ficheFrais.idEtat = 'CR'";
+            $this->executerRequete($req,'exec');
+        }
+    }
+
 }
 ?>

@@ -15,6 +15,8 @@ switch ($action) {
             $visiteurASelectionner = $lesClesVisiteurs[0];
             $lesClesDate = array_keys($tableauDate);
             $dateASelectionner = $lesClesDate[0];
+            //Cloture des fiches du mois precedent (campagne validation)            
+            $pdo->validationCampagne();            
             require('vues/v_listeVisiteurMoisComptable.inc.php');
             break;
         }

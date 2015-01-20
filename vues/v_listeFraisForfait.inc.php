@@ -1,4 +1,6 @@
-<!--debut v_listeFrais -->
+<!--debut v_listeFraisForfait -->
+<div class="row">
+     <div class="col-md-2 column"></div>
 <div class="col-md-8 column ">
     <h3 >
         Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
@@ -30,6 +32,7 @@
             </div>
         </fieldset>
     </form>
-</div>		
 </div>
-<!--fin v_listeFrais -->
+      <div class="col-md-2 column"></div>
+</div>
+<!--fin v_listeFraisForfait -->

@@ -12,16 +12,18 @@
 </head>
 <body>
 <div class="container">
-	<div class="row clearfix entete" >
-		<div class="col-md-4 column">
+	<div class="row clearfix entete " >
+
+		<div class="col-md-3 column ">
 			<img src="./images/logo.jpg" id="logoGSB" 
                              alt="Laboratoire Galaxy-Swiss
                      Bourdin" title="Laboratoire Galaxy-Swiss Bourdin" />
 		</div>
-		<div class="col-md-8 column entete" >
+		<div class="col-md-6 column " >
 			<h2 class="text-danger text-left">
 				Application GSB  Gestion Frais .
 			</h2>
 		</div>
+           <div class="col-md-3 column"></div>
 	</div>
 <!-- fin entete -->

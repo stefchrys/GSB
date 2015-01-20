@@ -2,7 +2,7 @@
 <div class="row clearfix"  >
     <div class="col-md-2 column contenu" >
     </div >
-    <div class="col-md-10 column contenu" >        
+    <div class="col-md-8 column contenu" >        
         <h3>Fiche de frais du mois <?php echo $ficheMois . "-" . $ficheAnnee ?> : 
         </h3>
         <h3 class='contenu'>
@@ -30,16 +30,16 @@
                 </thead>
                 <tbody>
                     <tr class="success">
-                        <?php                        
+                        <?php
                         foreach ($lesFraisForfait as $unFraisForfait) {
                             $quantite = $unFraisForfait['quantite'];
-                            $idFrais= $unFraisForfait['idFrais'];
+                            $idFrais = $unFraisForfait['idFrais'];
                             ?>                          
                             <td ><input type="text" class="form-control" 
                                         value="<?php echo $quantite ?>" 
                                         name="fraisForfait[<?php echo $idFrais ?>]"/>
                             </td>
-                            <?php                           
+                            <?php
                         }
                         ?> 
                     </tr>
@@ -76,7 +76,7 @@
                                 </select>
                             </td>
                         </tr>
-                        <?php                        
+                        <?php
                     }
                     ?> 
                 </tbody>
@@ -88,6 +88,8 @@
                 </p> 
             </div>
         </form>
-    </div>		
+    </div>
+    <div class="col-md-2 column contenu" >
+    </div >
 </div>
 <!--fin v_traiterFrais -->

@@ -1,6 +1,6 @@
 <!--debut v_listeFraishorsForfait -->
 <div class="row clearfix"  >
-    <div class="col-md-4 column">		
+    <div class="col-md-2 column">		
     </div>
     <div class="col-md-8 column contenu">
         <h3 class='text-center'>
@@ -29,9 +29,9 @@
                 foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
                     $libelle = $unFraisHorsForfait['libelle'];
                     //formater les retour chariots eventuels sur le libelle
-                    $char=30;
-                    if(strlen($libelle)>$char){
-                       $libelle = retourChariot($libelle, $char);
+                    $char = 30;
+                    if (strlen($libelle) > $char) {
+                        $libelle = retourChariot($libelle, $char);
                     }
                     $date = $unFraisHorsForfait['date'];
                     $montant = $unFraisHorsForfait['montant'];
@@ -49,10 +49,10 @@
                         </td>
 
                         <td>
-                        <a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
-                           onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">
-                               Supprimer ce frais
-                        </a>
+                            <a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
+                               onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">
+                                Supprimer ce frais
+                            </a>
                         </td>
                     </tr>
                     <?php
@@ -99,6 +99,7 @@
                 </div>
             </fieldset>
         </form>
-    </div>		
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
 <!--fin v_listeFraishorsForfait -->
