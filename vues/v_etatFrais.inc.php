@@ -3,16 +3,17 @@
      <div class="col-md-2 column"></div>
     <div class="col-md-8 column contenu" >
         <h3>
-            <span class="label label-success">
+            <span class="label label-default">
                 Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
             </span>
         </h3>
-        <p>
             Etat : <?php echo $libEtat ?> depuis le <?php echo $dateModif ?> 
-            <br> Montant validé : <?php echo $montantValide ?>
-        </p>
+        <br/>
+        
+             Montant validé : <?php echo $montantValide ?>
+       
         <h3 class='contenu'>
-            <span class="label label-success">
+            <span class="label label-default">
                 Eléments forfaitisés .
             </span>
         </h3>
@@ -43,10 +44,12 @@
             </tbody>
         </table>
         <table class="table table-hover">
-            <caption>
+            <h3>
+            <span class="label label-default">
                 Descriptif des éléments hors forfait -
                 <?php echo $nbJustificatifs ?> justificatifs reçus -
-            </caption>
+            </span>
+            </h3>
             <thead>
             <th><span class="label label-info">Date</span></th>
             <th><span class="label label-info">Libellé</span></th>

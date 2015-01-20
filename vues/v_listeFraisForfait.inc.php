@@ -3,7 +3,7 @@
      <div class="col-md-2 column"></div>
 <div class="col-md-8 column ">
     <h3 >
-        <span class="label label-success"> 
+        <span class="label label-default"> 
             Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
         </succes>
     </h3>
@@ -29,7 +29,11 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-success" 
-                            name="cmd_valider">Valider</button>
+                            name="cmd_valider">
+                        Valider 
+                        <span class="glyphicon glyphicon-ok-sign"> 
+                                </span>
+                    </button>
                 </div>
             </div>
         </fieldset>

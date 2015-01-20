@@ -5,9 +5,8 @@
         <div class="contenu">
             <h3>
                 <span class="label label-success">
-                    Choix fiche (Visiteur/Mois)
+                    Choix fiche
                 </span></h3>
-            <h4>Selectionner une fiche de frais : </h4>
             <form action="index.php?uc=validerFrais&action=validerChoixVisiteurMois" 
                   method="post">
                 <table >                
@@ -59,7 +58,11 @@
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-success" id="ok" type="submit" value="Valider"  > Valider</button> 
+                            <button class="btn btn-success" id="ok" type="submit" value="Valider"  > 
+                                Valider&nbsp;
+                                <span class="glyphicon glyphicon-ok-sign"> 
+                                </span>
+                            </button> 
                         </td>
                     </tr>               
                 </table>

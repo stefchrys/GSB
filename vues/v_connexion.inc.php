@@ -9,19 +9,19 @@
                 Identification utilisateur .
             </h3>
             <div class="form-group" >
-                <label for="login">Login*</label>
                 <input class="form-control" id="login" 
-                       type="text" name="txt_login" required>
+                       type="text" name="txt_login" placeholder="Login" required>
             </div>
             <div class="form-group">
-                <label for="mdp">Password*</label>
                 <input class="form-control" id="mdp" 
-                       type="password" name="txt_mdp" 
+                       type="password" name="txt_mdp" placeholder="Password"
                        required>
             </div>
 
             <button type="submit" class="btn btn-success">
-                Valider
+                Valider 
+                <span class="glyphicon glyphicon-ok-sign"> 
+                                </span>
             </button>
         </form>
     </div>

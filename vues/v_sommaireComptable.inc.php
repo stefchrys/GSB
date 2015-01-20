@@ -5,8 +5,8 @@
         <ul class="nav nav-pills" id="menuList">
             <li >
                 <h4>
-                    <span class="label label-warning">
-                        Comptable
+                    <span class="glyphicon glyphicon-user">
+                        Comptable</br>
                     <?php echo $_SESSION['prenom'] . "  " . $_SESSION['nom'] ?>
                     </span>
                 </h4>
@@ -14,23 +14,23 @@
             <li >
                 <a href="index.php?uc=validerFrais&action=choixVisiteurMois" 
                    title="Valider fiche de frais">
-                    <span class="label label-default">
-                        Valider fiche de frais
+                    <span class="glyphicon glyphicon-check">
+                        Validation
                     </span>
                 </a>
             </li>
             <li >
                 <a href="index.php?uc=suivrePaiement&action=choixFicheValide" 
                    title="Suivre le paiement fiche de frais">
-                    <span class="label label-default">
-                        Suivre le paiement fiche de frais
+                    <span class="glyphicon glyphicon-list">
+                        Reglement
                     </span>
                 </a>
             </li>
             <li >
                 <a href="index.php?uc=connexion&action=deconnexion" 
                    title="Se déconnecter">
-                    <span class="label label-default">
+                    <span class="glyphicon glyphicon-log-out">
                         Déconnexion
                     </span>
                 </a>

@@ -6,7 +6,9 @@
         <h3>Fiche de frais du mois <?php echo $ficheMois . "-" . $ficheAnnee ?> : 
         </h3>
         <h3 class='contenu'>
+            <span class="label label-success">
             Eléments forfaitisés .
+            </span>
         </h3>
         <form action="index.php?uc=validerFrais&action=validerTraitement" method="post">
             <?php
@@ -82,10 +84,12 @@
                 </tbody>
             </table>                                             
             <label> Nb justificatifs reçus:</label><input type="text" name='justificatifs'/>                      
-            <div class="piedForm">              
-                <p>
-                    <button class="btn btn-success" type="submit" value="Valider le traitement"  > Valider </button>                  
-                </p> 
+            <div class="piedForm">                           
+                    <button class="btn btn-success" data-icon="glyphicon-heart" type="submit" value="Valider le traitement"  >
+                        Valider&nbsp;
+                        <span class="glyphicon glyphicon-ok-sign"> 
+                        </span>
+                    </button>                                 
             </div>
         </form>
     </div>

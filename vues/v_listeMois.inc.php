@@ -29,7 +29,10 @@
                             }
                             ?>    
                         </select>
-                        <button class="btn btn-success" id="ok" type="submit" value="Valider"  >Valider</button>
+                        <button class="btn btn-success" id="ok" type="submit" value="Valider"  >
+                            Valider
+                            <span class="glyphicon glyphicon-ok-sign"></span>
+                        </button>
                     </p>
                 </div>       
             </form>     		

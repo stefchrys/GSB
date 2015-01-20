@@ -12,11 +12,11 @@
         <link rel="stylesheet" type="text/css" href="styles/bootstrap-select.css">
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap-select.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
-	<div class="row clearfix entete " >
+	<div class="row clearfix  " >
 
 		<div class="col-md-3 column ">
 			<img src="./images/logo.jpg" id="logoGSB" 
