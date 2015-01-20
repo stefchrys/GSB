@@ -9,6 +9,10 @@
   <meta name="author" content="">	
 	<link href="./styles/bootstrap.min.css" rel="stylesheet">
 	<link href="./styles/style.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap-select.css">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap-select.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">

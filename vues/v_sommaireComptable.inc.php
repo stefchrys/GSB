@@ -4,23 +4,35 @@
     <div class="col-md-8 column">        			
         <ul class="nav nav-pills" id="menuList">
             <li >
-                <h4>Comptable
-                    <?php echo $_SESSION['prenom'] . "  " . $_SESSION['nom'] ?></h4>
+                <h4>
+                    <span class="label label-warning">
+                        Comptable
+                    <?php echo $_SESSION['prenom'] . "  " . $_SESSION['nom'] ?>
+                    </span>
+                </h4>
             </li>
             <li >
                 <a href="index.php?uc=validerFrais&action=choixVisiteurMois" 
-                   title="Valider fiche de frais">Valider fiche de frais
+                   title="Valider fiche de frais">
+                    <span class="label label-default">
+                        Valider fiche de frais
+                    </span>
                 </a>
             </li>
             <li >
                 <a href="index.php?uc=suivrePaiement&action=choixFicheValide" 
                    title="Suivre le paiement fiche de frais">
-                    Suivre le paiement fiche de frais
+                    <span class="label label-default">
+                        Suivre le paiement fiche de frais
+                    </span>
                 </a>
             </li>
             <li >
                 <a href="index.php?uc=connexion&action=deconnexion" 
-                   title="Se déconnecter">Déconnexion
+                   title="Se déconnecter">
+                    <span class="label label-default">
+                        Déconnexion
+                    </span>
                 </a>
             </li>
         </ul>       

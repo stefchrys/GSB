@@ -3,8 +3,10 @@
     <div class="col-md-2 column">		
     </div>
     <div class="col-md-8 column contenu">
-        <h3 class='text-center'>
-            Descriptif des éléments hors forfaits .
+        <h3 >
+            <span class="label label-success"> 
+                Descriptif des éléments hors forfaits .
+            </span>
         </h3>
         <table class="table table-hover">
             <thead>
@@ -94,7 +96,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Ajouter</button>
+                        <button type="submit" class="btn btn-success">Ajouter</button>
                     </div>
                 </div>
             </fieldset>

@@ -3,15 +3,17 @@
     <div class="col-md-2 column"></div>
     <div class="col-md-8 column">
         <div class="contenu">
-            <h3>Choix fiche (Visiteur/Mois)</h3>
+            <h3>
+                <span class="label label-success">
+                    Choix fiche (Visiteur/Mois)
+                </span></h3>
             <h4>Selectionner une fiche de frais : </h4>
             <form action="index.php?uc=validerFrais&action=validerChoixVisiteurMois" 
                   method="post">
                 <table >                
                     <tr>
-                        <td>
-                            Visiteurs : 
-                            <select id="visiteur" name="visiteur">
+                        <td> 
+                            <select class="selectpicker" data-style="btn-info" id="visiteur" name="visiteur">
                                 <?php
                                 foreach ($visiteurs as $unVisiteur) {
                                     $nom = $unVisiteur['nom'];
@@ -33,8 +35,7 @@
                             </select>
                         </td>                   
                         <td>
-                            Mois :
-                            <select id="mois" name="mois">
+                            <select class="selectpicker" data-style="btn-info" id="mois" name="mois">
                                 <?php
                                 foreach ($tableauDate as $uneDate) {
                                     $date = $uneDate['date'];
@@ -57,13 +58,11 @@
                                 ?>    
                             </select>
                         </td>
+                        <td>
+                            <button class="btn btn-success" id="ok" type="submit" value="Valider"  > Valider</button> 
+                        </td>
                     </tr>               
                 </table>
-                <div class="piedForm">
-                    <p>
-                        <input id="ok" type="submit" value="Valider"  />                    
-                    </p> 
-                </div>
             </form>
         </div>
     </div>

@@ -4,7 +4,11 @@
     </div >
     <div class="col-md-8 column">
         <div class="contenu">
-            <h3>Fiches Frais à l'état "validé et mise en paiement" </h3>
+            <h3>
+                <span class="label label-success">
+                    Fiches frais à rembourser 
+                </span>
+            </h3>
             <h4>Selectionner une fiche de frais : </h4> 
             <form action="index.php?uc=suivrePaiement&action=payerFicheFrais" method="post">
                 <table class="table table-hover">
@@ -60,7 +64,7 @@
                 </table>
                 <div class="piedForm">
                     <p>
-                        <input id="ok" type="submit" value="Valider"  />                    
+                        <button class="btn btn-success" id="ok" type="submit"   >  Valider</button>                  
                     </p> 
                 </div>
             </form>

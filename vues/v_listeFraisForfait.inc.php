@@ -3,7 +3,9 @@
      <div class="col-md-2 column"></div>
 <div class="col-md-8 column ">
     <h3 >
-        Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
+        <span class="label label-success"> 
+            Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
+        </succes>
     </h3>
     <form class="form-horizontal " role="form" method="POST"  
           action="index.php?uc=gererFrais&action=validerMajFraisForfait">
@@ -26,7 +28,7 @@
                 </div><?php } ?>					
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default" 
+                    <button type="submit" class="btn btn-success" 
                             name="cmd_valider">Valider</button>
                 </div>
             </div>

@@ -34,10 +34,10 @@ class PdoGsb {
     private static $monPdo;
     private static $monPdoGsb = null;*/
     
-     private static $serveur = 'mysql:host=localhost';
-    private static $bdd = 'dbname=gsbv2';
-    private static $user = 'root';
-    private static $mdp = '';
+    private static $serveur = 'mysql:host=10.0.231.222';
+    private static $bdd = 'dbname=gsb2';
+    private static $user = 'gsb_data';
+    private static $mdp = 'Amanda1978';
     private static $monPdo;
     private static $monPdoGsb = null;
     

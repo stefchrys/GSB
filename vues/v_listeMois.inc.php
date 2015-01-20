@@ -3,13 +3,13 @@
     <div class="col-md-2 column"></div>
     <div class="col-md-8 column">
         <div class="contenu">
-            <h3>Mes fiches de frais</h3>
+            <h3><span class="label label-info">Mes fiches de frais</span></h3>
             <h4>Mois à sélectionner : </h4>
             <form action="index.php?uc=etatFrais&action=voirEtatFrais" method="post">
                 <div class="corpsForm">
                     <p>
-                        <label for="lstMois" accesskey="n">Mois : </label>
-                        <select id="lstMois" name="lstMois">
+                        <!--<label for="lstMois" accesskey="n"><h4>Mois :</h4> </label>-->
+                        <select class="selectpicker" data-style="btn-info" id="lstMois" name="lstMois">
                             <?php
                             foreach ($lesMois as $unMois) {
                                 $mois = $unMois['mois'];
@@ -29,12 +29,8 @@
                             }
                             ?>    
                         </select>
+                        <button class="btn btn-success" id="ok" type="submit" value="Valider"  >Valider</button>
                     </p>
-                </div>
-                <div class="piedForm">
-                    <p>
-                        <input id="ok" type="submit" value="Valider"  />
-                    </p> 
                 </div>       
             </form>     		
         </div>

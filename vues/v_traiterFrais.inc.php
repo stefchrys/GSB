@@ -69,10 +69,10 @@
                             <td><?php echo $libelle ?></td>
                             <td><?php echo $montant ?></td>
                             <td>                               
-                                <select name='etatFraisHorsForfait[<?php echo $id ?>]'>
-                                    <option selected value="valide">Validé</option>
-                                    <option value="reporte">Reporté</option>
-                                    <option value="supprime">Supprimé</option>
+                                <select class="selectpicker" data-style="btn-info" name='etatFraisHorsForfait[<?php echo $id ?>]'>
+                                    <option  selected value="valide">Validé</option>
+                                    <option  value="reporte">Reporté</option>
+                                    <option  value="supprime">Supprimé</option>
                                 </select>
                             </td>
                         </tr>
@@ -84,7 +84,7 @@
             <label> Nb justificatifs reçus:</label><input type="text" name='justificatifs'/>                      
             <div class="piedForm">              
                 <p>
-                    <input  type="submit" value="Valider le traitement"  />                   
+                    <button class="btn btn-success" type="submit" value="Valider le traitement"  > Valider </button>                  
                 </p> 
             </div>
         </form>

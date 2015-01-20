@@ -2,14 +2,19 @@
 <div class="row clearfix"  >  
      <div class="col-md-2 column"></div>
     <div class="col-md-8 column contenu" >
-        <h3>Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
+        <h3>
+            <span class="label label-success">
+                Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
+            </span>
         </h3>
         <p>
             Etat : <?php echo $libEtat ?> depuis le <?php echo $dateModif ?> 
             <br> Montant validé : <?php echo $montantValide ?>
         </p>
         <h3 class='contenu'>
-            Eléments forfaitisés .
+            <span class="label label-success">
+                Eléments forfaitisés .
+            </span>
         </h3>
         <table class="table table-hover">
             <thead>
