@@ -3,84 +3,153 @@
      <div class="col-md-2 column"></div>
     <div class="col-md-8 column contenu" >
         <h3>
-            <span class="label label-default">
-                Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
+            <span class="label label-info">
+                Fiche de frais  
+                    <?php 
+                    $periode = moisChaine((int)$numMois) . "-" . $numAnnee;
+                    echo $periode;
+                    ?> : 
             </span>
         </h3>
             Etat : <?php echo $libEtat ?> depuis le <?php echo $dateModif ?> 
         <br/>
         
-             Montant validé : <?php echo $montantValide ?>
-       
-        <h3 class='contenu'>
-            <span class="label label-default">
-                Eléments forfaitisés .
-            </span>
-        </h3>
+             Montant  : <?php echo $montantValide ?><br/>
+                <?php echo $nbJustificatifs ?> justificatifs reçus -
+        <form class="form-horizontal" action="pdf.php?" method="POST" role="form">
         <table class="table table-hover">
             <thead>
                 <tr>
                     <?php
-                    foreach ($lesFraisForfait as $unFraisForfait) {
-                        $libelle = $unFraisForfait['libelle'];
+                    $intitule = array('Frais forfaitaires','Quantité','Montant unitaire','Total');
+                    foreach ($intitule as $el) {
                         ?>	
-                        <th> <?php echo $libelle ?></th>
+                        <th> <?php echo $el ?></th>
                         <?php
                     }
                     ?>						
                 </tr>
             </thead>
             <tbody>
-                <tr class="success">
+                
                     <?php
+                    $sousTotalF = 0;
+                    $txtFilePdfFraisForfait='';
                     foreach ($lesFraisForfait as $unFraisForfait) {
+                        $libelle = $unFraisForfait['libelle'];
+                        $txtFilePdfFraisForfait = $txtFilePdfFraisForfait . $libelle . '!';
                         $quantite = $unFraisForfait['quantite'];
+                        $txtFilePdfFraisForfait = $txtFilePdfFraisForfait . $quantite . '!';
+                        $MU = $unFraisForfait['montant'];
+                        $txtFilePdfFraisForfait = $txtFilePdfFraisForfait . $MU . '!';
+                        $total = $MU * $quantite;
+                        $txtFilePdfFraisForfait = $txtFilePdfFraisForfait . $total . '!';
                         ?>
-                        <td ><?php echo $quantite ?> </td>
+                <tr>
+                        <td ><?php echo $libelle ?>                            
+                        </td>                       
+                        <td ><?php echo $quantite ?>                            
+                        </td>
+                        <td ><?php echo $MU ?>                            
+                        </td>
+                        <td ><?php echo $total ?>                           
+                        </td>                       
+                        <?php $sousTotalF += $total; ?>
+                </tr>
                         <?php
                     }
                     ?>
+                <tr class="warning">
+                    <td>Sous Total</td>
+                    <td></td>
+                    <td></td>
+                    <td><?php echo $sousTotalF ?></td>
+                    <?php 
+                        $txtFilePdfFraisForfait = $txtFilePdfFraisForfait
+                            .'Sous Total! ! !'.$sousTotalF;
+                        $txtFilePdfFraisForfait = htmlentities( $txtFilePdfFraisForfait, ENT_QUOTES);
+                    ?>
                 </tr>
+                
             </tbody>
         </table>
         <table class="table table-hover">
-            <h3>
-            <span class="label label-default">
-                Descriptif des éléments hors forfait -
-                <?php echo $nbJustificatifs ?> justificatifs reçus -
-            </span>
-            </h3>
             <thead>
-            <th><span class="label label-info">Date</span></th>
-            <th><span class="label label-info">Libellé</span></th>
-            <th><span class="label label-info">Montant</span></th>
+            <th>Frais Hors-Forfait</th>
+            <th>Date</th>
+            <th>Montant</th>
             </thead>
             <tbody>
                 <?php
+                $sousTotalFhF = 0;
+                $txtFilePdfFraisHorsForfait = '';
                 foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
                     $date = $unFraisHorsForfait['date'];
+                    $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $date . '!';
                     $libelle = $unFraisHorsForfait['libelle']; 
+                    $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $libelle . '!';
                     //formater les retour chariots eventuels sur le libelle
                     $char=30;
                     if(strlen($libelle)>$char){
                        $libelle = retourChariot($libelle, $char);
                     }
                     $montant = $unFraisHorsForfait['montant'];
-                    $couleur = 'success';
+                    $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $montant . '!';
+                    //gestion couleur du refus de frais
+                    $couleur = 'default';
                     if (substr($libelle, 0, 5) == 'refus' 
                         || substr($libelle, 0, 5) == 'REFUS') {
                         $couleur = "danger";
                     }
                     ?>                   
-                    <tr  class="<?php echo $couleur ?>">
-                        <td><?php echo $date ?></td>
+                    <tr class="<?php echo $couleur ?>">
                         <td><?php echo $libelle ?></td>
+                        <td><?php echo $date ?></td>
                         <td><?php echo $montant ?></td>
+                        <?php
+                        //si frais refusé on ne le comptabilise pas
+                        if (($couleur == 'default')){
+                            $sousTotalFhF += $montant;
+                        }
+                        ?>
                     </tr>
                     <?php
                 }
-                ?>                
+                ?>
+                <tr class="warning">
+                    <td>Sous Total</td>
+                    <td></td>
+                    <td><?php echo $sousTotalFhF ?></td>
+                    <?php 
+                        $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait
+                                .'Sous Total! !'. $sousTotalFhF;
+                        $txtFilePdfFraisHorsForfait = htmlentities( $txtFilePdfFraisHorsForfait,ENT_QUOTES);
+                    ?>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="success">
+                    <td>Total Frais </td>
+                    <td></td>
+                    <td><?php echo $sousTotalF + $sousTotalFhF ?></td>
+                </tr>
         </table>
+        <?php 
+            $nom = $_SESSION['prenom'] . "  " . $_SESSION['nom'];
+            $periode = $periode.' '.$nom;
+            $periode = htmlentities($periode, ENT_QUOTES);
+            $txtFilePdfResume =   $dateModif.'!'.$libEtat.'!'.$nbJustificatifs.'!'.$montantValide;
+            $txtFilePdfResume = htmlentities( $txtFilePdfResume, ENT_QUOTES);       
+        ?>
+        <input type='hidden' name='txtFilePdfMois' value='<?php echo $periode?>'/>  
+        <input type='hidden' name='txtFilePdfResume' value='<?php echo $txtFilePdfResume ?>'/>
+        <input type='hidden' name='txtFilePdfFraisForfait' value='<?php echo $txtFilePdfFraisForfait ?>'/>
+        <input type='hidden' name='txtFilePdfFraisHorsForfait' value='<?php echo $txtFilePdfFraisHorsForfait ?>'/>
+        <button type="submit">Générer PDF</button>
+        </form>
     </div>	
       <div class="col-md-2 column"></div>
 </div>

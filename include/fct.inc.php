@@ -249,6 +249,8 @@ function implementer($value) {
     $action = "";   
     if (isset($_REQUEST[$value])) {
         $action = $_REQUEST[$value];
+        //encodage les carracteres speciaux enentités html
+        $action = htmlspecialchars($action, ENT_QUOTES);
         return $action;
     }else{
         echo "probleme de variable globale".$value;
@@ -322,4 +324,20 @@ function retourChariot($libelle, $char) {
     return $newLibelle; 
 }
 
+/**
+ * Convertit un mois numerique en chaine de carractères
+ * @param $mois int
+ * 
+ * return string
+ * 
+ */
+function moisChaine($mois){
+    $tabMois = Array('Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet',
+        'Aout','Septembre','Octobre','Novembre','Decembre');
+    if($mois < 0 || $mois > 12){
+        echo 'Entrer un nombre compris entre 1 et 12';
+    }
+    $mois--;// -1 car un tableau de 12 mois va de 0 a 11  :)
+    return $tabMois[$mois];
+}
 ?>

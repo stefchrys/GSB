@@ -3,8 +3,8 @@
     <div class="col-md-2 column"></div>
     <div class="col-md-8 column">
         <div class="contenu">
-            <h3><span class="label label-info">Mes fiches de frais</span></h3>
-            <h4>Mois à sélectionner : </h4>
+            
+            
             <form action="index.php?uc=etatFrais&action=voirEtatFrais" method="post">
                 <div class="corpsForm">
                     <p>

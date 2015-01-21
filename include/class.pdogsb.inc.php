@@ -34,7 +34,7 @@ class PdoGsb {
     private static $monPdo;
     private static $monPdoGsb = null;
     
-
+    
     
    
     
@@ -187,6 +187,7 @@ class PdoGsb {
     public function obtenirLesFraisForfait($idVisiteur, $mois) {
         $req = "SELECT FraisForfait.id AS idFrais, "
                 . "FraisForfait.libelle AS libelle, "
+                . "FraisForfait.montant AS montant, "
                 . "LigneFraisForfait.quantite AS quantite "
                 . "FROM LigneFraisForfait INNER JOIN FraisForfait "
                 . "ON FraisForfait.id = LigneFraisForfait.idFraisForfait "
