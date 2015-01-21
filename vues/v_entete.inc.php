@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Laboratoire Galaxy-Swiss Bourdin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="">
   <meta name="description" content="">
   <meta name="author" content="">	
 	<link href="./styles/bootstrap.min.css" rel="stylesheet">

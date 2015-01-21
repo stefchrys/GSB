@@ -67,7 +67,7 @@
                     <?php 
                         $txtFilePdfFraisForfait = $txtFilePdfFraisForfait
                             .'Sous Total! ! !'.$sousTotalF;
-                        $txtFilePdfFraisForfait = htmlentities( $txtFilePdfFraisForfait, ENT_QUOTES);
+                        $txtFilePdfFraisForfait = addslashes($txtFilePdfFraisForfait);
                     ?>
                 </tr>
                 
@@ -89,10 +89,11 @@
                     $libelle = $unFraisHorsForfait['libelle']; 
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $libelle . '!';
                     //formater les retour chariots eventuels sur le libelle
-                    $char=30;
+                    //(attention bug de carractères) Grrrr!
+                    /*$char=30;
                     if(strlen($libelle)>$char){
                        $libelle = retourChariot($libelle, $char);
-                    }
+                    }*/
                     $montant = $unFraisHorsForfait['montant'];
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $montant . '!';
                     //gestion couleur du refus de frais
@@ -123,7 +124,7 @@
                     <?php 
                         $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait
                                 .'Sous Total! !'. $sousTotalFhF;
-                        $txtFilePdfFraisHorsForfait = htmlentities( $txtFilePdfFraisHorsForfait,ENT_QUOTES);
+                        $txtFilePdfFraisHorsForfait = addslashes( $txtFilePdfFraisHorsForfait);
                     ?>
                 </tr>
                 <tr>
@@ -140,9 +141,9 @@
         <?php 
             $nom = $_SESSION['prenom'] . "  " . $_SESSION['nom'];
             $periode = $periode.' '.$nom;
-            $periode = htmlentities($periode, ENT_QUOTES);
+            $periode = addslashes($periode);
             $txtFilePdfResume =   $dateModif.'!'.$libEtat.'!'.$nbJustificatifs.'!'.$montantValide;
-            $txtFilePdfResume = htmlentities( $txtFilePdfResume, ENT_QUOTES);       
+            $txtFilePdfResume = addslashes($txtFilePdfResume);   
         ?>
         <input type='hidden' name='txtFilePdfMois' value='<?php echo $periode?>'/>  
         <input type='hidden' name='txtFilePdfResume' value='<?php echo $txtFilePdfResume ?>'/>

@@ -53,14 +53,12 @@ $pdf->Ln();$pdf->Ln();
 $pdf->Cell(45, $size, 'Frais hors-forfait', 1);
 $pdf->Ln();
 foreach ($headerFraisForfait as $col) {
-    $pdf->Cell(45, $size, $col, 1);
+    $pdf->Cell(45, $size,  utf8_decode($col), 1);
 }$pdf->Ln();
 // affichage Données FF
 foreach ($fraisForfait as $row) {
     foreach ($row as $col)
-        //$col = html_entity_decode($col,ENT_QUOTES);
-        //$col = utf8_decode($col);
-        $pdf->Cell(45, $size, html_entity_decode($col,ENT_QUOTES), 1);
+        $pdf->Cell(45, $size,  utf8_decode($col), 1);
     
     $pdf->Ln();
 }
@@ -76,9 +74,7 @@ foreach ($headerFraisHorsForfait as $col) {
 // affichage Données Fhf
 foreach ($fraisHorsForfait as $row) {
     foreach ($row as $col)
-        //$val = html_entity_decode($col,ENT_QUOTES);
-        //$val = utf8_decode($val);
-        $pdf->Cell(60, $size, html_entity_decode($col,ENT_QUOTES), 1);
+        $pdf->Cell(60, $size,  utf8_decode($col), 1);
     $pdf->Ln();
 }$pdf->Ln();
 
@@ -93,9 +89,7 @@ foreach ($headerResume as $col) {
 foreach ($dataResume as $row) {
 
    foreach ($row as $col)
-        //$col = html_entity_decode($col,ENT_QUOTES);
-        //$col = utf8_decode($col);
-        $pdf->Cell(45, $size, html_entity_decode($col,ENT_QUOTES), 1);
+        $pdf->Cell(45, $size,  utf8_decode($col), 1);
     $pdf->Ln();
 }$pdf->Ln();
 $pdf->Output();

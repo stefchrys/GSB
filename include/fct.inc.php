@@ -314,7 +314,7 @@ function fusionner($lesFraisHorsForfait, $etat) {
     }
     return $tableauFraisHF;
 }
-
+//fonction qui fait bugger les carracteres !!!!! a effacer
 function retourChariot($libelle, $char) {
     $newLibelle = '';
     $lignes = (int) (strlen($libelle) / $char);
