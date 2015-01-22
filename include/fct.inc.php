@@ -170,16 +170,10 @@ function lesQteFraisValides($lesFrais) {
  * Filtre  une chaine de carractère
  * @param String $chaine Chaine a filtrer
  * 
- * return Booleen  True si la chaine est saine.
+ * return int  0 si pas trouvé
  */
-function filtrage($mot){
-    if(strpos($mot,'!') || strpos($mot,'<') || strpos($mot,'>') 
-                        || strpos($mot,'%') || strpos($mot,'&') 
-                        || strpos($mot,'|') || strpos($mot,';')){
-        return false;
-    }else{
-        return true;
-    }
+function filtrage($chaine){ 
+    return preg_match("#[\!%;\|\.&<>]#",$chaine);  
 }
 /**
  * Vérifie la validité des trois arguments : la date, le libellé
@@ -208,7 +202,7 @@ function valideInfosFrais($dateFrais, $libelle, $montant) {
         }
     }
     //protection libelle contre injection
-    if(!filtrage($libelle)){
+    if(filtrage($libelle) === 1){//si filtre est sale
         ajouterErreur('Carractères interdits!');
     }
        

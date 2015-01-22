@@ -5,7 +5,7 @@
     <h3 >
         <span class="label label-default"> 
             Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?>
-        </succes>
+        </span>
     </h3>
     <form class="form-horizontal " role="form" method="POST"  
           action="index.php?uc=gererFrais&action=validerMajFraisForfait">
