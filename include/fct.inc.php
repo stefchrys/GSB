@@ -166,7 +166,21 @@ function estDateValide($date) {
 function lesQteFraisValides($lesFrais) {
     return estTableauEntiers($lesFrais);
 }
-
+/**
+ * Filtre  une chaine de carractère
+ * @param String $chaine Chaine a filtrer
+ * 
+ * return Booleen  True si la chaine est saine.
+ */
+function filtrage($mot){
+    if(strpos($mot,'!') || strpos($mot,'<') || strpos($mot,'>') 
+                        || strpos($mot,'%') || strpos($mot,'&') 
+                        || strpos($mot,'|') || strpos($mot,';')){
+        return false;
+    }else{
+        return true;
+    }
+}
 /**
  * Vérifie la validité des trois arguments : la date, le libellé
  *  du frais et le montant 
@@ -193,6 +207,11 @@ function valideInfosFrais($dateFrais, $libelle, $montant) {
             }
         }
     }
+    //protection libelle contre injection
+    if(!filtrage($libelle)){
+        ajouterErreur('Carractères interdits!');
+    }
+       
     if ($libelle == "") {
         ajouterErreur("Le champ description ne peut pas être vide");
     }

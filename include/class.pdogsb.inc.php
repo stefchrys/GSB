@@ -33,6 +33,7 @@ class PdoGsb {
     private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
+   
     
     
     
