@@ -245,12 +245,13 @@ function remplirTableauFrais($idFrais) {
  * @param string $value
  * @return string
  */
-function implementer($value) {
-    $action = "";   
+function implementer($value) {  
     if (isset($_REQUEST[$value])) {
         $action = $_REQUEST[$value];
-        //encodage les carracteres speciaux enentités html
-        $action = htmlspecialchars($action, ENT_QUOTES);
+        if (!is_array($action)){
+            $action = htmlspecialchars($action, ENT_QUOTES);
+        }
+       
         return $action;
     }else{
         echo "probleme de variable globale".$value;

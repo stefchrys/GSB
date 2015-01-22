@@ -21,7 +21,7 @@ switch ($action) {
                 $tabInfoUtiles[$i]['id'] = $visiteur;
                 $tabInfoUtiles[$i]['mois'] = $mois;
                 $tabInfoUtiles[$i]['nom'] = $pdo->obtenirNomVisiteur($visiteur);
-                $tabInfoUtiles[$i]['alerte']='success';
+                $tabInfoUtiles[$i]['alerte']='default';
                 //verification cohérences des montants (multiplication par 1000
                 // pour eviter les bugs liés aux types float )
                 if(($tabInfoUtiles[$i]['montantTotal'])*1000 != $montantFraisForfait*1000+$montantHF*1000){

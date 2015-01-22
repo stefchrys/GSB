@@ -32,7 +32,7 @@
                             $montantF = $fiche['fraisForfait'];
                             $montantHF = $fiche['fraisHorsForfait'];
                             $couleur = $fiche['alerte'];
-                            ?>               
+                            ?>  
                             <tr class="<?php echo $couleur ?>">
                                 <td>
                                     <?php echo $numFiche; ?>
@@ -55,7 +55,7 @@
                                 <td>
                                     <input type="checkbox" name="choix[]"  
                                            value="<?php echo $id . '-' . $mois . '-' . $nom ?>" 
-                                           checked> 
+                                           > 
                                     Valider
                                 </td>
                             </tr>

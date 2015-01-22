@@ -16,7 +16,7 @@
         
              Montant  : <?php echo $montantValide ?><br/>
                 <?php echo $nbJustificatifs ?> justificatifs reçus -
-        <form class="form-horizontal" action="pdf.php?" method="POST" role="form">
+        <form class="form-horizontal" action="pdf.php?" method="POST" role="form" target="_blank">
         <table class="table table-hover">
             <thead>
                 <tr>

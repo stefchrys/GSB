@@ -5,11 +5,12 @@
 
         <div class ="erreur">
             <ul>
-                <?php
-                foreach ($_REQUEST['erreurs'] as $erreur) {
-                    echo "<li>$erreur</li>";
-                }
-                ?>
+                <?php 
+                $tab = $_REQUEST['erreurs']; 
+                foreach($tab as $el){
+                    echo"<script>alert('".$el."');</script>";
+                }             
+                ?>            
             </ul>
         </div>
     </div>

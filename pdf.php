@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once ("include/class.fpdf.inc.php");
 
 //creation des tableau de données frais forfait
@@ -50,7 +50,7 @@ $pdf->Cell(180, $size, ($titre.$txtFilePdfMois), 1);
 $pdf->Ln();$pdf->Ln();
 
 // affichage entete FF
-$pdf->Cell(45, $size, 'Frais hors-forfait', 1);
+$pdf->Cell(45, $size, 'Frais forfaitaires', 1);
 $pdf->Ln();
 foreach ($headerFraisForfait as $col) {
     $pdf->Cell(45, $size,  utf8_decode($col), 1);

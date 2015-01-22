@@ -13,6 +13,7 @@
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap-select.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/scriptComptable.js"></script>
 </head>
 <body>
 <div class="container">
