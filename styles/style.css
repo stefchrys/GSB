@@ -8,3 +8,10 @@
 
 //}
  
+.arrondi {
+background:url(../images/iconePdf.png);
+border:none;
+width: 60px; /* largeur à spécifier */
+height: 60px; /* longueur à spécifier */
+cursor: pointer;
+}

@@ -18,7 +18,7 @@
                        required>
             </div>
 
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-success pull-right">
                 Valider 
                 <span class="glyphicon glyphicon-ok-sign"> 
                                 </span>

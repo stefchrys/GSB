@@ -28,7 +28,7 @@
                 </div><?php } ?>					
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-success" 
+                    <button type="submit" class="btn btn-success pull-right" 
                             name="cmd_valider">
                         Valider 
                         <span class="glyphicon glyphicon-ok-sign"> 

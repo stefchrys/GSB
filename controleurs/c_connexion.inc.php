@@ -19,7 +19,7 @@ switch ($action) {
     //on controle l'identité 
     case 'valideConnexion': {
             $login = $_REQUEST['txt_login'];
-            $mdp = $_REQUEST['txt_mdp'];
+            $mdp = sha1($_REQUEST['txt_mdp']);
             $visiteur = $pdo->obtenirInfoVisiteur($login, $mdp);
             //si conexion est pas valide retour depart
             if (!is_array($visiteur)) {

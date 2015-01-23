@@ -18,6 +18,7 @@ session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
 
+
 /* Verifier le cas d'utilisation en cours (uc) et par défaut l'initialise
   à l'état "connexion" */
 

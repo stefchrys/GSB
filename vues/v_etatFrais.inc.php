@@ -17,6 +17,7 @@
              Montant  : <?php echo $montantValide ?><br/>
                 <?php echo $nbJustificatifs ?> justificatifs reçus -
         <form class="form-horizontal" action="pdf.php?" method="POST" role="form" target="_blank">
+            <input type="submit" class="btn pull-right arrondi" value=""/>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -149,7 +150,10 @@
         <input type='hidden' name='txtFilePdfResume' value='<?php echo $txtFilePdfResume ?>'/>
         <input type='hidden' name='txtFilePdfFraisForfait' value='<?php echo $txtFilePdfFraisForfait ?>'/>
         <input type='hidden' name='txtFilePdfFraisHorsForfait' value='<?php echo $txtFilePdfFraisHorsForfait ?>'/>
-        <button type="submit">Générer PDF</button>
+        
+         
+        
+        
         </form>
     </div>	
       <div class="col-md-2 column"></div>

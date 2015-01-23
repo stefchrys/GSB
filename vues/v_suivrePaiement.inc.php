@@ -64,7 +64,7 @@
                 </table>
                 <div class="piedForm">
                     <p>
-                        <button class="btn btn-success" id="ok" type="submit">  
+                        <button class="btn btn-success pull-right" id="ok" type="submit">  
                             Valider 
                             <span class="glyphicon glyphicon-ok-sign"> 
                                 </span>

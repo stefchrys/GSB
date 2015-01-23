@@ -36,7 +36,7 @@ switch ($action) {
             if (!empty($_REQUEST['choix'])) {
                 $choix = implementer('choix');
                 $etat = 'RB';
-                foreach ($choix as $el) {
+                foreach ($choix as $el) { 
                     //recuperation de l'id et du mois afin de lancer une procedure 
                     //de remboursemnt sur base de donnee
                     $tab = array();
@@ -47,7 +47,8 @@ switch ($action) {
                 }
                 require('vues/v_remboursement.inc.php');
             } else {
-                echo "aucune fiche remboursée";
+                ajouterErreur("aucune fiche remboursée");
+                require("vues/v_erreurs.inc.php");                
             }
             break;
         }

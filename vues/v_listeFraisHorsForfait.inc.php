@@ -69,26 +69,26 @@
                 <legend>Nouvel élément hors-forfait.
                 </legend>
                 <div class="form-group">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <input class="form-control" name="dateFrais" type="text" 
                                value ="" placeholder="jj/mm/aaaa" required/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <input class="form-control" name="libelle" type="text" 
                                value ="" placeholder="Libellé" required/>						
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-10">
-                        <input class="form-control" name="montant" type="text" 
+                    <div class="col-sm-12">
+                        <input class="form-control " name="montant" type="text" 
                                value ="" placeholder="Montant" required />
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">
+                    <div class=" col-sm-12">
+                        <button type="submit" class="btn btn-success pull-right">
                             Ajouter
                              <span class="glyphicon glyphicon-ok-sign"> 
                                 </span>
