@@ -26,15 +26,27 @@ class PdoGsb {
      * @var String$mdp Mot de passe
      * @var PDO $monPdo objet PDO
      * @var $monPdoGsb objet 
-     */
+     *//*
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsb3';
     private static $user = 'root';
     private static $mdp = '';
     private static $monPdo;
-    private static $monPdoGsb = null;
-   
+    private static $monPdoGsb = null;*/
+    /*
+    private static $serveur = 'mysql:host=10.0.231.222';
+    private static $bdd = 'dbname=gsb2';
+    private static $user = 'gsb_data';
+    private static $mdp = 'BelinBeliet33830';
+    private static $monPdo;
+    private static $monPdoGsb = null;*/
     
+    private static $serveur = 'mysql:host=37.187.247.36';
+    private static $bdd = 'dbname=gsb2';
+    private static $user = 'gsb_data';
+    private static $mdp = 'Paris75000';
+    private static $monPdo;
+    private static $monPdoGsb = null;
     
     
     
@@ -220,9 +232,9 @@ class PdoGsb {
      */
     
     function verifierComptable($id) {
-        $req = "SELECT typepersonnel.libelle "
-                . "FROM typepersonnel "
-                . "WHERE typepersonnel.id IN"
+        $req = "SELECT TypePersonnel.libelle "
+                . "FROM TypePersonnel "
+                . "WHERE TypePersonnel.id IN"
                 . "(select Visiteur.types from Visiteur where Visiteur.id = '$id')" ;
         $type = $this->executerRequete($req,'fetch()');
         return $type;
