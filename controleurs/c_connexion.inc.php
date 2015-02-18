@@ -33,14 +33,18 @@ switch ($action) {
                 $nom = $visiteur['nom'];
                 $prenom = $visiteur['prenom'];
                 connecter($id, $nom, $prenom);
-
-                // si c'est un comptable on affiche son sommaire comptable
-                if ($pdo->verifierComptable($id) != null) {
-                    require ("vues/v_sommaireComptable.inc.php");
-                    //sinon le sommaire visiteur
-                } else {
-                    require("vues/v_sommaireVisiteur.inc.php");
-                }
+                //controle type personnel
+                $type = $pdo->verifierComptable($id);
+                switch ($type['libelle']):
+                    case 'comptable':{
+                        require ("vues/v_sommaireComptable.inc.php");
+                        break;
+                    }
+                    case 'visiteur':{
+                         require("vues/v_sommaireVisiteur.inc.php");
+                         break;
+                    }
+                endswitch;
             }
             break;
         }

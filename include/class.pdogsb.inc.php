@@ -132,8 +132,7 @@ class PdoGsb {
                 . "Visiteur.nom AS nom, "
                 . "Visiteur.prenom AS prenom "
                 . "FROM Visiteur "
-                . "WHERE Visiteur.id "
-                . "NOT IN (SELECT * FROM Comptable)";
+                . "WHERE Visiteur.types = 1 ";
         return $this->executerRequete($req, 'fetchAll()');
     }
 
@@ -217,13 +216,17 @@ class PdoGsb {
 
      * Verifie si la personne connectée est un comptable
      * @param string $id  id du de la personne conectée
-     * @return array  Tableau associatif
+     * @return array  Tableau 
      */
+    
     function verifierComptable($id) {
-        $req = "SELECT Comptable.id "
-                . "FROM Comptable "
-                . "WHERE Comptable.id = '$id'";
-        return($this->executerRequete($req,'fetchAll()'));        
+        $req = "SELECT typepersonnel.libelle "
+                . "FROM typepersonnel "
+                . "WHERE typepersonnel.id IN"
+                . "(select Visiteur.types from Visiteur where Visiteur.id = '$id')" ;
+        $type = $this->executerRequete($req,'fetch()');
+        return $type;
+        
     }
 
     /**
