@@ -10,9 +10,9 @@
  * $monPdo de type PDO 
  * $monPdoGsb qui contiendra l'unique instance de la classe
  *
- * @package default
+ * @package PDOGSB
  * @author Chrysinus@gmail.com
- * @link       http://www.php.net/manual/fr/book.pdo.php
+ * @link  http://37.187.247.36/gsb
  */
 class PdoGsb {
 
@@ -26,27 +26,14 @@ class PdoGsb {
      * @var String$mdp Mot de passe
      * @var PDO $monPdo objet PDO
      * @var $monPdoGsb objet 
-     *//*
+     */
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsb3';
     private static $user = 'root';
     private static $mdp = '';
     private static $monPdo;
-    private static $monPdoGsb = null;*/
-    /*
-    private static $serveur = 'mysql:host=10.0.231.222';
-    private static $bdd = 'dbname=gsb2';
-    private static $user = 'gsb_data';
-    private static $mdp = 'BelinBeliet33830';
-    private static $monPdo;
-    private static $monPdoGsb = null;*/
-    
-    private static $serveur = 'mysql:host=37.187.247.36';
-    private static $bdd = 'dbname=gsb2';
-    private static $user = 'gsb_data';
-    private static $mdp = 'Paris75000';
-    private static $monPdo;
     private static $monPdoGsb = null;
+  
     
     
     
@@ -82,12 +69,12 @@ class PdoGsb {
         return PdoGsb::$monPdoGsb;
     }
     /**
-     * execute une requete en parametre et retourne un tableau associatif, un element ou 
-     * ne retourne rien en fonction du deuxieme parametre
+     * Execute une requete sql entrée parametre et retourne un tableau associatif, 
+     * un element ou ne retourne rien en fonction du deuxieme parametre
      * 
      * @param string $req
      * @param string $fetch
-     * @return NULL or array retourne rien ou un tableau
+     * @return NULL or array Retourne rien ou un tableau
      */
     public function executerRequete($req,$fetch){
         switch ($fetch){
@@ -114,11 +101,11 @@ class PdoGsb {
         }       
     }
     /**
-     * Retourne les informations d'un visiteur(validé 10/12/2014)
+     * Retourne les informations id, nom, prenom, d'un visiteur
 
      * @param string $login 
      * @param string $mdp
-     * @return array renvoie l'id, le nom et le prénom sous la forme d'un 
+     * @return array Renvoie l'id, le nom et le prénom sous la forme d'un 
      * tableau associatif 
      */
     public function obtenirInfoVisiteur($login, $mdp) {
@@ -130,12 +117,10 @@ class PdoGsb {
         $res = PdoGsb::$monPdo->query($req);
         $val=  $res->fetch();
         return $val;
-
-       // return $this->executerRequete($req,'fetch()');
     }
 
     /**
-     * Retourne un tableau rempli des visiteurs(id,nom,prenom)(validé 20/01/2015)
+     * Retourne un tableau rempli des visiteurs(id,nom,prenom)
      * 
      * @return Array Tableau de visiteurs
      */
@@ -150,14 +135,14 @@ class PdoGsb {
 
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais 
-     * hors forfait concernées par les deux arguments(validé 20/01/2015)
+     * hors forfait concernées par les deux arguments.
 
      * La boucle foreach ne peut être utilisée ici car on procède
      * à une modification de la structure itérée - transformation du champ date-
 
      * @param string $idVisiteur 
      * @param string $mois sous la forme aaaamm
-     * @return array tous les champs des lignes de frais hors forfait sous la forme 
+     * @return array Tous les champs des lignes de frais hors forfait sous la forme 
      * d'un tableau associatif 
      */
     public function obtenirLesFraisHorsForfait($idVisiteur, $mois) {
@@ -224,7 +209,7 @@ class PdoGsb {
     }
 
     /**
-     * Verification type de personnel connecté(alerte 10/12/2014 le renvoie d'un tableau associatif est inutile, renvoyer juste un bool)
+     * Verification type de personnel connecté
 
      * Verifie si la personne connectée est un comptable
      * @param string $id  id du de la personne conectée
@@ -242,7 +227,7 @@ class PdoGsb {
     }
 
     /**
-     * Met à jour la table ligneFraisForfait(rquete a verifier)
+     * Met à jour la table ligneFraisForfait
 
      * Met à jour la table ligneFraisForfait pour un visiteur et
      * un mois donné en enregistrant les nouveaux montants
@@ -282,11 +267,11 @@ class PdoGsb {
     }*/
 
     /**
-     * Teste si le frais est le premier du mois(verifié 10/12/2014)
+     * Teste si le frais est le premier du mois
 
      * @param string $idVisiteur 
      * @param string $mois sous la forme aaaamm
-     * @return bool vrai ou faux 
+     * @return bool 
      */
     public function estPremierFraisMois($idVisiteur, $mois) {
         $ok = false;
@@ -320,7 +305,7 @@ class PdoGsb {
      * Crée une nouvelle fiche de frais et les lignes de frais au forfait pour
      *  un visiteur et un mois donnés(verifié 20/01/2015)
 
-     * récupère le dernier mois en cours de traitement, met à 'CL' son champs idEtat, 
+     * Récupère le dernier mois en cours de traitement, met à 'CL' son champs idEtat, 
      * crée une nouvelle fiche de frais avec un idEtat à 'CR' et crée les lignes de 
      * frais forfait de quantités nulles
      *  
@@ -377,7 +362,7 @@ class PdoGsb {
     }
 
     /**
-     * Retourne les mois pour lesquel un visiteur a une fiche de frais(verifié 20/01/2015)
+     * Retourne les mois pour lesquel un visiteur a une fiche de frais
 
      * @param string $idVisiteur 
      * @return array Tableau associatif de clé un mois -aaaamm- et de valeurs l'année 
@@ -407,7 +392,7 @@ class PdoGsb {
 
     /**
      * Retourne les informations d'une fiche de frais d'un visiteur 
-     * pour un mois donné(verifié 10/12/2014)
+     * pour un mois donné
 
      * @param string $idVisiteur 
      * @param string $mois sous la forme aaaamm
@@ -430,7 +415,7 @@ class PdoGsb {
     }
 
     /**
-     * Modifie l'état et la date de modification d'une fiche de frais(verifié 10/12/2014)
+     * Modifie l'état et la date de modification d'une fiche de frais
 
      * Modifie le champ idEtat et met la date de modif à aujourd'hui
      * @param string $idVisiteur 
@@ -447,7 +432,7 @@ class PdoGsb {
     }
 
     /**
-     * modifie le champs nb justificatif et montant valide d'une fiche de frais(verifié 10/12/2014)
+     * modifie le champs nb justificatif et montant valide d'une fiche de frais
      * @param string $idVisiteur
      * @param string $mois
      * @param string $montant
@@ -463,7 +448,7 @@ class PdoGsb {
     }
 
     /**
-     * renvoie un tableau composé des 12 derniers mois (alerte 10/12/2014 voir si on peu changer par une requete dans base de donnée)
+     * renvoie un tableau composé des 12 derniers mois 
      * 
      * Le tableau est un tableau multi dimmensionnel
      * composé de la clé mois et de la clé année et de la date au format aaaamm
@@ -494,7 +479,7 @@ class PdoGsb {
     }
 
     /**
-     * Teste si une fiche de frais cloturee existe concernant (validée 10/12/2014)
+     * Teste si une fiche de frais cloturee existe concernant 
      * le visiteur l'etat et le mois passé en paramètre renvoie un tab
      * @param string $id 
      * @param string $date
@@ -546,9 +531,9 @@ class PdoGsb {
         $this->executerRequete($req,'exec');
     }
     /**
-     * alerte 10/12/2014 
+     * Retourne montant du frais forfait
      * @param type $id
-     * @return type
+     * @return float
      */
     public function valeurMontant($id) {
         $req = "SELECT montant FROM FraisForfait WHERE id='$id'";
@@ -557,7 +542,7 @@ class PdoGsb {
     }
 
     /**
-     * Recupere les fiche frais dont l'état est donné en paramètre(verifié 10/12/2014)
+     * Recupere les fiche frais dont l'état est donné en paramètre
      * 
      * @param string $etat etat de la fiche 
      * @return array Retourne un tableau de ficheFrais 
@@ -582,7 +567,7 @@ class PdoGsb {
     }
 
     /**
-     * Recupere le nom et le prenom d'un visiteur en fonction de l'id(verifié 20/01/2015)
+     * Recupere le nom et le prenom d'un visiteur en fonction de l'id
      * @param string $id
      * @return array
      */
@@ -594,10 +579,10 @@ class PdoGsb {
     }
     
     /**
-     * Calcul le cumul des frais hors forfait d'un visiteur suivant le mois(verifié 10/12/2014)
+     * Calcul le cumul des frais hors forfait d'un visiteur suivant le mois
      * @param string $mois
      * @param string $visiteur
-     * @return float cumul des frais hors forfait
+     * @return float Cumul des frais hors forfait
      */
     public function getCumulFraisHorsForfait($mois,$visiteur){
         $req = "SELECT SUM(montant) AS cumul from LigneFraisHorsForfait "
@@ -625,7 +610,11 @@ class PdoGsb {
 		$cumulMontantForfait = $lgMontant['cumul'];
                 return (float)$cumulMontantForfait;
     }
-    
+    /*
+     *Validation de la campagne 
+     * 
+     * 
+     */
     public function validationCampagne() {
         $day = (new \DateTime())->format('d');
         $month = (new \DateTime())->format('m');

@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 * FPDF                                                                         *
-*                                                                              *
+* @package Librairie exterieur                                                                            *
 * Version: 1.7                                                                 *
 * Date:    2011-06-18                                                          *
 * Author:  Olivier PLATHEY                                                     *

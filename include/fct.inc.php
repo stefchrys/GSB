@@ -1,10 +1,10 @@
 ﻿<?php
 /**
  * Fonctions pour l'application GSB
-
  * Fonctions Metier (MODELE)
  *  
  * @author chrysinus@gmail.com 
+ * @package FONCTIONS 
  */
 
 /**
@@ -65,7 +65,7 @@ function dateAnglaisVersFrancais($maDate) {
 /**
  * Simplifie le format d'une date
 
- * retourne le mois au format aaaamm selon le jour dans le mois
+ * Retourne le mois au format aaaamm selon le jour dans le mois
  * @param date $date  Format  jj/mm/aaaa
  * @return date Mois au format aaaamm
  */
@@ -328,15 +328,7 @@ function fusionner($lesFraisHorsForfait, $etat) {
     }
     return $tableauFraisHF;
 }
-//fonction qui fait bugger les carracteres !!!!! a effacer
-function retourChariot($libelle, $char) {
-    $newLibelle = '';
-    $lignes = (int) (strlen($libelle) / $char);
-    for ($i = 0; $i <= $lignes; $i++) {
-        $newLibelle = $newLibelle . substr($libelle, $i * $char, $char) . '<br />';
-    }
-    return $newLibelle; 
-}
+
 
 /**
  * Convertit un mois numerique en chaine de carractères
