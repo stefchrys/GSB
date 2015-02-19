@@ -361,10 +361,12 @@ class PdoGsb {
         $this->executerRequete($req,'exec');
     }
 
-    /**
+     /**
      * Retourne les mois pour lesquel un visiteur a une fiche de frais
-
-     * @param string $idVisiteur 
+     
+     * @param string $idVisiteur
+     * @param $periode string "all" selectionne tout les mois disponibles
+     * "year" selectionne les 12 derniers mois 
      * @return array Tableau associatif de clé un mois -aaaamm- et de valeurs l'année 
      * et le mois correspondant 
      */
