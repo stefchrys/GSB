@@ -193,10 +193,10 @@ function valideInfosFrais($dateFrais, $libelle, $montant) {
             ajouterErreur("Format Date invalide la date doit être au format jj/mm/aaaa");
         } else {
             if (estDateDepassee($dateFrais)) {
-                ajouterErreur("date d'enregistrement du frais dépassé, plus de 1 an");
+                ajouterErreur("date non valide enregistrement du frais dépassé, plus de 1 an");
             }else {
                 if(estDatePosterieur($dateFrais)){
-                   ajouterErreur("La date ne doit pas être posterieur à celle d'aujourd'hui");
+                   ajouterErreur("La date ne doit pas être posterieur à celle du jour courant");
                 }              
             }
         }

@@ -368,11 +368,19 @@ class PdoGsb {
      * @return array Tableau associatif de clé un mois -aaaamm- et de valeurs l'année 
      * et le mois correspondant 
      */
-    public function obtenirLesMoisDisponibles($idVisiteur) {
+    public function obtenirLesMoisDisponibles($idVisiteur,$periode) {
+        if($periode == "all"){
         $req = "SELECT FicheFrais.mois as mois "
                 . "FROM  FicheFrais "
                 . "WHERE FicheFrais.idVisiteur ='$idVisiteur' "
                 . "ORDER BY FicheFrais.mois desc ";
+        }else
+            if($periode == "year"){
+                $req = "SELECT DISTINCT(mois) AS mois "
+                . "FROM FicheFrais "
+                . "WHERE mois >= (select max(mois)-100 from FicheFrais WHERE FicheFrais.idVisiteur ='$idVisiteur')"
+                . "ORDER BY mois DESC";
+            }
         $idJeuMoisFiche = PdoGsb::$monPdo->query($req);
         $lesMois = array();
         $lgMoisFiche = $idJeuMoisFiche->fetch();       
