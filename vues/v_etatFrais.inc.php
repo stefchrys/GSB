@@ -89,12 +89,6 @@
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $date . '!';
                     $libelle = $unFraisHorsForfait['libelle']; 
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $libelle . '!';
-                    //formater les retour chariots eventuels sur le libelle
-                    //(attention bug de carractères) Grrrr!
-                    /*$char=30;
-                    if(strlen($libelle)>$char){
-                       $libelle = retourChariot($libelle, $char);
-                    }*/
                     $montant = $unFraisHorsForfait['montant'];
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $montant . '!';
                     //gestion couleur du refus de frais
