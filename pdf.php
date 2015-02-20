@@ -92,6 +92,6 @@ foreach ($dataResume as $row) {
         $pdf->Cell(45, $size,  utf8_decode($col), 1);
     $pdf->Ln();
 }$pdf->Ln();
-$pdf->Output();
+$pdf->Output("FicheFrais.pdf","D");
 ?>
 
