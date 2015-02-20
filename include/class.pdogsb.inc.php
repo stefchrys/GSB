@@ -33,13 +33,7 @@ class PdoGsb {
     private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
-  
-    
-    
-    
-    
-   
-    
+      
     /**
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
      * pour toutes les méthodes de la classe

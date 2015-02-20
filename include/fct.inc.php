@@ -340,8 +340,9 @@ function fusionner($lesFraisHorsForfait, $etat) {
 function moisChaine($mois){
     $tabMois = Array('Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet',
         'Aout','Septembre','Octobre','Novembre','Decembre');
-    if($mois < 0 || $mois > 12){
+    if($mois <= 0 || $mois > 12){
         echo 'Entrer un nombre compris entre 1 et 12';
+        return null;
     }
     $mois--;// -1 car un tableau de 12 mois va de 0 a 11  :)
     return $tabMois[$mois];
