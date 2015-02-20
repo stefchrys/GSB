@@ -47,7 +47,7 @@ switch ($action) {
                 }
                 require('vues/v_remboursement.inc.php');
             } else {
-                ajouterErreur("aucune fiche remboursée");
+                Err::ajouterErreur("aucune fiche remboursée");
                 require("vues/v_erreurs.inc.php");                
             }
             break;

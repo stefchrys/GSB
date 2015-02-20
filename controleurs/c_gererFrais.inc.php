@@ -23,7 +23,7 @@ switch ($action) {
             if (lesQteFraisValides($lesFrais)) {
                 $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
             } else {
-                ajouterErreur("Les valeurs des frais doivent être numériques");
+                Err::ajouterErreur("Les valeurs des frais doivent être numériques");
                 require("vues/v_erreurs.inc.php");
             }
             break;

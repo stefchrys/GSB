@@ -40,7 +40,7 @@ switch ($action) {
                 require('vues/v_traiterFrais.inc.php');
             } else {
                 //si existe pas retour vers le choix d'une fiche
-                ajouterErreur("pas de fiches trouvées ce mois ci pour ce visiteur");
+                Err::ajouterErreur("pas de fiches trouvées ce mois ci pour ce visiteur");
                 require('vues/v_erreurs.inc.php');
                 require('vues/v_listeVisiteurMoisComptable.inc.php');
             }
@@ -105,11 +105,11 @@ switch ($action) {
                                                $nbJustificatifs);
                     $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
                 }else {
-                    ajouterErreur("Les valeurs des frais doivent être numériques");
+                    Err::ajouterErreur("Les valeurs des frais doivent être numériques");
                     require("vues/v_erreurs.inc.php");
                 }   
             } else {
-                ajouterErreur("Les valeurs des frais doivent être numériques");
+                Err::ajouterErreur("Les valeurs des frais doivent être numériques");
                 require("vues/v_erreurs.inc.php");
             } 
             break;
