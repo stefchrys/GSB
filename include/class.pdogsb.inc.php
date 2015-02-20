@@ -148,7 +148,7 @@ class PdoGsb {
         $nbLignes = count($lgFraisHorsForf);
         for ($i = 0; $i < $nbLignes; $i++) {
             $date = $lgFraisHorsForf[$i]['date'];
-            $lgFraisHorsForf[$i]['date'] = dateAnglaisVersFrancais($date);
+            $lgFraisHorsForf[$i]['date'] = DateGsb::dateAnglaisVersFrancais($date);
         }
         return $lgFraisHorsForf;
     }
@@ -338,7 +338,7 @@ class PdoGsb {
      */
     public function creeNouveauFraisHorsForfait
     ($idVisiteur, $mois, $libelle, $date, $montant) {
-        $dateFr = dateFrancaisVersAnglais($date);
+        $dateFr = DateGsb::dateFrancaisVersAnglais($date);
         $req = "INSERT INTO LigneFraisHorsForfait "
                 . "VALUES('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
         $this->executerRequete($req,'exec');

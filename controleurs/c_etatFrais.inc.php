@@ -33,7 +33,7 @@ switch ($action) {
             $montantValide = $lesInfosFicheFrais['montantValide'];
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif = $lesInfosFicheFrais['dateModif'];
-            $dateModif = dateAnglaisVersFrancais($dateModif);
+            $dateModif = DateGsb::dateAnglaisVersFrancais($dateModif);
             require("vues/v_etatFrais.inc.php");
             break;
         }

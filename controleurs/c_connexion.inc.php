@@ -32,7 +32,7 @@ switch ($action) {
                 $id = $visiteur['id'];
                 $nom = $visiteur['nom'];
                 $prenom = $visiteur['prenom'];
-                connecter($id, $nom, $prenom);
+                Connect::connecter($id, $nom, $prenom);
                 //controle type personnel
                 $type = $pdo->verifierComptable($id);
                 switch ($type['libelle']):

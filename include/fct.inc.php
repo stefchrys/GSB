@@ -10,7 +10,7 @@
 /**
  * Teste si un quelconque visiteur est connecté
  * @return bool true false
- */
+ *//*
 function estConnecte() {
     return isset($_SESSION['idVisiteur']);
 }
@@ -21,7 +21,7 @@ function estConnecte() {
  * @param $id 
  * @param $nom
  * @param $prenom
- */
+ *//*
 function connecter($id, $nom, $prenom) {
     $_SESSION['idVisiteur'] = $id;
     $_SESSION['nom'] = $nom;
@@ -30,10 +30,10 @@ function connecter($id, $nom, $prenom) {
 
 /**
  * Détruit la session active
- */
+ *//*
 function deconnecter() {
     session_destroy();
-}
+}*/
 
 /**
  * Convertisseur de date FR->UK
@@ -42,11 +42,11 @@ function deconnecter() {
  * anglais aaaa-mm-jj
  * @param date $maDate  Date au format  jj/mm/aaaa
  * @return date Date au format anglais aaaa-mm-jj
- */
+ *//*
 function dateFrancaisVersAnglais($maDate) {
     list($jour, $mois, $annee) = explode('/', $maDate);
     return date('Y-m-d', mktime(0, 0, 0, $mois, $jour, $annee));
-}
+}*/
 
 /**
  * Convertisseur de date UK->FR
@@ -55,12 +55,12 @@ function dateFrancaisVersAnglais($maDate) {
  * le format français jj/mm/aaaa 
  * @param date $maDate Date au format  aaaa-mm-jj
  * @return date Date au format format français jj/mm/aaaa
- */
+ *//*
 function dateAnglaisVersFrancais($maDate) {
     list($annee, $mois, $jour) = explode('-', $maDate);
     $date = "$jour" . "/" . $mois . "/" . $annee;
     return $date;
-}
+}*/
 
 /**
  * Simplifie le format d'une date
@@ -68,14 +68,14 @@ function dateAnglaisVersFrancais($maDate) {
  * Retourne le mois au format aaaamm selon le jour dans le mois
  * @param date $date  Format  jj/mm/aaaa
  * @return date Mois au format aaaamm
- */
+ *//*
 function getMois($date) {
     list($jour, $mois, $annee) = explode('/', $date);
     if (strlen($mois) == 1) {
         $mois = "0" . $mois;
     }
     return $annee . $mois;
-}
+}*/
 
 /* gestion des erreurs */
 
@@ -86,7 +86,8 @@ function getMois($date) {
  * @return bool true false
  */
 function estEntierPositif($valeur) {
-    return preg_match("/[^0-9]/", $valeur) == 0;
+    $bool = preg_match("/[^0-9]/", $valeur) == 0;
+    return $bool;
 }
 
 /**
@@ -94,34 +95,34 @@ function estEntierPositif($valeur) {
 
  * @param array $tabEntiers : le tableau
  * @return bool true false
- */
+ /*
 function estTableauEntiers($tabEntiers) {
     $ok = true;
     foreach ($tabEntiers as $unEntier) {
-        if (!estEntierPositif($unEntier)) {
+        if (estEntierPositif($unEntier) == null || !estEntierPositif($unEntier)) {
             $ok = false;
         }
     }
     return $ok;
-}
+}*/
 /**
  * Calcul si la date envoyée en paramètre est posterieur à la date actuelle
  * renvoi vrai si elle est posterieur
  * 
  * @param date $date
  * @return bool 
- */
+ *//*
 function estDatePosterieur($date){
     $dateActuelle = date("Y-m-d");
-    $dateFormatee=dateFrancaisVersAnglais($date);
+    $dateFormatee=DateGsb::dateFrancaisVersAnglais($date);
     return($dateFormatee>$dateActuelle);   
-}
+}*/
 /**
  * Vérifie si une date est inférieure d'un an à la date actuelle
 
  * @param date $dateTestee  Date à tester
  * @return bool true false
- */
+ *//*
 function estDateDepassee($dateTestee) {
     $dateActuelle = date("d/m/Y");
     list($jour, $mois, $annee) = explode('/', $dateActuelle);
@@ -130,13 +131,13 @@ function estDateDepassee($dateTestee) {
     list($jourTeste, $moisTeste, $anneeTeste) = explode('/', $dateTestee);
     return ($anneeTeste . $moisTeste . $jourTeste < $AnPasse);
 }
-
+*/
 /**
  * Vérifie la validité du format d'une date française jj/mm/aaaa 
 
  * @param date $date Date à Vérifier
  * @return bool true false
- */
+ *//*
 function estDateValide($date) {
     $tabDate = explode('/', $date);
     $dateOK = true;
@@ -146,7 +147,7 @@ function estDateValide($date) {
     if (count($tabDate) != 3) {
         $dateOK = false;
     } else {
-        if (!estTableauEntiers($tabDate)) {
+        if (!TypeNum::estTableauEntiers($tabDate)) {
             $dateOK = false;
         } else {
             if (!checkdate($tabDate[1], $tabDate[0], $tabDate[2])) {
@@ -155,7 +156,7 @@ function estDateValide($date) {
         }
     }
     return $dateOK;
-}
+}*/
 
 /**
  * Vérifie que le tableau de frais ne contient que des valeurs numériques 
@@ -164,7 +165,7 @@ function estDateValide($date) {
  * @return bool true false
  */
 function lesQteFraisValides($lesFrais) {
-    return estTableauEntiers($lesFrais);
+    return TypeNum::estTableauEntiers($lesFrais);
 }
 /**
  * Filtre  une chaine de carractère
@@ -189,13 +190,13 @@ function valideInfosFrais($dateFrais, $libelle, $montant) {
     if ($dateFrais == "") {
         ajouterErreur("Le champ date ne doit pas être vide");
     } else {
-        if (!estDateValide($dateFrais)) {
+        if (!DateGsb::estDateValide($dateFrais)) {
             ajouterErreur("Format Date invalide la date doit être au format jj/mm/aaaa");
         } else {
-            if (estDateDepassee($dateFrais)) {
+            if (DateGsb::estDateDepassee($dateFrais)) {
                 ajouterErreur("date non valide enregistrement du frais dépassé, plus de 1 an");
             }else {
-                if(estDatePosterieur($dateFrais)){
+                if(DateGsb::estDatePosterieur($dateFrais)){
                    ajouterErreur("La date ne doit pas être posterieur à celle du jour courant");
                 }              
             }
@@ -276,7 +277,7 @@ function implementer($value) {
  * 
  * @param string $date Date au format aaaamm
  * @return string Renvoie une date au format aaaamm
- */
+ *//*
 function definirMoisSuivant($date) {
     $moisSuivant = "";
     $annee = substr($date, 0, 4);
@@ -294,7 +295,7 @@ function definirMoisSuivant($date) {
     }   
     $moisSuivant = (string)$annee . (string)$mois;
     return $moisSuivant;
-}
+}*/
 /**
  * (ok)
  * Fusionne 2 tableaux associatifs afin de renvoyer un tableau associatif avec juste 
@@ -336,7 +337,7 @@ function fusionner($lesFraisHorsForfait, $etat) {
  * 
  * return string
  * 
- */
+ *//*
 function moisChaine($mois){
     $tabMois = Array('Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet',
         'Aout','Septembre','Octobre','Novembre','Decembre');
@@ -346,5 +347,5 @@ function moisChaine($mois){
     }
     $mois--;// -1 car un tableau de 12 mois va de 0 a 11  :)
     return $tabMois[$mois];
-}
+}*/
 ?>

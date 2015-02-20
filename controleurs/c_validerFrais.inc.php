@@ -54,53 +54,64 @@ switch ($action) {
             $mois = implementer('mois');
             $idVisiteur = implementer('visiteur');
             //mise a jour de ligneFraisForfait
-            $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
-            $lesFraisForfait = $pdo->obtenirLesFraisForfait($idVisiteur, $mois);
-            //calcul du montant  composé des frais forfait validés par le comptable
-            $montantValide = $pdo->sommeFrais($lesFraisForfait);
-
-            //////////////////traitement des frais hors forfaits /////////////////
-            $lesFraisHorsForfait = $pdo->obtenirLesFraisHorsForfait($idVisiteur, $mois);
-            $etat = implementer('etatFraisHorsForfait');
-            //creation d'un tableau associatif specifique(voir fonction fusionner())
-            $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);
-            foreach ($tableauFraisHF as $frais) {
-                $libelle = $frais['libelle'];
-                $date = $frais['date'];
-                $montant = (float) $frais['montant'];
-                $etat = $frais['etat'];
-                $id = $frais['id'];
-                //si le frais est supprimé par le comptable
-                if ($etat == 'supprime') {
-                    //on refuse le paiement
-                    $pdo->refuserLigneFraisHorsForfait((int) $id);
-                } else {
-                    //si le frais est reporté
-                    if ($etat == 'reporte') {
-                        //verifier si ficheFrais du mois suivant existe
-                        $moisSuivant = definirMoisSuivant($mois);
-                        $fiche = $pdo->ficheExiste($idVisiteur, $moisSuivant, 'CR');
-                        //si la fichefrais du mois suivant n'existe pas
-                        if (!$fiche) {
-                            //creer la nouvelle fiche de frais du mois suivant
-                            $pdo->creeNouvellesLignesFrais($idVisiteur, $moisSuivant);
-                        }
-                        //deplacer la ligne fraishorsforfait du mois traité 
-                        //vers mois suivant
-                        $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, 
-                                                          $libelle, $date, $montant);
-                        //et supprimer l'ancienne ligne fraishorsforfait
-                        $pdo->supprimerFraisHorsForfait((int) $id);
-                        //si le frais est validé on y ajoute le montant 
+            if (lesQteFraisValides($lesFrais)) {
+                $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
+                $lesFraisForfait = $pdo->obtenirLesFraisForfait($idVisiteur, $mois);
+                //calcul du montant  composé des frais forfait validés par le comptable
+                $montantValide = $pdo->sommeFrais($lesFraisForfait);
+                
+                 //////////////////traitement des frais hors forfaits /////////////////
+                $lesFraisHorsForfait = $pdo->obtenirLesFraisHorsForfait($idVisiteur, $mois);
+                $etat = implementer('etatFraisHorsForfait');
+                //creation d'un tableau associatif specifique(voir fonction fusionner())
+                $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);
+                foreach ($tableauFraisHF as $frais) {
+                    $libelle = $frais['libelle'];
+                    $date = $frais['date'];
+                    $montant = (float) $frais['montant'];
+                    $etat = $frais['etat'];
+                    $id = $frais['id'];
+                    //si le frais est supprimé par le comptable
+                    if ($etat == 'supprime') {
+                        //on refuse le paiement
+                        $pdo->refuserLigneFraisHorsForfait((int) $id);
                     } else {
-                        $montantValide += $montant;
+                        //si le frais est reporté
+                        if ($etat == 'reporte') {
+                            //verifier si ficheFrais du mois suivant existe
+                            $moisSuivant = DateGsb::definirMoisSuivant($mois);
+                            $fiche = $pdo->ficheExiste($idVisiteur, $moisSuivant, 'CR');
+                            //si la fichefrais du mois suivant n'existe pas
+                            if (!$fiche) {
+                                //creer la nouvelle fiche de frais du mois suivant
+                                $pdo->creeNouvellesLignesFrais($idVisiteur, $moisSuivant);
+                            }
+                            //deplacer la ligne fraishorsforfait du mois traité 
+                            //vers mois suivant
+                            $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, 
+                                                              $libelle, $date, $montant);
+                            //et supprimer l'ancienne ligne fraishorsforfait
+                            $pdo->supprimerFraisHorsForfait((int) $id);
+                            //si le frais est validé on y ajoute le montant 
+                        } else {
+                            $montantValide += $montant;
+                        }
                     }
                 }
-            }
-            //enfin on cloture fiche de frais
-            $nbJustificatifs = implementer('justificatifs');
-            $pdo->majMontantFicheFrais($idVisiteur, $mois, $montantValide, 
-                                       $nbJustificatifs);
-            $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
+                //enfin on cloture fiche de frais
+                $nbJustificatifs = implementer('justificatifs');
+                if(estEntierPositif($nbJustificatifs)){
+                    $pdo->majMontantFicheFrais($idVisiteur, $mois, $montantValide, 
+                                               $nbJustificatifs);
+                    $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
+                }else {
+                    ajouterErreur("Les valeurs des frais doivent être numériques");
+                    require("vues/v_erreurs.inc.php");
+                }   
+            } else {
+                ajouterErreur("Les valeurs des frais doivent être numériques");
+                require("vues/v_erreurs.inc.php");
+            } 
+            break;
         }
 } 

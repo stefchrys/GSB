@@ -6,7 +6,7 @@
             <span class="label label-info">
                 Fiche de frais  
                     <?php 
-                    $periode = moisChaine((int)$numMois) . "-" . $numAnnee;
+                    $periode = DateGsb::moisChaine((int)$numMois) . "-" . $numAnnee;
                     echo $periode;
                     ?> : 
             </span>
