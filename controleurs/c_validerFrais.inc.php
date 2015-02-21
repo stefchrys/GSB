@@ -1,7 +1,7 @@
 <?php
 
 require ("vues/v_sommaireComptable.inc.php");
-$action = implementer('action');
+$action = Session::implementer('action');
 $visiteurs = $pdo->obtenirListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
@@ -22,8 +22,8 @@ switch ($action) {
         }
     case 'validerChoixVisiteurMois': {
 
-            $mois = implementer('mois');
-            $idVisiteur = implementer('visiteur');
+            $mois = Session::implementer('mois');
+            $idVisiteur = Session::implementer('visiteur');
             //controler qu'une fiche de frais existe
             $visiteurASelectionner = $idVisiteur;
             $dateASelectionner = $mois;
@@ -50,11 +50,11 @@ switch ($action) {
 
             //////////////////////traitement frais forfait//////////////////////////
             //tableau de frais forfait idFrais=>quantité
-            $lesFrais = implementer('fraisForfait');
-            $mois = implementer('mois');
-            $idVisiteur = implementer('visiteur');
+            $lesFrais = Session::implementer('fraisForfait');
+            $mois = Session::implementer('mois');
+            $idVisiteur = Session::implementer('visiteur');
             //mise a jour de ligneFraisForfait
-            if (lesQteFraisValides($lesFrais)) {
+            if (FiltreCtrl::estTableauEntiers($lesFrais)) {
                 $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
                 $lesFraisForfait = $pdo->obtenirLesFraisForfait($idVisiteur, $mois);
                 //calcul du montant  composé des frais forfait validés par le comptable
@@ -62,9 +62,9 @@ switch ($action) {
                 
                  //////////////////traitement des frais hors forfaits /////////////////
                 $lesFraisHorsForfait = $pdo->obtenirLesFraisHorsForfait($idVisiteur, $mois);
-                $etat = implementer('etatFraisHorsForfait');
-                //creation d'un tableau associatif specifique(voir fonction fusionner())
-                $tableauFraisHF = fusionner($lesFraisHorsForfait, $etat);
+                $etat = Session::implementer('etatFraisHorsForfait');
+                //creation d'un tableau associatif specifique
+                $tableauFraisHF = ManierTableaux::fusionner($lesFraisHorsForfait, $etat);
                 foreach ($tableauFraisHF as $frais) {
                     $libelle = $frais['libelle'];
                     $date = $frais['date'];
@@ -99,7 +99,7 @@ switch ($action) {
                     }
                 }
                 //enfin on cloture fiche de frais
-                $nbJustificatifs = implementer('justificatifs');
+                $nbJustificatifs = Session::implementer('justificatifs');
                 if(estEntierPositif($nbJustificatifs)){
                     $pdo->majMontantFicheFrais($idVisiteur, $mois, $montantValide, 
                                                $nbJustificatifs);

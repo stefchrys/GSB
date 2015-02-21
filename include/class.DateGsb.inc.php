@@ -95,7 +95,7 @@ abstract class DateGsb {
         if (count($tabDate) != 3) {
             $dateOK = false;
         } else {
-            if (!TypeNum::estTableauEntiers($tabDate)) {
+            if (!FiltreCtrl::estTableauEntiers($tabDate)) {
                 $dateOK = false;
             } else {
                 if (!checkdate($tabDate[1], $tabDate[0], $tabDate[2])) {

@@ -1,13 +1,13 @@
 <?php
 
 /*
- * Classe de connection
+ * Classe de Session
  * @author: chrysinus@gmail.com
  * @package: class.inc
  * @date: 20/02/2015
  */
 
-abstract class Connect {
+abstract class Session {
 
     /**
      * Teste si un quelconque visiteur est connecté
@@ -35,6 +35,24 @@ abstract class Connect {
      */
     static function deconnecter() {
         session_destroy();
+    }
+    
+    /**
+     * Securise l'utilisation des variables globales
+     * 
+     * @param string $value
+     * @return string
+     */
+    static function implementer($value) {
+        if (isset($_REQUEST[$value])) {
+            $action = $_REQUEST[$value];
+            if (!is_array($action)) {
+                $action = htmlspecialchars($action, ENT_QUOTES);
+            }
+            return $action;
+        } else {
+            echo "probleme de variable globale" . $value;
+        }
     }
 
 }

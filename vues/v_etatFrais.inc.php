@@ -20,7 +20,7 @@
             <input type="submit" class="btn pull-right arrondi" value=""/>
         <table class="table table-hover">
             <thead>
-                <tr>
+                <tr> 
                     <?php
                     $intitule = array('Frais forfaitaires','Quantité','Montant unitaire','Total');
                     foreach ($intitule as $el) {
@@ -132,7 +132,7 @@
                     <td></td>
                     <td><?php echo $sousTotalF + $sousTotalFhF ?></td>
                 </tr>
-        </table>
+        </table>       
         <?php 
             $nom = $_SESSION['prenom'] . "  " . $_SESSION['nom'];
             $periode = $periode.' '.$nom;
@@ -143,11 +143,7 @@
         <input type='hidden' name='txtFilePdfMois' value='<?php echo $periode?>'/>  
         <input type='hidden' name='txtFilePdfResume' value='<?php echo $txtFilePdfResume ?>'/>
         <input type='hidden' name='txtFilePdfFraisForfait' value='<?php echo $txtFilePdfFraisForfait ?>'/>
-        <input type='hidden' name='txtFilePdfFraisHorsForfait' value='<?php echo $txtFilePdfFraisHorsForfait ?>'/>
-        
-         
-        
-        
+        <input type='hidden' name='txtFilePdfFraisHorsForfait' value='<?php echo $txtFilePdfFraisHorsForfait ?>'/>    
         </form>
     </div>	
       <div class="col-md-2 column"></div>
