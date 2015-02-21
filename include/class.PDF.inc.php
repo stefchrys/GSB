@@ -1,10 +1,22 @@
 <?php
-
+/**
+ * 
+ * Classe PDF qui hérite de FPDF
+ * 
+ * @author chrysinus@gmail.com
+ * @package class.inc
+ * 
+ */
 require('class.fpdf.inc.php');
 
 class PDF extends FPDF {
-
-// En-tête
+    
+    /**
+     * 
+     * La function header est surchargée et appelée nativement dans la classe mère
+     * Nul besoin de l'appeler elle est chargée directement à l'implementation de la Classe FPDF
+     * Elle s'occupe de la mise en place du header on y met tout ce que l'on veut.
+     */
     function Header() {
         global $monTitre;
         // Logo
@@ -26,7 +38,9 @@ class PDF extends FPDF {
         $this->Ln(20);
     }
 
-// Pied de page
+    /**
+     * Même principe que la fonction header .
+     */
     function Footer() {
         // Positionnement à 1,5 cm du bas
         $this->SetY(-15);
