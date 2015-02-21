@@ -32,8 +32,8 @@ switch ($action) {
             $dateFrais = Session::implementer('dateFrais');
             $libelle = Session::implementer('libelle');
             $montant = Session::implementer('montant');
-            FiltreCtrl::valideInfoFrais($dateFrais, $libelle, $montant);
-            if (nbErreurs() != 0) {
+            FiltreCtrl::valideInfosFrais($dateFrais, $libelle, $montant);
+            if (Err::nbErreurs() != 0) {
                 require("vues/v_erreurs.inc.php");
             } else {
                 $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,
