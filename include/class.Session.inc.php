@@ -53,6 +53,7 @@ abstract class Session {
             return $action;
         } else {
             echo "probleme de variable globale" . $value;
+            return null;
         }
     }
 

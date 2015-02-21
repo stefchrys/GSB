@@ -12,7 +12,7 @@
  *
  * @package PDOGSB
  * @author Chrysinus@gmail.com
- * @link  http://37.187.247.36/gsb
+ * 
  */
 class PdoGsb {
 

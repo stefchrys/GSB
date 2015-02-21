@@ -40,7 +40,7 @@ abstract class FiltreCtrl {
      * Filtre  une chaine de carractère
      * @param String $chaine Chaine a filtrer
      * 
-     * return int  0 si pas trouvé
+     * return int 1 = trouvé  0 = pas trouvé
      */
     static function prohiberChar($chaine) {
         return preg_match("#[\!%;\|\.&<>]#", $chaine);

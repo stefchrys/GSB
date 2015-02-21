@@ -5,7 +5,7 @@
  * @package Test_Unitaire
  * @author Stef 
  */
-require_once ("../class.TypeNum.inc.php");
+require_once ("../class.FiltreCtrl.inc.php");
 class TestFilteCtrl extends PHPUnit_Framework_TestCase {
     
     public function testEstEntierPositif(){
@@ -19,5 +19,10 @@ class TestFilteCtrl extends PHPUnit_Framework_TestCase {
         
          $arr = [1,"foo",3];
         $this->assertEquals(false ,FiltreCtrl::estTableauEntiers($arr));
+        
+        $arr = ['!','%',';','|','.','&','<','>'];
+        foreach($arr as $el){
+            $this->assertEquals(1,FiltreCtrl::prohiberChar($el));
+        }
     }
 }
