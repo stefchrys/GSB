@@ -1,7 +1,7 @@
 <?php
 
 require("vues/v_sommaireComptable.inc.php");
-$action = implementer('action');
+$action = Session::implementer('action');
 
 switch ($action) {
     case 'choixFicheValide': {
@@ -34,7 +34,7 @@ switch ($action) {
         }
     case 'payerFicheFrais': {
             if (!empty($_REQUEST['choix'])) {
-                $choix = implementer('choix');
+                $choix = Session::implementer('choix');
                 $etat = 'RB';
                 foreach ($choix as $el) { 
                     //recuperation de l'id et du mois afin de lancer une procedure 
@@ -47,7 +47,7 @@ switch ($action) {
                 }
                 require('vues/v_remboursement.inc.php');
             } else {
-                ajouterErreur("aucune fiche remboursée");
+                Err::ajouterErreur("aucune fiche remboursée");
                 require("vues/v_erreurs.inc.php");                
             }
             break;

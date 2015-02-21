@@ -10,13 +10,18 @@
  * @package default
  * @date 29/10/2014
  */
-require_once("include/fct.inc.php");
+
 require_once ("include/class.pdogsb.inc.php");
-require_once ("include/class.fpdf.inc.php");
+require_once ("include/class.PDF.inc.php");
+require_once("include/class.Session.inc.php");
+require_once("include/class.FiltreCtrl.inc.php");
+require_once("include/class.DateGsb.inc.php");
+require_once("include/class.Err.inc.php");
+require_once("include/class.ManierTableaux.inc.php");
 require("vues/v_entete.inc.php");
 session_start();
 $pdo = PdoGsb::getPdoGsb();
-$estConnecte = estConnecte();
+$estConnecte = Session::estConnecte();
 
 
 /* Verifier le cas d'utilisation en cours (uc) et par défaut l'initialise

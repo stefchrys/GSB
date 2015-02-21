@@ -7,10 +7,10 @@
  */
 require("vues/v_sommaireVisiteur.inc.php");
 $idVisiteur = $_SESSION['idVisiteur'];
-$mois = getMois(date("d/m/Y"));
+$mois = DateGsb::getMois(date("d/m/Y"));
 $numAnnee = substr($mois, 0, 4);
 $numMois = substr($mois, 4, 2);
-$action = implementer('action');
+$action = Session::implementer('action');
 switch ($action) {
     case 'saisirFrais': {
             if ($pdo->estPremierFraisMois($idVisiteur, $mois)) {
@@ -20,20 +20,20 @@ switch ($action) {
         }
     case 'validerMajFraisForfait': {
             $lesFrais = $_REQUEST['txt_lesFrais'];
-            if (lesQteFraisValides($lesFrais)) {
+            if (FiltreCtrl::estTableauEntiers($lesFrais)) {
                 $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
             } else {
-                ajouterErreur("Les valeurs des frais doivent être numériques");
+                Err::ajouterErreur("Les valeurs des frais doivent être numériques");
                 require("vues/v_erreurs.inc.php");
             }
             break;
         }
     case 'validerCreationFrais': {
-            $dateFrais = implementer('dateFrais');
-            $libelle = implementer('libelle');
-            $montant = implementer('montant');
-            valideInfosFrais($dateFrais, $libelle, $montant);
-            if (nbErreurs() != 0) {
+            $dateFrais = Session::implementer('dateFrais');
+            $libelle = Session::implementer('libelle');
+            $montant = Session::implementer('montant');
+            FiltreCtrl::valideInfosFrais($dateFrais, $libelle, $montant);
+            if (Err::nbErreurs() != 0) {
                 require("vues/v_erreurs.inc.php");
             } else {
                 $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,

@@ -33,13 +33,7 @@ class PdoGsb {
     private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
-  
-    
-    
-    
-    
-   
-    
+      
     /**
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
      * pour toutes les méthodes de la classe
@@ -154,7 +148,7 @@ class PdoGsb {
         $nbLignes = count($lgFraisHorsForf);
         for ($i = 0; $i < $nbLignes; $i++) {
             $date = $lgFraisHorsForf[$i]['date'];
-            $lgFraisHorsForf[$i]['date'] = dateAnglaisVersFrancais($date);
+            $lgFraisHorsForf[$i]['date'] = DateGsb::dateAnglaisVersFrancais($date);
         }
         return $lgFraisHorsForf;
     }
@@ -344,7 +338,7 @@ class PdoGsb {
      */
     public function creeNouveauFraisHorsForfait
     ($idVisiteur, $mois, $libelle, $date, $montant) {
-        $dateFr = dateFrancaisVersAnglais($date);
+        $dateFr = DateGsb::dateFrancaisVersAnglais($date);
         $req = "INSERT INTO LigneFraisHorsForfait "
                 . "VALUES('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
         $this->executerRequete($req,'exec');
@@ -361,7 +355,7 @@ class PdoGsb {
         $this->executerRequete($req,'exec');
     }
 
-    /**
+     /**
      * Retourne les mois pour lesquel un visiteur a une fiche de frais
      
      * @param string $idVisiteur

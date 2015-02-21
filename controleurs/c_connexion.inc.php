@@ -23,7 +23,7 @@ switch ($action) {
             $visiteur = $pdo->obtenirInfoVisiteur($login, $mdp);
             //si conexion est pas valide retour depart
             if (!is_array($visiteur)) {
-                ajouterErreur("Login ou mot de passe incorrect");
+                Err::ajouterErreur("Login ou mot de passe incorrect");
                 require("vues/v_erreurs.inc.php");
                 require("vues/v_connexion.inc.php");
             }
@@ -32,7 +32,7 @@ switch ($action) {
                 $id = $visiteur['id'];
                 $nom = $visiteur['nom'];
                 $prenom = $visiteur['prenom'];
-                connecter($id, $nom, $prenom);
+                Session::connecter($id, $nom, $prenom);
                 //controle type personnel
                 $type = $pdo->verifierComptable($id);
                 switch ($type['libelle']):

@@ -6,7 +6,7 @@
             <span class="label label-info">
                 Fiche de frais  
                     <?php 
-                    $periode = moisChaine((int)$numMois) . "-" . $numAnnee;
+                    $periode = DateGsb::moisChaine((int)$numMois) . "-" . $numAnnee;
                     echo $periode;
                     ?> : 
             </span>
@@ -16,11 +16,11 @@
         
              Montant  : <?php echo $montantValide ?><br/>
                 <?php echo $nbJustificatifs ?> justificatifs reçus -
-        <form class="form-horizontal" action="pdf.php?" method="POST" role="form" target="_blank">
+        <form class="form-horizontal" action="pdf.php?" method="POST" role="form"  >
             <input type="submit" class="btn pull-right arrondi" value=""/>
         <table class="table table-hover">
             <thead>
-                <tr>
+                <tr> 
                     <?php
                     $intitule = array('Frais forfaitaires','Quantité','Montant unitaire','Total');
                     foreach ($intitule as $el) {
@@ -89,12 +89,6 @@
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $date . '!';
                     $libelle = $unFraisHorsForfait['libelle']; 
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $libelle . '!';
-                    //formater les retour chariots eventuels sur le libelle
-                    //(attention bug de carractères) Grrrr!
-                    /*$char=30;
-                    if(strlen($libelle)>$char){
-                       $libelle = retourChariot($libelle, $char);
-                    }*/
                     $montant = $unFraisHorsForfait['montant'];
                     $txtFilePdfFraisHorsForfait = $txtFilePdfFraisHorsForfait . $montant . '!';
                     //gestion couleur du refus de frais
@@ -138,7 +132,7 @@
                     <td></td>
                     <td><?php echo $sousTotalF + $sousTotalFhF ?></td>
                 </tr>
-        </table>
+        </table>       
         <?php 
             $nom = $_SESSION['prenom'] . "  " . $_SESSION['nom'];
             $periode = $periode.' '.$nom;
@@ -149,11 +143,7 @@
         <input type='hidden' name='txtFilePdfMois' value='<?php echo $periode?>'/>  
         <input type='hidden' name='txtFilePdfResume' value='<?php echo $txtFilePdfResume ?>'/>
         <input type='hidden' name='txtFilePdfFraisForfait' value='<?php echo $txtFilePdfFraisForfait ?>'/>
-        <input type='hidden' name='txtFilePdfFraisHorsForfait' value='<?php echo $txtFilePdfFraisHorsForfait ?>'/>
-        
-         
-        
-        
+        <input type='hidden' name='txtFilePdfFraisHorsForfait' value='<?php echo $txtFilePdfFraisHorsForfait ?>'/>    
         </form>
     </div>	
       <div class="col-md-2 column"></div>
