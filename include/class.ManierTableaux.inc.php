@@ -52,18 +52,31 @@ abstract class ManierTableaux {
         return $tableauFraisHF;
     }
 
+    /**
+     * Transforme un texte serialisé en tableaux associatif .
+     * 
+     * @param string $text Ensemble de mots séparés par le carractère "!"
+     * @param int $cols Nombre de colonnes prévues
+     * @return array Tableau composé $cols colonnes et rempli par les motsde $text
+     * Si le nombre de colonnes n'est pas un multiple du nombre d'elemnt retourne NULL
+     * 
+     */
     static function textToArray($text, $cols) {
         $textArray[] = explode('!', trim($text));
         $indice = 0;
         $array = array();
-        $val = (count($textArray[0]) / $cols);
-        for ($i = 0; $i < $val; $i++) {
-            for ($j = 0; $j < $cols; $j++) {
-                $array[$i][$j] = $textArray[0][$indice];
-                $indice++;
+        if (count($textArray[0]) % $cols == 0) {
+            $val = (count($textArray[0]) / $cols);
+            for ($i = 0; $i < $val; $i++) {
+                for ($j = 0; $j < $cols; $j++) {
+                    $array[$i][$j] = $textArray[0][$indice];
+                    $indice++;
+                }
             }
+            return $array;
+        } else {
+            return null;
         }
-        return $array;
     }
 
 }

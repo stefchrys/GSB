@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 
  * Classe PDF qui hérite de FPDF
@@ -10,7 +11,7 @@
 require('class.fpdf.inc.php');
 
 class PDF extends FPDF {
-    
+
     /**
      * 
      * La function header est surchargée et appelée nativement dans la classe mère
@@ -19,23 +20,25 @@ class PDF extends FPDF {
      */
     function Header() {
         global $monTitre;
-        // Logo
-        $this->Image('images/logo.jpg', 10, 6, 30);
-        // Police Arial gras 15
-        $this->SetFont('Arial', 'B', 15);
-        // Décalage à droite
-        $this->Cell(80);
-        // Calcul de la largeur du titre et positionnement
-        $w = $this->GetStringWidth($monTitre) + 6;
-        $this->SetX((210 - $w) / 2);
-        // Couleurs du cadre, du fond et du texte
-        $this->SetDrawColor(0, 80, 180);
-        $this->SetFillColor(230, 230, 0);
-        $this->SetTextColor(220, 50, 50);
-        // Titre
-        $this->Cell($w, 10, $monTitre, 1, 0, 'C');
-        // Saut de ligne
-        $this->Ln(20);
+        if ($this->PageNo() == 1) {//entete que sur premiere page
+            // Logo
+            $this->Image('images/logo.jpg', 10, 6, 30);
+            // Police Arial gras 15
+            $this->SetFont('Arial', 'B', 15);
+            // Décalage à droite
+            $this->Cell(80);
+            // Calcul de la largeur du titre et positionnement
+            $w = $this->GetStringWidth($monTitre) + 6;
+            $this->SetX((210 - $w) / 2);
+            // Couleurs du cadre, du fond et du texte
+            $this->SetDrawColor(0, 80, 180);
+            $this->SetFillColor(230, 230, 0);
+            $this->SetTextColor(220, 50, 50);
+            // Titre
+            $this->Cell($w, 10, $monTitre, 1, 0, 'C',1);
+            // Saut de ligne
+            $this->Ln(20);
+        }
     }
 
     /**
@@ -49,54 +52,33 @@ class PDF extends FPDF {
         // Numéro de page
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
-    
-    function imprimFraisForfait($header,$inner,$size) {
-        // affichage entete FF       
-        $this->Cell(45, $size, 'Frais forfaitaires', 1);
+
+    /**
+     * Crée une grille remplie des données des deux tableaux 
+     * 
+     * @param array $header Tableaux de string rempli de titres
+     * @param array $inner  Tableaux de string rempli des données
+     * @param int $size Hauteur cellules
+     * @param int $width largeur cellules
+     * @param string $entete Titre de l'entete de la grille
+     * 
+     */
+    function imprimContenu($header, $inner, $size,$width,$entete) {
+        $this->SetFillColor(200,220,255);
+        $this->Cell($width, $size, utf8_decode($entete), 1,0,'L',1);
         $this->Ln();
+        // affichage Entete 
         foreach ($header as $col) {
-            $this->Cell(45, $size, utf8_decode($col), 1);
-        }$this->Ln();
-        // affichage Données FF
+            $this->SetFillColor(230, 230, 0);
+            $this->Cell($width, $size, utf8_decode($col), 1,0,'L',1);
+        }
+        $this->Ln();
+        // affichage Données 
         foreach ($inner as $row) {
             foreach ($row as $col)
-                $this->Cell(45, $size, utf8_decode($col), 1);
+                $this->Cell($width, $size, utf8_decode($col), 1,0,'L');
             $this->Ln();
         }
-    }
-    
-    function imprimFraisHorsForfait($header,$inner,$size) {
         $this->Ln();
-        $this->Cell(60, $size, 'Frais hors-forfait', 1);
-        $this->Ln();
-
-        // affichage entete Fhf
-        foreach ($header as $col) {
-            $this->Cell(60, $size, $col, 1);
-        }$this->Ln();
-        // affichage Données Fhf
-        foreach ($inner as $row) {
-            foreach ($row as $col)
-                $this->Cell(60, $size, utf8_decode($col), 1);
-            $this->Ln();
-        }$this->Ln();
     }
-    
-    function imprimResume($header, $inner,$size) {
-        //affichage resumé situation
-        //entete
-        foreach ($header as $col) {
-
-            $this->Cell(45, $size, $col, 1);
-        }$this->Ln();
-        //Données
-        foreach ($inner as $row) {
-
-            foreach ($row as $col)
-                $this->Cell(45, $size, utf8_decode($col), 1);
-            $this->Ln();
-        }$this->Ln();
-        $this->Output();
-    }
-
 }

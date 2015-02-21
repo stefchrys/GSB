@@ -9,7 +9,7 @@ $headerFraisForfait = array('Frais Forfaitaires','Quantité','Montant unitaire',
 //recuperation chaine de carractères
 $txtCharFf = $_REQUEST['txtFilePdfFraisForfait'];
 //sous division en tableau associatif en 4
- $fraisForfait = ManierTableaux::textToArray($txtCharFf, 4);
+$fraisForfait = ManierTableaux::textToArray($txtCharFf, 4);
  
 //////////////////////////////////////////////////////////////////
 //creation de tableau de données frais hors forfait(meme principe)
@@ -36,15 +36,19 @@ $monTitre = 'Situation '.$txtFilePdfMois;//creation du titre
 $pdf->SetTitle($monTitre);
 //reglage général
 $pdf->SetFont('Arial','',10);
-$pdf->AddPage();// ne pas oublier d'ajouter une page
 
-//affichage entete FF
-$pdf->imprimFraisForfait($headerFraisForfait,$fraisForfait,$size);
-//affichage Frais hors forfait
-$pdf->imprimFraisHorsForfait($headerFraisHorsForfait,$fraisHorsForfait,$size);
-//affichage resumé
-$pdf->imprimResume($headerResume,$dataResume,$size);
+$pdf->AddPage();//initialiser page(commande indispensable)
+//
+//frais forfait
+$pdf->imprimContenu($headerFraisForfait, $fraisForfait, $size,45,'Frais');
+$pdf->Ln();
+//Frais hors forfait
+$pdf->imprimContenu($headerFraisHorsForfait, $fraisHorsForfait, $size,60,'Frais hors-forfait');
+//resumé
+ $pdf->Ln();
+$pdf->imprimContenu($headerResume,$dataResume,$size,45,'Resumé');
 
+$pdf->Output();//affiche  la sortie(indispensable)
 
 
 
