@@ -2,6 +2,7 @@
 
 /*
  * Classe de Session
+ * Classe reservée au manipulations de variables de session
  * @author: chrysinus@gmail.com
  * @package: class.inc
  * @date: 20/02/2015

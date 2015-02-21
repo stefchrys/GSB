@@ -2,11 +2,12 @@
 
 /**
  * 
- * Classe PDF qui hérite de FPDF
+ * Classe PDF qui hérite de FPDF et qui permet de mettre en place des pdf de manière
+ * simplifiée
  * 
  * @author chrysinus@gmail.com
  * @package class.inc
- * 
+ * @21/02/2015
  */
 require('class.fpdf.inc.php');
 

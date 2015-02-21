@@ -1,15 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of ManierTableaux
- *
- * @author Stef
+ * Classe qui permet de modifier, arranger et manipuler des tableaux
+ * @author chrysinus@gmail.com
+ * @package classe.inc
+ * @date 20/02/2015
  */
 abstract class ManierTableaux {
 

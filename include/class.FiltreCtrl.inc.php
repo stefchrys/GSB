@@ -2,7 +2,7 @@
 
 /**
  * Description of TypeNum
- * Classe qui analyse le type de nombre (entier, float etc)
+ * Classe qui controle les données
  *
  * @author chrysinus@gmail.com
  * @package classe.inc

@@ -100,7 +100,7 @@ switch ($action) {
                 }
                 //enfin on cloture fiche de frais
                 $nbJustificatifs = Session::implementer('justificatifs');
-                if(estEntierPositif($nbJustificatifs)){
+                if(FiltreCtrl::estEntierPositif($nbJustificatifs)){
                     $pdo->majMontantFicheFrais($idVisiteur, $mois, $montantValide, 
                                                $nbJustificatifs);
                     $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
