@@ -13,23 +13,18 @@
  */
 abstract class ManierTableaux {
 
-static function remplirTableauFrais($idFrais) {
-    $lesFrais = array();
-    for ($i = 0; $i < count($idFrais); $i++) {
-        if (isset($_REQUEST['fraisForfait' . $i]) 
-                  && is_string($_REQUEST['fraisForfait' . $i])) {
-            $lesFrais[$idFrais[$i][0]] = (int) (($_REQUEST['fraisForfait' . $i]));
-        }
-    }
-    return $lesFrais;
-}
 
 
 /**
- * (ok)
+ * 
  * Fusionne 2 tableaux associatifs afin de renvoyer un tableau associatif avec juste 
  * les infos necessaires.
  * id devient la clé .
+ * exemple:
+ * $tab1=[0=>'id','idVisiteur','mois','libelle','date','montant']
+ * $tab2=['id'=>'etat']
+ * fusionner($tab1,$tab2) = ['id'=>'id','libelle','date','montant','etat']
+ * 
  * 
  *    1er tableau           2eme tableau        tableau fusionné
  *    clé|Value             clé|Value           clé|Value

@@ -10,7 +10,7 @@
  * @package default
  * @date 29/10/2014
  */
-require_once("include/fct.inc.php");
+
 require_once ("include/class.pdogsb.inc.php");
 require_once ("include/class.PDF.inc.php");
 require_once("include/class.Session.inc.php");
