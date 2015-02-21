@@ -3,7 +3,7 @@ require_once ("include/class.PDF.inc.php");
 require_once("include/class.ManierTableaux.inc.php");
 
 //////////////////////////////////////////////////
-//creation des tableau de données frais forfait
+//creation de tableau de données frais forfait
 ///////////////////////////////////////////////////
 $headerFraisForfait = array('Frais Forfaitaires','Quantité','Montant unitaire','Total');
 //recuperation chaine de carractères
@@ -12,7 +12,7 @@ $txtCharFf = $_REQUEST['txtFilePdfFraisForfait'];
  $fraisForfait = ManierTableaux::textToArray($txtCharFf, 4);
  
 //////////////////////////////////////////////////////////////////
-//creation des tableau de données frais hors forfait(meme principe)
+//creation de tableau de données frais hors forfait(meme principe)
  //////////////////////////////////////////////////////////////////
 $headerFraisHorsForfait = array('Date','Frais Hors-Forfait','Montant');
 $txtCharFhf = $_REQUEST['txtFilePdfFraisHorsForfait'];
