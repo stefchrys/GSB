@@ -43,7 +43,8 @@ abstract class FiltreCtrl {
      * return int 1 = trouvé  0 = pas trouvé
      */
     static function prohiberChar($chaine) {
-        return preg_match("#[\!%;\|\.&<>]#", $chaine);
+       return preg_match("#[\!%\|\.<>]#", $chaine);
+       
     }
 
     /**

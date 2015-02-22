@@ -148,5 +148,20 @@ abstract class DateGsb {
         $mois--; // -1 car un tableau de 12 mois va de 0 a 11  :)
         return $tabMois[$mois];
     }
+    
+    static function obtenirMoisPrecedent(){
+        $day = (new \DateTime())->format('d');
+        $month = (new \DateTime())->format('m');
+        $year = (new \DateTime())->format('Y');
+        //pour la soustraction :avant janvier c'est decembre soit 12
+        if($month==1){
+            $month='13';
+            $year = ((int)$year)-1;
+            $year= (string)$year;
+        }    
+        $moisPrecedent = ((int)($year.$month))-1;
+        $moisPrecedent=(string)$moisPrecedent;
+        return $moisPrecedent;
+    }
 
 }

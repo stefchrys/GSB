@@ -103,7 +103,7 @@ class PdoGsb {
      * tableau associatif 
      */
     public function obtenirInfoVisiteur($login, $mdp) {
-
+        
         $req = "SELECT Visiteur.id AS id, "
                 . "Visiteur.nom AS nom, "
                 . "Visiteur.prenom AS prenom FROM Visiteur "
@@ -152,22 +152,6 @@ class PdoGsb {
         }
         return $lgFraisHorsForf;
     }
-
-    /**
-     * Retourne le nombre de justificatif d'un visiteur pour un mois donné(alerte 11/12/2014 semble inutilisée)
-
-     * @param string $idVisiteur 
-     * @param string $mois sous la forme aaaamm
-     * @return int Le nombre entier de justificatifs 
-     */
-    /*public function obtenirNbjustificatifs($idVisiteur, $mois) {
-        $req = "select fichefrais.nbjustificatifs as nb from  fichefrais "
-                . "where fichefrais.idvisiteur ='$idVisiteur' "
-                . "and fichefrais.mois = '$mois'";
-        $idJeuJustif = PdoGsb::$monPdo->query($req);
-        $lgJustif = $idJeuJustif->fetch();
-        return $lgJustif['nb'];
-    }*/
 
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de 
@@ -297,7 +281,7 @@ class PdoGsb {
 
     /**
      * Crée une nouvelle fiche de frais et les lignes de frais au forfait pour
-     *  un visiteur et un mois donnés(verifié 20/01/2015)
+     *  un visiteur et un mois donnés
 
      * Récupère le dernier mois en cours de traitement, met à 'CL' son champs idEtat, 
      * crée une nouvelle fiche de frais avec un idEtat à 'CR' et crée les lignes de 
@@ -620,19 +604,10 @@ class PdoGsb {
      * 
      */
     public function validationCampagne() {
-        $day = (new \DateTime())->format('d');
-        $month = (new \DateTime())->format('m');
-        $year = (new \DateTime())->format('Y');
-        //pour la soustraction :avant janvier c'est decembre soit 12
-        if($month==1){
-            $month='13';
-            $year = ((int)$year)-1;
-            $year= (string)$year;
-        }    
-        $moisPrecedent = ((int)($year.$month))-1;
-        $moisPrecedent=(string)$moisPrecedent;     
+        $day = (new \DateTime())->format('d');        
+        $moisPrecedent=  DateGsb::obtenirMoisPrecedent();        var_dump($moisPrecedent); 
         //verifier que nous sommens entre le 10 et 20 du mois suivant
-        if ((int) $day >= 10 && (int) $day <= 20) {
+        if ((int) $day >= 10 && (int) $day <= 22) {
             //si oui on cloture les fiches du mois precedent qui ne le sont pas
             $req = "UPDATE ficheFrais SET idEtat = 'CL' "
                     . "WHERE ficheFrais.mois = '$moisPrecedent' "

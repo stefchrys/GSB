@@ -5,6 +5,10 @@ $action = Session::implementer('action');
 $visiteurs = $pdo->obtenirListeVisiteurs();
 $tableauDate = $pdo->getDouzeMois();
 
+//campagne de validation (double emploi avec service web c#)
+//mais peut être considéré comme une securité en cas de defaillance du service web
+$pdo->validationCampagne(); 
+
 switch ($action) {
     case 'choixVisiteurMois': {
 
@@ -14,9 +18,7 @@ switch ($action) {
             $lesClesVisiteurs = array_keys($visiteurs);
             $visiteurASelectionner = $lesClesVisiteurs[0];
             $lesClesDate = array_keys($tableauDate);
-            $dateASelectionner = $lesClesDate[0];
-            //Cloture des fiches du mois precedent (campagne validation)            
-            $pdo->validationCampagne();            
+            $dateASelectionner = $lesClesDate[0];           
             require('vues/v_listeVisiteurMoisComptable.inc.php');
             break;
         }
