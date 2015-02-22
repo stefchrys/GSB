@@ -5,7 +5,7 @@
  * Classe qui controle les données
  *
  * @author chrysinus@gmail.com
- * @package classe.inc
+ * @package Filtre
  * @date 20/02/2015
  */
 abstract class FiltreCtrl {

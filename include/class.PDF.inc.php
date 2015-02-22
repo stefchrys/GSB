@@ -6,7 +6,7 @@
  * simplifiée
  * 
  * @author chrysinus@gmail.com
- * @package class.inc
+ * @package PDF
  * @21/02/2015
  */
 require('class.fpdf.inc.php');

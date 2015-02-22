@@ -4,7 +4,7 @@
  * Description of DateGsb
  * Classe de manipulation des dates
  * @author chrysinus@gmail.com
- * @package classe.inc
+ * @package Date
  * @date 20/02/2015
  */
 abstract class DateGsb {

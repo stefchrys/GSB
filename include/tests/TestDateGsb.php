@@ -2,7 +2,7 @@
 
 /**
  * Description of TestTypeNum
- * @package Test_Unitaire
+ * @package TestsUnitaires
  * @author Stef 
  */
 

@@ -229,20 +229,7 @@ class PdoGsb {
         }
     }
 
-    /**
-     * met à jour le nombre de justificatifs de la table ficheFrais(alerte 11/12/2014 semble inutilisée)
-     * pour le mois et le visiteur concerné
-
-     * @param string $idVisiteur 
-     * @param string $mois sous la forme aaaamm
-     * @param int $nbJustificatifs Nombre de justificatifs
-     */
-    /*public function majNbJustificatifs($idVisiteur, $mois, $nbJustificatifs) {
-        $req = "update fichefrais set nbjustificatifs = $nbJustificatifs 
-                where fichefrais.idvisiteur = '$idVisiteur' "
-                . "and fichefrais.mois = '$mois'";
-        PdoGsb::$monPdo->exec($req);
-    }*/
+  
 
     /**
      * Teste si le frais est le premier du mois

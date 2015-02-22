@@ -3,7 +3,7 @@
 /**
  * Classe qui permet de modifier, arranger et manipuler des tableaux
  * @author chrysinus@gmail.com
- * @package classe.inc
+ * @package Tableaux
  * @date 20/02/2015
  */
 abstract class ManierTableaux {

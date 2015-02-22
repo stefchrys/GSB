@@ -4,7 +4,7 @@
  * Classe de Session
  * Classe reservée au manipulations de variables de session
  * @author: chrysinus@gmail.com
- * @package: class.inc
+ * @package: Session
  * @date: 20/02/2015
  */
 

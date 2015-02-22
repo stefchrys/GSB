@@ -4,7 +4,7 @@
  * Description of Err
  * Classe de manipulation des Erreurs
  * @author chrysinus@gmail.com
- * @package classe.inc
+ * @package Erreur
  * @date 20/02/2015
  */
 abstract class Err {

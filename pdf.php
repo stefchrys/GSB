@@ -48,7 +48,7 @@ $pdf->imprimContenu($headerFraisHorsForfait, $fraisHorsForfait, $size,60,'Frais 
  $pdf->Ln();
 $pdf->imprimContenu($headerResume,$dataResume,$size,45,'Resumé');
 
-$pdf->Output();//affiche  la sortie(indispensable)
+$pdf->Output("fiche.pdf","D");//affiche  la sortie(indispensable)
 
 
 
