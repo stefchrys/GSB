@@ -20,7 +20,7 @@ class TestFilteCtrl extends PHPUnit_Framework_TestCase {
          $arr = [1,"foo",3];
         $this->assertEquals(false ,FiltreCtrl::estTableauEntiers($arr));
         
-        $arr = ['!','%',';','|','.','&','<','>'];
+        $arr = ['!','%','|','.','<','>'];
         foreach($arr as $el){
             $this->assertEquals(1,FiltreCtrl::prohiberChar($el));
         }

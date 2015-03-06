@@ -592,7 +592,7 @@ class PdoGsb {
      */
     public function validationCampagne() {
         $day = (new \DateTime())->format('d');        
-        $moisPrecedent=  DateGsb::obtenirMoisPrecedent();        var_dump($moisPrecedent); 
+        $moisPrecedent=  DateGsb::obtenirMoisPrecedent(); 
         //verifier que nous sommens entre le 10 et 20 du mois suivant
         if ((int) $day >= 10 && (int) $day <= 22) {
             //si oui on cloture les fiches du mois precedent qui ne le sont pas
