@@ -26,7 +26,7 @@ class PdoGsb {
      * @var String$mdp Mot de passe
      * @var PDO $monPdo objet PDO
      * @var $monPdoGsb objet 
-     */
+     *//*test*/
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsb3';
     private static $user = 'root';
